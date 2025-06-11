@@ -23,7 +23,9 @@ const ModifierNom = () => {
   };
 
   useEffect(() => {
-    console.log("✅ Le nom a été mis à jour :", name);
+    if (typeof window !== "undefined") {
+      console.log("✅ Le nom a été mis à jour :", name);
+    }
   }, [name]); 
 
   return (
