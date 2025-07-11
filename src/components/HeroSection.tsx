@@ -20,7 +20,7 @@ const HeroSection = () => {
           </h2>
           <p className="text-gray-600 dark:text-gray-300 text-lg max-w-lg">
             Je crée des expériences web modernes et performantes avec React,
-            Next.js et Node.js. Passionné par le design et l'architecture
+            Next.js, Node.js et Java. Passionné par le design et l'architecture
             logicielle.
           </p>
           <div className="flex gap-4 pt-4">

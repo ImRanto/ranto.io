@@ -23,73 +23,37 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "E-commerce Platform",
+    title: "Gestion de Patrimoine",
     description:
-      "Une plateforme e-commerce complète avec panier, paiement et gestion des commandes.",
+      "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
     image:
       "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    tags: ["React", "Node.js", "MongoDB", "Stripe"],
+    tags: ["React", "Express", "Node.js", "MongoDB", "Tailwind CSS"],
     category: "fullstack",
     liveUrl: "#",
     githubUrl: "#",
   },
   {
     id: 2,
-    title: "Dashboard Analytics",
+    title: "Assistant IA (Hackathon HIU)",
     description:
-      "Tableau de bord analytique interactif pour visualiser des données complexes.",
+      "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
     image:
       "https://images.pexels.com/photos/7689466/pexels-photo-7689466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    tags: ["Next.js", "TypeScript", "Chart.js", "Firebase"],
+    tags: ["Next.js", "Tailwind CSS", "TypeScript", "OpenAI API"],
     category: "frontend",
     liveUrl: "#",
     githubUrl: "#",
   },
   {
     id: 3,
-    title: "API Gateway Service",
+    title: "Tapakila – Billetterie en ligne",
     description:
-      "Service de gateway API pour gérer l'authentification et les autorisations.",
+      "Application web de billetterie permettant la réservation d'événements avec intégration d’API et paiement sécurisé.",
     image:
       "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    tags: ["Node.js", "Express", "JWT", "Redis"],
-    category: "backend",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 4,
-    title: "Social Media App",
-    description:
-      "Application de réseau social avec messagerie et fil d'actualité en temps réel.",
-    image:
-      "https://images.pexels.com/photos/4126724/pexels-photo-4126724.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    tags: ["React Native", "Firebase", "Socket.io"],
-    category: "mobile",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 5,
-    title: "Task Management Tool",
-    description:
-      "Application de gestion de tâches avec suivi du temps et rapports.",
-    image:
-      "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    tags: ["Vue.js", "Vuex", "Express", "PostgreSQL"],
+    tags: ["React", "Node.js", "Express", "Stripe", "Bootstrap"],
     category: "fullstack",
-    liveUrl: "#",
-    githubUrl: "#",
-  },
-  {
-    id: 6,
-    title: "Portfolio Website",
-    description:
-      "Site portfolio personnel avec sections animées et design réactif.",
-    image:
-      "https://images.pexels.com/photos/3184360/pexels-photo-3184360.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    tags: ["Next.js", "TailwindCSS", "Framer Motion"],
-    category: "frontend",
     liveUrl: "#",
     githubUrl: "#",
   },
