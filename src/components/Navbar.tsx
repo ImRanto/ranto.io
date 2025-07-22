@@ -75,19 +75,19 @@ const Navbar = () => {
         <div className="flex items-center gap-3">
           <div className="hidden md:flex gap-4 items-center">
             <a
-              href="#"
+              href="https://www.linkedin.com/in/handraina-ranto-78a00b299"
               className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
             >
               <FaLinkedin size={20} />
             </a>
             <a
-              href="#"
+              href="https://github.com/HRanto001"
               className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
             >
               <FaGithub size={20} />
             </a>
             <a
-              href="#"
+              href="https://x.com/RantoHei"
               className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
             >
               <FaTwitter size={20} />
