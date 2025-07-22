@@ -64,10 +64,9 @@ const onSubmit = async (values: z.infer<typeof formSchema>) => {
 const templateParams = {
   from_name: values.name,
   from_email: values.email,
+  to_email: values.email,
   message: values.message,
-  to_email: "hei.ranto.2@gmail.com",
 };
-
 
   try {
     await emailjs.send(
