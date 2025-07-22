@@ -40,53 +40,56 @@ const ContactSection = () => {
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const now = new Date().getTime();
-    const DAY_MS = 24 * 60 * 60 * 1000;
+const onSubmit = async (values: z.infer<typeof formSchema>) => {
+  const now = new Date().getTime();
+  const DAY_MS = 24 * 60 * 60 * 1000;
 
-    // Récupérer l'historique des envois
-    let sentTimes: number[] = JSON.parse(
-      localStorage.getItem("emailSentTimes") || "[]"
+  // Récupérer l'historique des envois
+  let sentTimes: number[] = JSON.parse(
+    localStorage.getItem("emailSentTimes") || "[]"
+  );
+
+  // Filtrer pour ne garder que ceux des dernières 24h
+  sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
+
+  if (sentTimes.length >= 2) {
+    alert(
+      "Vous avez déjà envoyé 2 messages aujourd'hui. Veuillez réessayer demain."
+    );
+    return;
+  }
+
+  setIsSending(true);
+
+const templateParams = {
+  from_name: values.name,
+  from_email: values.email,
+  message: values.message,
+  to_email: "hei.ranto.2@gmail.com",
+};
+
+
+  try {
+    await emailjs.send(
+      "service_onpu91r",
+      "template_idqelae",
+      templateParams,
+      "WImm9vtMoDwBMn51X"
     );
 
-    // Filtrer pour ne garder que ceux des dernières 24h
-    sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
+    alert("Message envoyé avec succès !");
+    // Ajouter l'heure actuelle dans l'historique
+    sentTimes.push(now);
+    localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
 
-    if (sentTimes.length >= 2) {
-      alert(
-        "Vous avez déjà envoyé 2 messages aujourd'hui. Veuillez réessayer demain."
-      );
-      return;
-    }
-
-    setIsSending(true);
-
-    const templateParams = {
-      from_name: values.name,
-      from_email: values.email,
-      message: values.message,
-    };
-
-    try {
-      await emailjs.send(
-        "service_onpu91r",
-        "template_idqelae",
-        templateParams,
-        "WImm9vtMoDwBMn51X"
-      );
-
-      alert("Message envoyé avec succès !");
-      sentTimes.push(now);
-      localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
-
-      form.reset();
-    } catch (error) {
-      alert("Erreur lors de l'envoi du message.");
-      console.error(error);
-    } finally {
-      setIsSending(false);
-    }
-  };
+    form.reset();
+  } catch (error) {
+    alert("Erreur lors de l'envoi du message.");
+    console.error(error);
+  } finally {
+    setIsSending(false);
+  }
+};
 
   const contactInfo = [
     {
