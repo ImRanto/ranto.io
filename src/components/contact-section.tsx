@@ -39,56 +39,68 @@ const ContactSection = () => {
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const now = new Date().getTime();
+    const DAY_MS = 24 * 60 * 60 * 1000;
 
-const onSubmit = async (values: z.infer<typeof formSchema>) => {
-  const now = new Date().getTime();
-  const DAY_MS = 24 * 60 * 60 * 1000;
-
-  // Récupérer l'historique des envois
-  let sentTimes: number[] = JSON.parse(
-    localStorage.getItem("emailSentTimes") || "[]"
-  );
-
-  // Filtrer pour ne garder que ceux des dernières 24h
-  sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
-
-  if (sentTimes.length >= 2) {
-    alert(
-      "Vous avez déjà envoyé 2 messages aujourd'hui. Veuillez réessayer demain."
-    );
-    return;
-  }
-
-  setIsSending(true);
-
-const templateParams = {
-  from_name: values.name,
-  from_email: values.email,
-  to_email: values.email,
-  message: values.message,
-};
-
-  try {
-    await emailjs.send(
-      "service_onpu91r",
-      "template_idqelae",
-      templateParams,
-      "WImm9vtMoDwBMn51X"
+    // Récupérer l'historique des envois
+    let sentTimes: number[] = JSON.parse(
+      localStorage.getItem("emailSentTimes") || "[]"
     );
 
-    alert("Message envoyé avec succès !");
-    // Ajouter l'heure actuelle dans l'historique
-    sentTimes.push(now);
-    localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
+    // Garder seulement les messages envoyés aujourd'hui
+    sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
 
-    form.reset();
-  } catch (error) {
-    alert("Erreur lors de l'envoi du message.");
-    console.error(error);
-  } finally {
-    setIsSending(false);
-  }
-};
+    if (sentTimes.length >= 2) {
+      alert(
+        "Vous avez déjà envoyé 2 messages aujourd'hui. Veuillez réessayer demain."
+      );
+      return;
+    }
+
+    setIsSending(true);
+
+    const userMessageParams = {
+      from_name: values.name,
+      from_email: values.email,
+      to_email: "hei.ranto.2@gmail.com", // TON adresse
+      message: values.message,
+    };
+
+    const autoReplyParams = {
+      to_email: values.email, // utilisateur
+      to_name: values.name,
+    };
+
+    try {
+      // Envoie à moi
+      await emailjs.send(
+        "service_onpu91r",
+        "template_1xe336g",
+        userMessageParams,
+        "WImm9vtMoDwBMn51X"
+      );
+
+      // Auto-reply à l'utilisateur
+      await emailjs.send(
+        "service_onpu91r",
+        "template_idqelae",
+        autoReplyParams,
+        "WImm9vtMoDwBMn51X"
+      );
+
+      alert("Message envoyé avec succès !");
+      sentTimes.push(now);
+      localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
+
+      form.reset();
+    } catch (error) {
+      alert("Erreur lors de l'envoi du message.");
+      console.error(error);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const contactInfo = [
     {
