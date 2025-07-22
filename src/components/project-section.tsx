@@ -23,34 +23,34 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Gestion de Patrimoine",
+    title: "Gestion de Patrimoine (L1)",
     description:
       "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
     image: "https://iili.io/FNPgedg.png",
-    tags: ["React", "Express", "Node.js", "MongoDB", "Tailwind CSS"],
-    category: "fullstack",
-    liveUrl: "#",
+    tags: ["React", "Express", "Node.js", "Tailwind CSS"],
+    category: "all",
+    liveUrl: "https://patrimoine-economique-ui-rnt.onrender.com",
     githubUrl: "#",
   },
   {
     id: 2,
-    title: "Assistant IA (Hackathon HIU)",
+    title: "Assistant IA (Hackathon HIU) (L2)",
     description:
       "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
     image: "https://iili.io/FNPhUvI.png",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "OpenAI API"],
-    category: "frontend",
-    liveUrl: "#",
+    category: "all",
+    liveUrl: "https://hiu-2025-bisounours.vercel.app",
     githubUrl: "#",
   },
   {
     id: 3,
-    title: "Tapakila – Billetterie en ligne",
+    title: "Tapakila – Billetterie en ligne (L2)",
     description:
       "Application web de billetterie permettant la réservation d'événements avec intégration d’API et paiement sécurisé.",
     image: "https://iili.io/FN4Ujcb.png",
-    tags: ["React", "Node.js", "Express", "Stripe", "Bootstrap"],
-    category: "fullstack",
+    tags: ["Next.js", "Taiwindcss(Shadcn)", "Java(Spring Boot)"],
+    category: "all",
     liveUrl: "#",
     githubUrl: "#",
   },
@@ -92,11 +92,11 @@ const ProjectsSection = () => {
         >
           <div className="flex justify-center">
             <TabsList className="bg-muted/50">
-              <TabsTrigger value="all">Tous</TabsTrigger>
-              <TabsTrigger value="frontend">Frontend</TabsTrigger>
-              <TabsTrigger value="backend">Backend</TabsTrigger>
-              <TabsTrigger value="fullstack">Full Stack</TabsTrigger>
-              <TabsTrigger value="mobile">Mobile</TabsTrigger>
+              <TabsTrigger value="all">all</TabsTrigger>
+              <TabsTrigger value="all">Frontend</TabsTrigger>
+              <TabsTrigger value="all">Backend</TabsTrigger>
+              <TabsTrigger value="all">Full Stack</TabsTrigger>
+              <TabsTrigger value="all">Mobile</TabsTrigger>
             </TabsList>
           </div>
 
