@@ -26,8 +26,7 @@ const projects: Project[] = [
     title: "Gestion de Patrimoine",
     description:
       "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
-    image:
-      "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "https://iili.io/FNPgedg.png",
     tags: ["React", "Express", "Node.js", "MongoDB", "Tailwind CSS"],
     category: "fullstack",
     liveUrl: "#",
@@ -38,8 +37,7 @@ const projects: Project[] = [
     title: "Assistant IA (Hackathon HIU)",
     description:
       "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
-    image:
-      "https://images.pexels.com/photos/7689466/pexels-photo-7689466.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "https://iili.io/FNPhUvI.png",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "OpenAI API"],
     category: "frontend",
     liveUrl: "#",
@@ -50,8 +48,7 @@ const projects: Project[] = [
     title: "Tapakila – Billetterie en ligne",
     description:
       "Application web de billetterie permettant la réservation d'événements avec intégration d’API et paiement sécurisé.",
-    image:
-      "https://images.pexels.com/photos/3861958/pexels-photo-3861958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    image: "https://iili.io/FN4Ujcb.png",
     tags: ["React", "Node.js", "Express", "Stripe", "Bootstrap"],
     category: "fullstack",
     liveUrl: "#",
