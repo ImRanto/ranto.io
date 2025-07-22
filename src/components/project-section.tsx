@@ -26,7 +26,7 @@ const projects: Project[] = [
     title: "Gestion de Patrimoine (L1)",
     description:
       "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
-    image: "https://iili.io/FNPgedg.png",
+    image: "https://iili.io/FNQpoWN.png",
     tags: ["React", "Express", "Node.js", "Tailwind CSS"],
     category: "all",
     liveUrl: "https://patrimoine-economique-ui-rnt.onrender.com",
@@ -37,7 +37,7 @@ const projects: Project[] = [
     title: "Assistant IA (Hackathon HIU) (L2)",
     description:
       "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
-    image: "https://iili.io/FNPhUvI.png",
+    image: "https://iili.io/FNQiG0x.png",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "OpenAI API"],
     category: "all",
     liveUrl: "https://hiu-2025-bisounours.vercel.app",
