@@ -24,9 +24,11 @@ const HeroSection = () => {
             logicielle.
           </p>
           <div className="flex gap-4 pt-4">
+            <Link href="/#projects">
             <button className="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2 transition-all shadow-lg hover:shadow-cyan-500/20">
               Voir mes projets <FiArrowRight />
             </button>
+            </Link>
             <Link href={"#"}>
               <button className="border border-cyan-600 dark:border-cyan-400 text-cyan-600 dark:text-cyan-400
                         hover:bg-cyan-50 dark:hover:bg-cyan-900/30 px-6 py-3 rounded-lg font-medium transition-all">
