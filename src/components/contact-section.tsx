@@ -51,26 +51,25 @@ const ContactSection = () => {
     // Garder seulement les messages envoyés aujourd'hui
     sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
 
-    if (sentTimes.length >= 2) {
+    if (sentTimes.length >= 1) {
       alert(
-        "Vous avez déjà envoyé 2 messages aujourd'hui. Veuillez réessayer demain."
+        "Vous avez déjà envoyé une messages aujourd'hui. Veuillez réessayer demain."
       );
       return;
     }
 
     setIsSending(true);
 
-    const userMessageParams = {
-      from_name: values.name,
-      from_email: values.email,
-      to_email: "hei.ranto.2@gmail.com", // TON adresse
-      message: values.message,
-    };
+const userMessageParams = {
+  from_name: values.name,
+  from_email: values.email,
+  message: values.message,
+};
 
-    const autoReplyParams = {
-      to_email: values.email, // utilisateur
-      to_name: values.name,
-    };
+const autoReplyParams = {
+  to_name: values.name,
+  to_email: values.email,
+};
 
     try {
       // Envoie à moi
