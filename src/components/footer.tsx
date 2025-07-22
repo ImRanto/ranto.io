@@ -91,8 +91,10 @@ const Footer = () => {
                 Contact
               </h3>
               <ul className="space-y-2">
-                <li className="text-muted-foreground">contact@ranto.dev</li>
-                <li className="text-muted-foreground">Paris, France</li>
+                <li className="text-muted-foreground">hei.ranto.2@gmail.com</li>
+                <li className="text-muted-foreground">
+                  Antananarivo, Madagascar
+                </li>
               </ul>
 
               <div className="flex space-x-4 mt-4">
