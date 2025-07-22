@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -20,32 +21,72 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 const formSchema = z.object({
-  name: z.string().min(2, {
-    message: "Le nom doit contenir au moins 2 caractères.",
-  }),
-  email: z.string().email({
-    message: "Veuillez entrer une adresse email valide.",
-  }),
-  message: z.string().min(10, {
-    message: "Le message doit contenir au moins 10 caractères.",
-  }),
+  name: z
+    .string()
+    .min(2, { message: "Le nom doit contenir au moins 2 caractères." }),
+  email: z
+    .string()
+    .email({ message: "Veuillez entrer une adresse email valide." }),
+  message: z
+    .string()
+    .min(10, { message: "Le message doit contenir au moins 10 caractères." }),
 });
 
 const ContactSection = () => {
+  const [isSending, setIsSending] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      name: "",
-      email: "",
-      message: "",
-    },
+    defaultValues: { name: "", email: "", message: "" },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    // In a real application, you would handle form submission here
-    form.reset();
-  }
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const now = new Date().getTime();
+    const DAY_MS = 24 * 60 * 60 * 1000;
+
+    // Récupérer l'historique des envois
+    let sentTimes: number[] = JSON.parse(
+      localStorage.getItem("emailSentTimes") || "[]"
+    );
+
+    // Filtrer pour ne garder que ceux des dernières 24h
+    sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
+
+    if (sentTimes.length >= 2) {
+      alert(
+        "Vous avez déjà envoyé 2 messages aujourd'hui. Veuillez réessayer demain."
+      );
+      return;
+    }
+
+    setIsSending(true);
+
+    const templateParams = {
+      from_name: values.name,
+      from_email: values.email,
+      message: values.message,
+    };
+
+    try {
+      await emailjs.send(
+        "service_onpu91r",
+        "template_idqelae",
+        templateParams,
+        "WImm9vtMoDwBMn51X"
+      );
+
+      alert("Message envoyé avec succès !");
+      sentTimes.push(now);
+      localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
+
+      form.reset();
+    } catch (error) {
+      alert("Erreur lors de l'envoi du message.");
+      console.error(error);
+    } finally {
+      setIsSending(false);
+    }
+  };
 
   const contactInfo = [
     {
@@ -84,7 +125,7 @@ const ContactSection = () => {
           </h2>
           <p className="text-lg text-muted-foreground">
             Vous avez un projet en tête ou vous souhaitez simplement discuter ?
-            N'hésitez pas à me contacter !
+            N&apos;hésitez pas à me contacter !
           </p>
         </motion.div>
 
@@ -185,8 +226,10 @@ const ContactSection = () => {
                       type="submit"
                       className="w-full md:w-auto"
                       size="lg"
+                      disabled={isSending}
                     >
-                      <Send className="mr-2 h-4 w-4" /> Envoyer le message
+                      <Send className="mr-2 h-4 w-4" />{" "}
+                      {isSending ? "Envoi..." : "Envoyer le message"}
                     </Button>
                   </form>
                 </Form>
