@@ -79,7 +79,6 @@ const ContactSection = () => {
     const autoReplyParams = {
       to_name: values.name,
       to_email: values.email,
-      "g-recaptcha-response": recaptchaToken,
     };
 
 
