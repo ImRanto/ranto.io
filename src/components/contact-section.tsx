@@ -73,13 +73,15 @@ const ContactSection = () => {
       from_name: values.name,
       from_email: values.email,
       message: values.message,
-      "g-recaptcha-response": recaptchaToken, // ⚠️ nécessaire
+      "g-recaptcha-response": recaptchaToken,
     };
 
     const autoReplyParams = {
       to_name: values.name,
       to_email: values.email,
+      "g-recaptcha-response": recaptchaToken,
     };
+
 
     try {
       await emailjs.send(
