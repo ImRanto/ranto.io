@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -19,11 +19,12 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
+import ReCAPTCHA from "react-google-recaptcha";
 
 const formSchema = z.object({
-  name: z
-    .string()
-    .min(2, { message: "Le nom doit contenir au moins 2 caractères." }),
+  name: z.string().min(2, {
+    message: "Le nom doit contenir au moins 2 caractères.",
+  }),
   email: z
     .string()
     .email({ message: "Veuillez entrer une adresse email valide." }),
@@ -34,45 +35,51 @@ const formSchema = z.object({
 
 const ContactSection = () => {
   const [isSending, setIsSending] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", message: "" },
   });
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const token = await recaptchaRef.current?.getValue();
+    if (!token) {
+      alert("Veuillez valider le reCAPTCHA.");
+      return;
+    }
+
     const now = new Date().getTime();
     const DAY_MS = 24 * 60 * 60 * 1000;
 
-    // Récupérer l'historique des envois
     let sentTimes: number[] = JSON.parse(
       localStorage.getItem("emailSentTimes") || "[]"
     );
 
-    // Garder seulement les messages envoyés aujourd'hui
     sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
 
     if (sentTimes.length >= 1) {
       alert(
-        "Vous avez déjà envoyé une messages aujourd'hui. Veuillez réessayer demain."
+        "Vous avez déjà envoyé un message aujourd'hui. Veuillez réessayer demain."
       );
       return;
     }
 
     setIsSending(true);
 
-const userMessageParams = {
-  from_name: values.name,
-  from_email: values.email,
-  message: values.message,
-};
+    const userMessageParams = {
+      from_name: values.name,
+      from_email: values.email,
+      message: values.message,
+      "g-recaptcha-response": token, // utile si activé dans EmailJS
+    };
 
-const autoReplyParams = {
-  to_name: values.name,
-  to_email: values.email,
-};
+    const autoReplyParams = {
+      to_name: values.name,
+      to_email: values.email,
+    };
 
     try {
-      // Envoie à moi
       await emailjs.send(
         "service_onpu91r",
         "template_1xe336g",
@@ -80,7 +87,6 @@ const autoReplyParams = {
         "WImm9vtMoDwBMn51X"
       );
 
-      // Auto-reply à l'utilisateur
       await emailjs.send(
         "service_onpu91r",
         "template_idqelae",
@@ -91,8 +97,8 @@ const autoReplyParams = {
       alert("Message envoyé avec succès !");
       sentTimes.push(now);
       localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
-
       form.reset();
+      recaptchaRef.current?.reset();
     } catch (error) {
       alert("Erreur lors de l'envoi du message.");
       console.error(error);
@@ -235,13 +241,22 @@ const autoReplyParams = {
                         </FormItem>
                       )}
                     />
+
+                    <div className="flex justify-center">
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey="6Le6-YwrAAAAACPn1f60rthAcNV2yhnM5_UwM5NE"
+                        theme="light"
+                      />
+                    </div>
+
                     <Button
                       type="submit"
                       className="w-full md:w-auto"
                       size="lg"
                       disabled={isSending}
                     >
-                      <Send className="mr-2 h-4 w-4" />{" "}
+                      <Send className="mr-2 h-4 w-4" />
                       {isSending ? "Envoi..." : "Envoyer le message"}
                     </Button>
                   </form>
