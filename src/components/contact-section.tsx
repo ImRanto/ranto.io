@@ -35,6 +35,7 @@ const formSchema = z.object({
 
 const ContactSection = () => {
   const [isSending, setIsSending] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,20 +43,21 @@ const ContactSection = () => {
     defaultValues: { name: "", email: "", message: "" },
   });
 
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
+
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    const token = await recaptchaRef.current?.getValue();
-    if (!token) {
+    if (!recaptchaToken) {
       alert("Veuillez valider le reCAPTCHA.");
       return;
     }
 
     const now = new Date().getTime();
     const DAY_MS = 24 * 60 * 60 * 1000;
-
     let sentTimes: number[] = JSON.parse(
       localStorage.getItem("emailSentTimes") || "[]"
     );
-
     sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
 
     if (sentTimes.length >= 1) {
@@ -71,7 +73,7 @@ const ContactSection = () => {
       from_name: values.name,
       from_email: values.email,
       message: values.message,
-      "g-recaptcha-response": token, // utile si activé dans EmailJS
+      "g-recaptcha-response": recaptchaToken, // ⚠️ nécessaire
     };
 
     const autoReplyParams = {
@@ -98,6 +100,7 @@ const ContactSection = () => {
       sentTimes.push(now);
       localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
       form.reset();
+      setRecaptchaToken(null);
       recaptchaRef.current?.reset();
     } catch (error) {
       alert("Erreur lors de l'envoi du message.");
@@ -247,6 +250,7 @@ const ContactSection = () => {
                         ref={recaptchaRef}
                         sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                         theme="light"
+                        onChange={handleRecaptchaChange}
                       />
                     </div>
 
