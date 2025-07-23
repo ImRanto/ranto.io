@@ -81,17 +81,17 @@ const ContactSection = () => {
 
     try {
       await emailjs.send(
-        "service_onpu91r",
-        "template_1xe336g",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_USER!,
         userMessageParams,
-        "WImm9vtMoDwBMn51X"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
       await emailjs.send(
-        "service_onpu91r",
-        "template_idqelae",
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REPLY!,
         autoReplyParams,
-        "WImm9vtMoDwBMn51X"
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
       alert("Message envoyé avec succès !");
@@ -245,7 +245,7 @@ const ContactSection = () => {
                     <div className="flex justify-center">
                       <ReCAPTCHA
                         ref={recaptchaRef}
-                        sitekey="6Le6-YwrAAAAACPn1f60rthAcNV2yhnM5_UwM5NE"
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
                         theme="light"
                       />
                     </div>
