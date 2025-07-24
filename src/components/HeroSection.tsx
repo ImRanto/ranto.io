@@ -29,7 +29,7 @@ const HeroSection = () => {
               Voir mes projets <FiArrowRight />
             </button>
             </Link>
-            <Link href={"#"}>
+            <Link href={"/cv"}>
               <button className="border border-cyan-600 dark:border-cyan-400 text-cyan-600 dark:text-cyan-400
                         hover:bg-cyan-50 dark:hover:bg-cyan-900/30 px-6 py-3 rounded-lg font-medium transition-all">
                 Voir Mon CV

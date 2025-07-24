@@ -4,6 +4,7 @@ import Link from "next/link";
 import { FaLinkedin, FaGithub, FaTwitter, FaHeart } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { motion } from "framer-motion";
+import ScrollToTopButton from "./ScrollToTopButton";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -120,6 +121,7 @@ const Footer = () => {
           © {currentYear} Ranto. Tous droits réservés.
         </div>
       </div>
+      <ScrollToTopButton />
     </footer>
   );
 };
