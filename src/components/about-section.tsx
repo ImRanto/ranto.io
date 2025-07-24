@@ -26,18 +26,26 @@ const SkillCard = ({
   <motion.div
     initial={{ opacity: 0, y: 20 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{ delay, duration: 0.5 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{
+      delay,
+      duration: 0.6,
+      ease: [0.16, 1, 0.3, 1],
+    }}
   >
-    <Card className="h-full transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1">
+    <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/30 transition-all duration-500 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1 hover:border-cyan-500/30">
       <CardContent className="p-6 flex flex-col h-full">
-        <div className="flex items-center mb-4">
-          <div className="mr-4 p-3 bg-cyan-100 dark:bg-cyan-900/30 rounded-full text-cyan-600 dark:text-cyan-400">
+        <div className="flex items-start gap-4 mb-4">
+          <div className="p-3 bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/40 dark:to-blue-900/40 rounded-lg text-cyan-600 dark:text-cyan-400 shadow-inner">
             <Icon className="h-6 w-6" />
           </div>
-          <h3 className="text-lg font-semibold">{title}</h3>
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
+              {title}
+            </h3>
+            <p className="text-muted-foreground mt-1">{description}</p>
+          </div>
         </div>
-        <p className="text-muted-foreground">{description}</p>
       </CardContent>
     </Card>
   </motion.div>
@@ -49,43 +57,46 @@ const AboutSection = () => {
       icon: Layout,
       title: "Frontend",
       description:
-        "React, Next.js, TailwindCSS, et plus pour créer des interfaces modernes et réactives.",
+        "Création d'interfaces modernes avec React, Next.js et TailwindCSS. Expertise en animations et expérience utilisateur fluide.",
     },
     {
       icon: Server,
       title: "Backend",
       description:
-        "Node.js, Express, Java(POO) pour développer des API robustes et scalables.",
+        "Développement d'API performantes avec Node.js, Express et Java. Conception d'architectures scalables.",
     },
     {
       icon: Database,
-      title: "Databases",
+      title: "Bases de données",
       description:
-        "PostgreSQL pour la gestion efficace des données.",
+        "Modélisation et optimisation de bases de données relationnelles avec PostgreSQL.",
     },
     {
       icon: Code2,
-      title: "Languages",
+      title: "Langages",
       description:
-        "JavaScript, TypeScript, Python et Java pour des solutions complètes.",
+        "Maîtrise de JavaScript/TypeScript, Python et Java pour des solutions full-stack complètes.",
     },
     {
       icon: Brain,
       title: "Architecture",
       description:
-        "Conception de systèmes distribués, microservices et applications cloud-native.",
+        "Design système, microservices et déploiements cloud-native. Pensée critique et résolution de problèmes complexes.",
     },
     {
       icon: Lightbulb,
-      title: "UX/UI",
+      title: "Design UX/UI",
       description:
-        "Création d'expériences utilisateur intuitives et attrayantes.",
+        "Approche centrée utilisateur pour des interfaces intuitives et esthétiques. Prototypage et tests utilisateurs.",
     },
   ];
 
   return (
-    <section id="about" className="py-24 bg-gray-50/50 dark:bg-gray-900/20">
-      <div className="container mx-auto px-6">
+    <section
+      id="about"
+      className="py-24 bg-gradient-to-b from-gray-50/50 to-white dark:from-gray-900/20 dark:to-gray-950"
+    >
+      <div className="container mx-auto px-4 sm:px-6">
         <motion.div
           className="mb-16 text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
@@ -93,29 +104,49 @@ const AboutSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block">
-            À propos de moi
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-cyan-500 rounded-full"></div>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Développeur web passionné dans la
-            création d'applications modernes, performantes et maintenables. Je
-            combine mon expertise technique avec un œil attentif pour le design
-            afin de créer des expériences utilisateur exceptionnelles.
-          </p>
+          <motion.h2
+            className="text-3xl md:text-4xl font-bold mb-6 relative inline-block"
+            whileHover={{ scale: 1.02 }}
+          >
+            <span className="relative z-10">
+              À propos de moi
+              <motion.span
+                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                initial={{ scaleX: 0 }}
+                whileInView={{ scaleX: 1 }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
+            </span>
+          </motion.h2>
+          <motion.p
+            className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Développeur full-stack passionné par la création d'applications web
+            performantes et élégantes. Je combine expertise technique et
+            sensibilité design pour concevoir des expériences digitales
+            mémorables et intuitives.
+          </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
           {skills.map((skill, index) => (
             <SkillCard
               key={skill.title}
               icon={skill.icon}
               title={skill.title}
               description={skill.description}
-              delay={index * 0.1}
+              delay={index * 0.1 + 0.4}
             />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
