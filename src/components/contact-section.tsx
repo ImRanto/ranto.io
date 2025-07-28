@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -21,6 +21,9 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import ReCAPTCHA from "react-google-recaptcha";
 
+// Clerk
+import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
+
 const formSchema = z.object({
   name: z.string().min(2, {
     message: "Le nom doit contenir au moins 2 caractères.",
@@ -34,20 +37,39 @@ const formSchema = z.object({
 });
 
 const ContactSection = () => {
+  const { user } = useUser();
   const [isSending, setIsSending] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: { name: "", email: "", message: "" },
+    defaultValues: {
+      name: user?.fullName || "",
+      email: user?.primaryEmailAddress?.emailAddress || "",
+      message: "",
+    },
   });
+
+  // Reset form when user changes (Clerk)
+  useEffect(() => {
+    form.reset({
+      name: user?.fullName || "",
+      email: user?.primaryEmailAddress?.emailAddress || "",
+      message: "",
+    });
+  }, [user]);
 
   const handleRecaptchaChange = (token: string | null) => {
     setRecaptchaToken(token);
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!user) {
+      alert("Veuillez vous connecter pour envoyer un message.");
+      return;
+    }
+
     if (!recaptchaToken) {
       alert("Veuillez valider le reCAPTCHA.");
       return;
@@ -80,7 +102,6 @@ const ContactSection = () => {
       to_name: values.name,
       to_email: values.email,
     };
-
 
     try {
       await emailjs.send(
@@ -151,6 +172,23 @@ const ContactSection = () => {
             N&apos;hésitez pas à me contacter !
           </p>
         </motion.div>
+
+        <div className="mb-6 text-center">
+          {!user ? (
+            <SignInButton mode="modal">
+              <Button variant="outline" className="mb-4">
+                Veuillez vous pour envoyer un message
+              </Button>
+            </SignInButton>
+          ) : (
+            <div className="flex justify-center items-center gap-4 mb-4">
+              <UserButton />
+              <span className="text-muted-foreground text-sm">
+                Connecté en tant que <strong>{user?.fullName}</strong>
+              </span>
+            </div>
+          )}
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1 space-y-4">
@@ -259,7 +297,7 @@ const ContactSection = () => {
                       type="submit"
                       className="w-full md:w-auto"
                       size="lg"
-                      disabled={isSending}
+                      disabled={isSending || !user}
                     >
                       <Send className="mr-2 h-4 w-4" />
                       {isSending ? "Envoi..." : "Envoyer le message"}
