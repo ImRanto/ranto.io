@@ -19,6 +19,7 @@ type Project = {
   liveUrl: string;
   githubUrl: string;
 };
+// https://patrimoine-economique-ui-rnt.onrender.com
 
 const projects: Project[] = [
   {
@@ -29,7 +30,7 @@ const projects: Project[] = [
     image: "https://iili.io/FNQpoWN.png",
     tags: ["React", "Express", "Node.js", "Tailwind CSS"],
     category: "all",
-    liveUrl: "https://patrimoine-economique-ui-rnt.onrender.com",
+    liveUrl: "#", 
     githubUrl: "#",
   },
   {
