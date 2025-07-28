@@ -227,7 +227,11 @@ const ContactSection = () => {
                           <FormItem>
                             <FormLabel>Nom</FormLabel>
                             <FormControl>
-                              <Input placeholder="Votre nom" {...field} />
+                              <Input
+                                placeholder="Votre nom"
+                                readOnly={!!user}
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
@@ -240,7 +244,11 @@ const ContactSection = () => {
                           <FormItem>
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                              <Input placeholder="Votre email" {...field} />
+                              <Input
+                                placeholder="Votre email"
+                                readOnly={!!user}
+                                {...field}
+                              />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
