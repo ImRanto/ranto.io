@@ -281,13 +281,13 @@ const ContactSection = () => {
                         onChange={handleRecaptchaChange}
                       />
                     </div>
-
                     {/* Boutons envoyés et connexion côte à côte */}
-                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                      <div className="flex gap-2 w-full md:w-auto">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between w-full">
+                      {/* Bloc gauche : bouton envoyer + connexion */}
+                      <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
                         <Button
                           type="submit"
-                          className="w-full md:w-auto"
+                          className="w-full sm:w-auto"
                           size="lg"
                           disabled={isSending || !user}
                         >
@@ -301,22 +301,25 @@ const ContactSection = () => {
                             variant="outline"
                             size="lg"
                             disabled={!!user}
-                            className="w-full md:w-auto"
+                            className="w-full sm:w-auto"
                           >
                             {user ? "Connecté" : "Se connecter"}
                           </Button>
                         </SignInButton>
                       </div>
 
+                      {/* Bloc droit : info user + déconnexion */}
                       {user && (
-                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                          <UserButton />
-                          <span>
-                            Connecté en tant que{" "}
-                            <strong>{user.fullName}</strong>
-                          </span>
+                        <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <UserButton />
+                            <span>
+                              Connecté en tant que{" "}
+                              <strong>{user.fullName}</strong>
+                            </span>
+                          </div>
                           <SignOutButton>
-                            <button className="ml-4 px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
+                            <button className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
                               Déconnexion
                             </button>
                           </SignOutButton>
