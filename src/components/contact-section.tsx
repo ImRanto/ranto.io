@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import ReCAPTCHA from "react-google-recaptcha";
 
-import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
+import { useUser, SignInButton, UserButton, SignOutButton } from "@clerk/nextjs";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -307,6 +307,11 @@ const ContactSection = () => {
                             Connecté en tant que{" "}
                             <strong>{user.fullName}</strong>
                           </span>
+                          <SignOutButton>
+                            <button className="ml-4 px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
+                              Déconnexion
+                            </button>
+                          </SignOutButton>
                         </div>
                       )}
                     </div>
