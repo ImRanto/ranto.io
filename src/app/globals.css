@@ -116,6 +116,7 @@
   * {
     @apply border-border outline-ring/50;
     cursor: none;
+    scroll-behavior: smooth;
   }
 
   body {
