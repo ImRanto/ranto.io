@@ -1,20 +1,14 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
-  output: "export",
   eslint: {
     ignoreDuringBuilds: true,
   },
   images: { unoptimized: true },
+  // Tu peux aussi activer ceci si tu utilises des images externes :
+  // images: {
+  //   domains: ["images.pexels.com"],
+  // },
 };
-
-// module.exports = {
-//   images: {
-//     domains: ["images.pexels.com"],
-//   },
-// };
-
-// export default nextConfig;
 
 module.exports = nextConfig;
