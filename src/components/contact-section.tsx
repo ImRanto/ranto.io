@@ -21,7 +21,6 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 import ReCAPTCHA from "react-google-recaptcha";
 
-// Clerk
 import { useUser, SignInButton, UserButton } from "@clerk/nextjs";
 
 const formSchema = z.object({
@@ -51,7 +50,6 @@ const ContactSection = () => {
     },
   });
 
-  // Reset form when user changes (Clerk)
   useEffect(() => {
     form.reset({
       name: user?.fullName || "",
@@ -75,7 +73,7 @@ const ContactSection = () => {
       return;
     }
 
-    const now = new Date().getTime();
+    const now = Date.now();
     const DAY_MS = 24 * 60 * 60 * 1000;
     let sentTimes: number[] = JSON.parse(
       localStorage.getItem("emailSentTimes") || "[]"
@@ -172,23 +170,6 @@ const ContactSection = () => {
             N&apos;hésitez pas à me contacter !
           </p>
         </motion.div>
-
-        <div className="mb-6 text-center">
-          {!user ? (
-            <SignInButton mode="modal">
-              <Button variant="outline" className="mb-4">
-                Veuillez vous pour envoyer un message
-              </Button>
-            </SignInButton>
-          ) : (
-            <div className="flex justify-center items-center gap-4 mb-4">
-              <UserButton />
-              <span className="text-muted-foreground text-sm">
-                Connecté en tant que <strong>{user?.fullName}</strong>
-              </span>
-            </div>
-          )}
-        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1 space-y-4">
@@ -293,15 +274,42 @@ const ContactSection = () => {
                       />
                     </div>
 
-                    <Button
-                      type="submit"
-                      className="w-full md:w-auto"
-                      size="lg"
-                      disabled={isSending || !user}
-                    >
-                      <Send className="mr-2 h-4 w-4" />
-                      {isSending ? "Envoi..." : "Envoyer le message"}
-                    </Button>
+                    {/* Boutons envoyés et connexion côte à côte */}
+                    <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                      <div className="flex gap-2 w-full md:w-auto">
+                        <Button
+                          type="submit"
+                          className="w-full md:w-auto"
+                          size="lg"
+                          disabled={isSending || !user}
+                        >
+                          <Send className="mr-2 h-4 w-4" />
+                          {isSending ? "Envoi..." : "Envoyer le message"}
+                        </Button>
+
+                        <SignInButton mode="modal">
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="lg"
+                            disabled={!!user}
+                            className="w-full md:w-auto"
+                          >
+                            {user ? "Connecté" : "Se connecter"}
+                          </Button>
+                        </SignInButton>
+                      </div>
+
+                      {user && (
+                        <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                          <UserButton />
+                          <span>
+                            Connecté en tant que{" "}
+                            <strong>{user.fullName}</strong>
+                          </span>
+                        </div>
+                      )}
+                    </div>
                   </form>
                 </Form>
               </CardContent>
