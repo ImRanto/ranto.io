@@ -24,18 +24,18 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Gestion de Patrimoine (L1)",
+    title: "Gestion de Patrimoine",
     description:
       "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
     image: "https://iili.io/FNQpoWN.png",
     tags: ["React", "Express", "Node.js", "Tailwind CSS"],
     category: "all",
-    liveUrl: "#", 
+    liveUrl: "#",
     githubUrl: "#",
   },
   {
     id: 2,
-    title: "Assistant IA (Hackathon HIU) (L2)",
+    title: "Assistant IA (Hackathon HIU)",
     description:
       "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
     image: "https://iili.io/FNQiG0x.png",
@@ -46,13 +46,25 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Tapakila – Billetterie en ligne (L2)",
+    title: "Tapakila – Billetterie en ligne",
     description:
       "Application web de billetterie permettant la réservation d'événements avec intégration d’API et paiement sécurisé.",
     image: "https://iili.io/FN4Ujcb.png",
     tags: ["Next.js", "Taiwindcss(Shadcn)", "Java(Spring Boot)"],
     category: "all",
     liveUrl: "#",
+    githubUrl: "#",
+  },
+  {
+    id: 4,
+    title: "Tapakila – Billetterie en ligne",
+    description:
+      "onception et développement d’un tableau de bord interactif pour l’analyse des données météorologiques.",
+    image: "https://iili.io/FmxQjv2.png",
+    tags: ["Airflow", "Python", "Power BI"],
+    category: "all",
+    liveUrl:
+      "https://app.powerbi.com/groups/me/reports/784eba80-4354-4304-a7a1-269718209fed/60510015ebe9b1202792?experience=power-bi",
     githubUrl: "#",
   },
 ];
