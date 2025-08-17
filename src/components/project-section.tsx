@@ -57,9 +57,9 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "TABLEAU DE BORD D’ANALYSE MÉTÉO",
+    title: "Tableau de bord d'alayse météo",
     description:
-      "onception et développement d’un tableau de bord interactif pour l’analyse des données météorologiques.",
+      "Conception et développement d’un tableau de bord interactif pour l’analyse des données météorologiques.",
     image: "https://iili.io/FmxQjv2.png",
     tags: ["Airflow", "Python", "Power BI"],
     category: "all",
