@@ -27,7 +27,7 @@ const projects: Project[] = [
     title: "Gestion de Patrimoine",
     description:
       "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
-    image: "https://iili.io/FNQpoWN.png",
+    image: "https://iili.io/FmzUawb.png",
     tags: ["React", "Express", "Node.js", "Tailwind CSS"],
     category: "all",
     liveUrl: "#",
@@ -38,7 +38,7 @@ const projects: Project[] = [
     title: "Assistant IA (Hackathon HIU)",
     description:
       "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
-    image: "https://iili.io/FNQiG0x.png",
+    image: "https://iili.io/Fmz4Ziv.png",
     tags: ["Next.js", "Tailwind CSS", "TypeScript", "OpenAI API"],
     category: "all",
     liveUrl: "https://hiu-2025-bisounours.vercel.app",
@@ -49,7 +49,7 @@ const projects: Project[] = [
     title: "Tapakila – Billetterie en ligne",
     description:
       "Application web de billetterie permettant la réservation d'événements avec intégration d’API et paiement sécurisé.",
-    image: "https://iili.io/FN4Ujcb.png",
+    image: "https://iili.io/FmI9Kuf.png",
     tags: ["Next.js", "Taiwindcss(Shadcn)", "Java(Spring Boot)"],
     category: "all",
     liveUrl: "#",
@@ -57,7 +57,7 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Tapakila – Billetterie en ligne",
+    title: "TABLEAU DE BORD D’ANALYSE MÉTÉO",
     description:
       "onception et développement d’un tableau de bord interactif pour l’analyse des données météorologiques.",
     image: "https://iili.io/FmxQjv2.png",
