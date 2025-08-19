@@ -121,19 +121,19 @@ const Navbar = () => {
 
                 <div className="flex gap-6 mt-6">
                   <a
-                    href="#"
+                    href="https://www.linkedin.com/in/handraina-ranto-78a00b299"
                     className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400"
                   >
                     <FaLinkedin size={24} />
                   </a>
                   <a
-                    href="#"
+                    href="https://github.com/HRanto001"
                     className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400"
                   >
                     <FaGithub size={24} />
                   </a>
                   <a
-                    href="#"
+                    href="https://x.com/RantoHei"
                     className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400"
                   >
                     <FaTwitter size={24} />
