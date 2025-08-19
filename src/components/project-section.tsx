@@ -57,7 +57,7 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Tableau de bord d'alayse météo",
+    title: "Tableau de Bord d'analyse Météo",
     description:
       "Conception et développement d’un tableau de bord interactif pour l’analyse des données météorologiques.",
     image: "https://iili.io/FmxQjv2.png",
