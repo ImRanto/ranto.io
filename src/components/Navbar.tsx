@@ -81,7 +81,7 @@ const Navbar = () => {
               <FaLinkedin size={20} />
             </a>
             <a
-              href="https://github.com/HRanto001"
+              href="https://github.com/ImRanto"
               className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400 transition-colors"
             >
               <FaGithub size={20} />
@@ -127,7 +127,7 @@ const Navbar = () => {
                     <FaLinkedin size={24} />
                   </a>
                   <a
-                    href="https://github.com/HRanto001"
+                    href="https://github.com/ImRanto"
                     className="text-gray-600 hover:text-cyan-500 dark:text-gray-300 dark:hover:text-cyan-400"
                   >
                     <FaGithub size={24} />
