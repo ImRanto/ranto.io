@@ -12,7 +12,7 @@ const experiences = [
     period: "2023 - 2026",
     description:
       "Formation approfondie en développement logiciel, algorithmes, bases de données et systèmes d'information.",
-    highlights: ["Algorithmique", "Programmation", "Bases de données"],
+    highlights: ["Algorithmique", "Réseaux", "Programmation", "Bases de données"],
   },
   {
     type: "education",
@@ -21,7 +21,7 @@ const experiences = [
     period: "2021",
     description:
       "Diplôme de fin d'études secondaires, série scientifique, axé sur les mathématiques et la logique.",
-    highlights: ["Logique", "Mathématiques", "Physique-Chimie"],
+    highlights: ["Logique", "Mathématiques", "Physique"],
   },
 ];
 
