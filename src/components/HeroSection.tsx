@@ -71,7 +71,7 @@ const HeroSection = () => {
               <Link href="/#projects">
                 <button className="group relative bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-8 py-4 rounded-2xl font-bold transition-all hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.3)] dark:hover:shadow-[0_20px_40px_-15px_rgba(255,255,255,0.1)] hover:-translate-y-1 active:scale-95 overflow-hidden">
                   <span className="relative z-10 flex items-center gap-2">
-                    Voir mes travaux{" "}
+                    Voir mes projets{" "}
                     <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                   </span>
                 </button>
