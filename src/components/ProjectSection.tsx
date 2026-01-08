@@ -89,6 +89,33 @@ const projects: Project[] = [
   },
 ];
 
+const getTagStyle = (tag: string) => {
+  const styles: Record<string, string> = {
+    React: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
+    "Next.js": "bg-gray-500/10 text-gray-600 dark:text-gray-400",
+    TypeScript: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+
+    "Spring Boot": "bg-red-500/10 text-red-600 dark:text-red-400",
+    Java: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+    "Power BI": "bg-red-500/10 text-red-600 dark:text-red-400",
+    Express: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+    PostgreSQL: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+
+    Python: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+    Airflow: "bg-green-500/10 text-green-600 dark:text-green-400",
+    "Node.js": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    Vite: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+
+    "Tailwind CSS": "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+    OpenAI: "bg-pink-500/10 text-pink-600 dark:text-pink-400",
+  };
+
+  return (
+    styles[tag] ||
+    "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
+  );
+};
+
 const ProjectsSection = () => {
   const [activeTab, setActiveTab] = useState("all");
 
@@ -146,8 +173,9 @@ const ProjectsSection = () => {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
               >
-                <Card className="group h-full flex flex-col overflow-hidden bg-white dark:bg-slate-900 border-slate-200/60 dark:border-slate-800/60 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 rounded-3xl">
+                <Card className="group relative h-full flex flex-col overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 hover:border-cyan-500/50 transition-all duration-500 rounded-[2rem]">
                   {/* IMAGE AVEC OVERLAY */}
+                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-700 to-blue-600 rounded-[2rem] blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200" />
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={project.image}
@@ -197,7 +225,9 @@ const ProjectsSection = () => {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="text-[10px] font-bold px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg uppercase tracking-wider"
+                          className={`text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider transition-colors ${getTagStyle(
+                            tag
+                          )}`}
                         >
                           {tag}
                         </span>
