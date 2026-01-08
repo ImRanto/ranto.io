@@ -1,13 +1,13 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ExternalLink, Github } from "lucide-react";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ExternalLink, Github, FolderCode, Layers } from "lucide-react";
 
 type Project = {
   id: number;
@@ -15,174 +15,189 @@ type Project = {
   description: string;
   image: string;
   tags: string[];
-  category: string;
+  category: "frontend" | "backend" | "fullstack" | "data" | "all";
   liveUrl: string;
   githubUrl: string;
 };
-// https://patrimoine-economique-ui-rnt.onrender.com
 
 const projects: Project[] = [
   {
     id: 1,
     title: "Gestion de Patrimoine",
     description:
-      "Application full-stack permettant de gérer les possessions d'une personne, calculer la valeur actuelle de son patrimoine, avec amortissements et revenus réguliers.",
+      "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel.",
     image: "https://iili.io/FmzUawb.png",
-    tags: ["React", "Express", "Node.js", "Tailwind CSS"],
-    category: "all",
-    liveUrl: "#",
+    tags: ["React", "Node.js", "Tailwind CSS"],
+    category: "fullstack",
+    liveUrl: "https://patrimoine-economique-ui-rnt.onrender.com",
     githubUrl: "#",
   },
   {
     id: 2,
     title: "Assistant IA (Hackathon HIU)",
     description:
-      "Application Next.js primée lors du Hackathon Inter-Universitaire, intégrant des fonctionnalités intelligentes pour l’aide à la recherche d’emploi et la planification de tâches quotidiennes avec IA.",
+      "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI.",
     image: "https://iili.io/Fmz4Ziv.png",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript", "OpenAI API"],
-    category: "all",
+    tags: ["Next.js", "TypeScript", "OpenAI"],
+    category: "frontend",
     liveUrl: "https://hiu-2025-bisounours.vercel.app",
     githubUrl: "#",
   },
   {
     id: 3,
-    title: "Tapakila – Billetterie en ligne",
+    title: "Tapakila – Billetterie",
     description:
-      "Application web de billetterie permettant la réservation d'événements avec intégration d’API et paiement sécurisé.",
+      "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot.",
     image: "https://iili.io/FmI9Kuf.png",
-    tags: ["Next.js", "Taiwindcss(Shadcn)", "Java(Spring Boot)"],
-    category: "all",
+    tags: ["Next.js", "Spring Boot", "PostgreSQL"],
+    category: "fullstack",
     liveUrl: "#",
     githubUrl: "#",
   },
   {
     id: 4,
-    title: "Tableau de Bord d'analyse Météo",
+    title: "Analyse Météo ETL",
     description:
-      "Conception et développement d’un tableau de bord interactif pour l’analyse des données météorologiques.",
+      "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques.",
     image: "https://iili.io/FmxQjv2.png",
     tags: ["Airflow", "Python", "Power BI"],
-    category: "all",
-    liveUrl:
-      "https://app.powerbi.com/groups/me/reports/784eba80-4354-4304-a7a1-269718209fed/60510015ebe9b1202792?experience=power-bi",
-    githubUrl: "#",
+    category: "data",
+    liveUrl: "#",
+    githubUrl: "https://github.com/ImRanto/meteo",
+  },
+  {
+    id: 5,
+    title: "CycleFlow – Analyse Cyclique",
+    description:
+      "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision.",
+    image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
+    tags: ["NextJs", "TypeScript", "Tailwind CSS"],
+    category: "frontend",
+    liveUrl: "https://cycleflow-one.vercel.app/",
+    githubUrl: "https://github.com/ImRanto/menstruel-cycle-tracker",
   },
 ];
 
 const ProjectsSection = () => {
   const [activeTab, setActiveTab] = useState("all");
 
-  const filteredProjects =
-    activeTab === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeTab);
+  const filteredProjects = projects.filter((p) =>
+    activeTab === "all" ? true : p.category === activeTab
+  );
 
   return (
-    <section id="projects" className="py-24 bg-background">
+    <section
+      id="projects"
+      className="py-32 bg-slate-50/50 dark:bg-[#020617]/50"
+    >
       <div className="container mx-auto px-6">
-        <motion.div
-          className="mb-16 text-center max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block">
-            Mes Projets
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-cyan-500 rounded-full"></div>
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Une sélection de mes travaux récents, allant des applications web
-            full stack aux sites vitrines et applications mobiles.
-          </p>
-        </motion.div>
-
-        <Tabs
-          defaultValue="all"
-          value={activeTab}
-          onValueChange={setActiveTab}
-          className="mb-12"
-        >
-          <div className="flex justify-center">
-            <TabsList className="bg-muted/50">
-              <TabsTrigger value="all">all</TabsTrigger>
-              <TabsTrigger value="all">Frontend</TabsTrigger>
-              <TabsTrigger value="all">Backend</TabsTrigger>
-              <TabsTrigger value="all">Full Stack</TabsTrigger>
-              <TabsTrigger value="all">Mobile</TabsTrigger>
-            </TabsList>
+        {/* HEADER SECTION */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl">
+            <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold tracking-widest uppercase text-sm mb-3">
+              <FolderCode size={18} />
+              <span>Portfolio</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
+              Projets{" "}
+              <span className="text-slate-400 font-light">Sélectionnés</span>
+            </h2>
           </div>
 
-          <TabsContent value={activeTab} className="mt-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredProjects.map((project, index) => (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-auto"
+          >
+            <TabsList className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-1 h-12 rounded-xl shadow-sm">
+              {["all", "frontend", "fullstack", "data"].map((tab) => (
+                <TabsTrigger
+                  key={tab}
+                  value={tab}
+                  className="rounded-lg px-6 capitalize data-[state=active]:bg-cyan-600 data-[state=active]:text-white transition-all"
                 >
-                  <Card className="overflow-hidden h-full transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/10 group">
-                    <div className="relative h-48 overflow-hidden">
-                      <Image
-                        src={project.image}
-                        alt={project.title}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  {tab}
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </Tabs>
+        </div>
 
-                      <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 flex justify-between">
-                        <Button size="sm" variant="default" asChild>
-                          <a
-                            href={project.liveUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1"
-                          >
-                            <ExternalLink className="h-4 w-4" /> Live
+        {/* GRID PROJETS */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <AnimatePresence mode="popLayout">
+            {filteredProjects.map((project) => (
+              <motion.div
+                key={project.id}
+                layout
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.9 }}
+                transition={{ duration: 0.4 }}
+              >
+                <Card className="group h-full flex flex-col overflow-hidden bg-white dark:bg-slate-900 border-slate-200/60 dark:border-slate-800/60 hover:shadow-2xl hover:shadow-cyan-500/10 transition-all duration-500 rounded-3xl">
+                  {/* IMAGE AVEC OVERLAY */}
+                  <div className="relative aspect-[16/10] overflow-hidden">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-6">
+                      <div className="flex gap-3 w-full">
+                        <Button
+                          size="sm"
+                          className="flex-1 bg-cyan-600 hover:bg-cyan-500 rounded-xl"
+                          asChild
+                        >
+                          <a href={project.liveUrl} target="_blank">
+                            <ExternalLink className="mr-2 h-4 w-4" /> Demo
                           </a>
                         </Button>
-                        <Button size="sm" variant="outline" asChild>
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1"
-                          >
-                            <Github className="h-4 w-4" /> Code
+                        <Button
+                          size="sm"
+                          variant="secondary"
+                          className="flex-1 rounded-xl"
+                          asChild
+                        >
+                          <a href={project.githubUrl} target="_blank">
+                            <Github className="mr-2 h-4 w-4" /> Code
                           </a>
                         </Button>
                       </div>
                     </div>
+                  </div>
 
-                    <CardContent className="p-5">
-                      <h3 className="text-xl font-semibold mb-2">
+                  {/* CONTENU TEXTE */}
+                  <CardContent className="p-6 flex flex-col flex-1">
+                    <div className="flex justify-between items-start mb-3">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-muted-foreground mb-4">
-                        {project.description}
-                      </p>
+                      <Layers size={16} className="text-slate-400" />
+                    </div>
 
-                      <div className="flex flex-wrap gap-2">
-                        {project.tags.map((tag) => (
-                          <Badge
-                            key={tag}
-                            variant="secondary"
-                            className="bg-muted/80"
-                          >
-                            {tag}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
-          </TabsContent>
-        </Tabs>
+                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                      {project.description}
+                    </p>
+
+                    <div className="mt-auto flex flex-wrap gap-2">
+                      {project.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-bold px-2.5 py-1 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-lg uppercase tracking-wider"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
