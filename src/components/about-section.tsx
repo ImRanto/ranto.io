@@ -9,6 +9,7 @@ import {
   Server,
   Brain,
   Lightbulb,
+  Sparkles,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -16,35 +17,44 @@ const SkillCard = ({
   icon: Icon,
   title,
   description,
-  delay,
+  index,
 }: {
   icon: React.ElementType;
   title: string;
   description: string;
-  delay: number;
+  index: number;
 }) => (
   <motion.div
-    initial={{ opacity: 0, y: 20 }}
+    initial={{ opacity: 0, y: 30 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
+    viewport={{ once: true }}
     transition={{
-      delay,
-      duration: 0.6,
-      ease: [0.16, 1, 0.3, 1],
+      delay: index * 0.1,
+      duration: 0.5,
+      ease: [0.21, 0.45, 0.32, 0.9],
     }}
   >
-    <Card className="h-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/30 transition-all duration-500 hover:shadow-lg hover:shadow-cyan-500/10 hover:-translate-y-1 hover:border-cyan-500/30">
-      <CardContent className="p-6 flex flex-col h-full">
-        <div className="flex items-start gap-4 mb-4">
-          <div className="p-3 bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/40 dark:to-blue-900/40 rounded-lg text-cyan-600 dark:text-cyan-400 shadow-inner">
-            <Icon className="h-6 w-6" />
-          </div>
-          <div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {title}
-            </h3>
-            <p className="text-muted-foreground mt-1">{description}</p>
-          </div>
+    <Card className="group relative h-full overflow-hidden border-gray-200/50 dark:border-gray-800/50 bg-white/50 dark:bg-slate-900/50 backdrop-blur-xl transition-all duration-300 hover:border-cyan-500/50 shadow-sm hover:shadow-cyan-500/10">
+      {/* Effet de brillance au hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+      <CardContent className="p-8 flex flex-col h-full relative z-10">
+        <div className="mb-5 inline-flex p-3 rounded-2xl bg-slate-100 dark:bg-slate-800 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-inner">
+          <Icon className="h-6 w-6" />
+        </div>
+
+        <div className="space-y-3">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+            {title}
+          </h3>
+          <p className="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+            {description}
+          </p>
+        </div>
+
+        {/* Décoration discrète en bas à droite */}
+        <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-20 transition-opacity">
+          <Sparkles className="h-4 w-4 text-cyan-500" />
         </div>
       </CardContent>
     </Card>
@@ -55,98 +65,119 @@ const AboutSection = () => {
   const skills = [
     {
       icon: Layout,
-      title: "Frontend",
+      title: "Frontend Development",
       description:
-        "Création d'interfaces modernes avec React, Next.js et TailwindCSS. Expertise en animations et expérience utilisateur fluide.",
+        "Interfaces pixel-perfect avec React et Next.js. Focus sur la performance, l'accessibilité et les animations fluides.",
     },
     {
       icon: Server,
-      title: "Backend",
+      title: "Backend Systems",
       description:
-        "Développement d'API performantes avec Node.js, Express et Java. Conception d'architectures scalables.",
+        "APIs robustes en Node.js et Java. Expertise en microservices, sécurité et gestion de flux de données.",
     },
     {
       icon: Database,
-      title: "Bases de données",
+      title: "Database Design",
       description:
-        "Modélisation et optimisation de bases de données relationnelles avec PostgreSQL.",
+        "Architecture de données optimisée avec PostgreSQL. Maîtrise de l'indexation et des requêtes complexes.",
     },
     {
       icon: Code2,
-      title: "Langages",
+      title: "Core Languages",
       description:
-        "Maîtrise de JavaScript/TypeScript, Python et Java pour des solutions full-stack complètes.",
+        "Développement typé avec TypeScript pour la fiabilité, combiné à la puissance de Java et Python.",
     },
     {
       icon: Brain,
-      title: "Architecture",
+      title: "Software Architecture",
       description:
-        "Design système, microservices et déploiements cloud-native. Pensée critique et résolution de problèmes complexes.",
+        "Conception de systèmes scalables et maintenables. Utilisation des meilleurs design patterns.",
     },
     {
       icon: Lightbulb,
-      title: "Design UX/UI",
+      title: "Creative Solutions",
       description:
-        "Approche centrée utilisateur pour des interfaces intuitives et esthétiques. Prototypage et tests utilisateurs.",
+        "Résolution de problèmes complexes avec une approche centrée sur l'utilisateur et l'innovation continue.",
     },
   ];
 
   return (
     <section
       id="about"
-      className="py-24 bg-gradient-to-b from-gray-50/50 to-white dark:from-gray-900/20 dark:to-gray-950"
+      className="relative py-32 overflow-hidden bg-white dark:bg-[#020617]"
     >
-      <div className="container mx-auto px-4 sm:px-6">
-        <motion.div
-          className="mb-16 text-center max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-6 relative inline-block"
-            whileHover={{ scale: 1.02 }}
-          >
-            <span className="relative z-10">
-              À propos de moi
-              <motion.span
-                className="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
-                initial={{ scaleX: 0 }}
-                whileInView={{ scaleX: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-              />
-            </span>
-          </motion.h2>
-          <motion.p
-            className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            Développeur full-stack passionné par la création d'applications web
-            performantes et élégantes. Je combine expertise technique et
-            sensibilité design pour concevoir des expériences digitales
-            mémorables et intuitives.
-          </motion.p>
-        </motion.div>
+      {/* Éléments de fond */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(6,182,212,0.03)_0%,transparent_70%)]" />
 
-        <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          {skills.map((skill, index) => (
-            <SkillCard
-              key={skill.title}
-              icon={skill.icon}
-              title={skill.title}
-              description={skill.description}
-              delay={index * 0.1 + 0.4}
-            />
-          ))}
-        </motion.div>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-[1fr_2fr] gap-16 items-start">
+          {/* Côté texte fixe (ou scrollable sur mobile) */}
+          <div className="sticky top-32 space-y-6">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-sm font-black uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-500 mb-4">
+                Expertise
+              </h2>
+              <h3 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white leading-tight">
+                Passionné par le{" "}
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-500">
+                  Code
+                </span>{" "}
+                & le Design.
+              </h3>
+            </motion.div>
+
+            <motion.p
+              className="text-lg text-slate-600 dark:text-slate-400 leading-relaxed"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Développeur Full-Stack, je transforme des problématiques complexes
+              en interfaces intuitives. Mon but est de construire des produits
+              qui ne sont pas seulement fonctionnels, mais exceptionnels.
+            </motion.p>
+
+            <motion.div
+              className="pt-4 flex gap-4 text-sm font-bold text-slate-900 dark:text-white"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
+              <div className="flex flex-col">
+                <span className="text-cyan-600 text-2xl">01+</span>
+                <span className="text-xs uppercase tracking-wider opacity-60">
+                  Années d'exp.
+                </span>
+              </div>
+              <div className="w-[1px] h-10 bg-slate-200 dark:bg-slate-800 mx-4" />
+              <div className="flex flex-col">
+                <span className="text-cyan-600 text-2xl">2+</span>
+                <span className="text-xs uppercase tracking-wider opacity-60">
+                  Projets finis
+                </span>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Grille de compétences */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {skills.map((skill, index) => (
+              <SkillCard
+                key={skill.title}
+                index={index}
+                icon={skill.icon}
+                title={skill.title}
+                description={skill.description}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
