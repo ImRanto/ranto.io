@@ -136,7 +136,7 @@ const ContactSection = () => {
 
       setStatus({
         type: "success",
-        message: "Message envoyé avec succès ! ✨",
+        message: "Message envoyé avec succès !",
       });
 
       currentSentTimes.push(now);
