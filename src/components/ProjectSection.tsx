@@ -27,10 +27,10 @@ const projects: Project[] = [
     description:
       "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel.",
     image: "https://iili.io/FmzUawb.png",
-    tags: ["React", "Node.js", "Tailwind CSS"],
+    tags: ["React", "Node.js", "Express", "Tailwind CSS"],
     category: "fullstack",
     liveUrl: "https://patrimoine-economique-ui-rnt.onrender.com",
-    githubUrl: "#",
+    githubUrl: "https://github.com/ImRanto/patrimoine-economique",
   },
   {
     id: 2,
@@ -38,7 +38,7 @@ const projects: Project[] = [
     description:
       "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI.",
     image: "https://iili.io/Fmz4Ziv.png",
-    tags: ["Next.js", "TypeScript", "OpenAI"],
+    tags: ["Next.js", "TypeScript", "OpenAI", "Python"],
     category: "frontend",
     liveUrl: "https://hiu-2025-bisounours.vercel.app",
     githubUrl: "#",
@@ -75,6 +75,17 @@ const projects: Project[] = [
     category: "frontend",
     liveUrl: "https://cycleflow-one.vercel.app/",
     githubUrl: "https://github.com/ImRanto/menstruel-cycle-tracker",
+  },
+  {
+    id: 6,
+    title: "Suivi de vente E-Tsako",
+    description:
+      "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
+    image: "https://i.postimg.cc/BQBf4KCb/e-tsako.png",
+    tags: ["Vite", "Tailwind CSS", "Java", "Spring Boot"],
+    category: "fullstack",
+    liveUrl: "https://i-tsaky.vercel.app",
+    githubUrl: "https://github.com/ImRanto/e-tsako",
   },
 ];
 
