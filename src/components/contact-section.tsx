@@ -7,7 +7,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import {
+  Mail,
+  Phone,
+  MapPin,
+  Send,
+  Lock,
+  LogOut,
+  User as UserIcon,
+} from "lucide-react";
 import {
   Form,
   FormControl,
@@ -50,29 +58,22 @@ const ContactSection = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      name: user?.fullName || "",
-      email: user?.primaryEmailAddress?.emailAddress || "",
+      name: "",
+      email: "",
       message: "",
     },
   });
 
+  // Met à jour le formulaire quand l'utilisateur se connecte
   useEffect(() => {
-    form.reset({
-      name: user?.fullName || "",
-      email: user?.primaryEmailAddress?.emailAddress || "",
-      message: "",
-    });
-  }, [user]);
-
-  const handleRecaptchaChange = (token: string | null) => {
-    setRecaptchaToken(token);
-  };
+    if (user) {
+      form.setValue("name", user.fullName || "");
+      form.setValue("email", user.primaryEmailAddress?.emailAddress || "");
+    }
+  }, [user, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!user) {
-      alert("Veuillez vous connecter pour envoyer un message.");
-      return;
-    }
+    if (!user) return; // Sécurité supplémentaire
 
     if (!recaptchaToken) {
       alert("Veuillez valider le reCAPTCHA.");
@@ -87,49 +88,37 @@ const ContactSection = () => {
     sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
 
     if (sentTimes.length >= 1) {
-      alert(
-        "Vous avez déjà envoyé un message aujourd'hui. Veuillez réessayer demain."
-      );
+      alert("Limite d'envoi atteinte (1 message par 24h). À demain !");
       return;
     }
 
     setIsSending(true);
 
-    const userMessageParams = {
-      from_name: values.name,
-      from_email: values.email,
-      message: values.message,
-      "g-recaptcha-response": recaptchaToken,
-    };
-
-    const autoReplyParams = {
-      to_name: values.name,
-      to_email: values.email,
-    };
-
     try {
+      // Envoi vers votre boîte mail
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_USER!,
-        userMessageParams,
+        { ...values, "g-recaptcha-response": recaptchaToken },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
+      // Envoi de la réponse automatique
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REPLY!,
-        autoReplyParams,
+        { to_name: values.name, to_email: values.email },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
       alert("Message envoyé avec succès !");
       sentTimes.push(now);
       localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
-      form.reset();
-      setRecaptchaToken(null);
+      form.reset({ ...values, message: "" }); // On garde le nom/email mais on vide le message
       recaptchaRef.current?.reset();
+      setRecaptchaToken(null);
     } catch (error) {
-      alert("Erreur lors de l'envoi du message.");
+      alert("Erreur lors de l'envoi.");
       console.error(error);
     } finally {
       setIsSending(false);
@@ -157,55 +146,78 @@ const ContactSection = () => {
     },
   ];
 
+              <div className="space-y-4">
+                {[
+                  { icon: Mail, text: "hei.ranto.2@gmail.com" },
+                  { icon: Phone, text: "+261 38 13 277 37" },
+                  { icon: MapPin, text: "Antananarivo, Madagascar" },
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800"
+                  >
+                    <item.icon className="text-cyan-500" size={20} />
+                    <span className="text-sm font-medium">{item.text}</span>
+                  </div>
+                ))}
+              </div>;
+
   return (
     <>
-      <AuthRedirectWatcher />;
-      <section id="contact" className="py-24 bg-gray-50/50 dark:bg-gray-900/20">
+      <AuthRedirectWatcher />
+      <section
+        id="contact"
+        className="py-24 bg-slate-50/50 dark:bg-slate-900/20"
+      >
         <div className="container mx-auto px-6">
           <motion.div
             className="mb-16 text-center max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7 }}
           >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 relative inline-block">
-              Contactez Moi
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-cyan-500 rounded-full"></div>
+            <h2 className="text-3xl md:text-5xl font-bold mb-6">
+              Contactez <span className="text-cyan-500">Moi</span>
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Vous avez un projet en tête ou vous souhaitez simplement discuter
-              ? N&apos;hésitez pas à me contacter !
+            <p className="text-slate-600 dark:text-slate-400">
+              Le formulaire est ouvert à tous. Connectez-vous simplement pour
+              valider l'envoi.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-1 space-y-4">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            {/* Colonne Infos */}
+            <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <motion.div
-                  key={info.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
                 >
-                  <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="flex items-center">
-                        <div className="p-3 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400 mr-4">
-                          <info.icon className="h-6 w-6" />
+                  <Card className="group relative overflow-hidden border border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 rounded-[1.5rem]">
+                    {/* Petit éclat de lumière au survol */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+
+                    <CardContent className="p-6 flex items-center gap-5 relative z-10">
+                      {/* Container de l'icône avec un cercle doux */}
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="relative p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-inner">
+                          <info.icon size={22} strokeWidth={1.5} />
                         </div>
-                        <div>
-                          <h3 className="font-medium text-foreground">
-                            {info.title}
-                          </h3>
-                          <a
-                            href={info.link}
-                            className="text-muted-foreground hover:text-cyan-500 dark:hover:text-cyan-400 transition-colors"
-                          >
-                            {info.value}
-                          </a>
-                        </div>
+                      </div>
+
+                      <div className="flex flex-col">
+                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500 mb-1">
+                          {info.title}
+                        </span>
+                        <a
+                          href={info.link}
+                          className="text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300"
+                        >
+                          {info.value}
+                        </a>
                       </div>
                     </CardContent>
                   </Card>
@@ -213,15 +225,10 @@ const ContactSection = () => {
               ))}
             </div>
 
-            <motion.div
-              className="lg:col-span-2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.2, duration: 0.7 }}
-            >
-              <Card className="border-none shadow-md">
-                <CardContent className="p-6">
+            {/* Colonne Formulaire */}
+            <div className="lg:col-span-2">
+              <Card className="border-none shadow-xl rounded-[2rem] overflow-hidden bg-white dark:bg-slate-900">
+                <CardContent className="p-8">
                   <Form {...form}>
                     <form
                       onSubmit={form.handleSubmit(onSubmit)}
@@ -236,9 +243,10 @@ const ContactSection = () => {
                               <FormLabel>Nom</FormLabel>
                               <FormControl>
                                 <Input
-                                  placeholder="Votre nom"
-                                  readOnly={!!user}
+                                  placeholder="Votre nom..."
                                   {...field}
+                                  readOnly={!!user}
+                                  className="rounded-xl"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -250,12 +258,13 @@ const ContactSection = () => {
                           name="email"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Email</FormLabel>
+                              <FormLabel>Adresse Email</FormLabel>
                               <FormControl>
                                 <Input
-                                  placeholder="Votre email"
-                                  readOnly={!!user}
+                                  placeholder="exemple@gmail.com"
                                   {...field}
+                                  readOnly={!!user}
+                                  className="rounded-xl"
                                 />
                               </FormControl>
                               <FormMessage />
@@ -263,16 +272,17 @@ const ContactSection = () => {
                           )}
                         />
                       </div>
+
                       <FormField
                         control={form.control}
                         name="message"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Message</FormLabel>
+                            <FormLabel>Votre Projet / Message</FormLabel>
                             <FormControl>
                               <Textarea
-                                placeholder="Votre message"
-                                className="min-h-32"
+                                placeholder="Décrivez-moi votre besoin..."
+                                className="min-h-[150px] rounded-xl"
                                 {...field}
                               />
                             </FormControl>
@@ -281,56 +291,65 @@ const ContactSection = () => {
                         )}
                       />
 
-                      <div className="flex justify-center">
+                      <div className="flex justify-center py-2">
                         <ReCAPTCHA
                           ref={recaptchaRef}
                           sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                          theme="light"
-                          onChange={handleRecaptchaChange}
+                          onChange={(t) => setRecaptchaToken(t)}
+                          theme="dark"
                         />
                       </div>
-                      {/* Boutons envoyés et connexion côte à côte */}
-                      <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between w-full">
-                        {/* Bloc gauche : bouton envoyer + connexion */}
-                        <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
-                          <Button
-                            type="submit"
-                            className="w-full sm:w-auto"
-                            size="lg"
-                            disabled={isSending || !user}
-                          >
-                            <Send className="mr-2 h-4 w-4" />
-                            {isSending ? "Envoi..." : "Envoyer le message"}
-                          </Button>
 
-                          <SignInButton mode="modal">
-                            <Button
-                              type="button"
-                              variant="outline"
-                              size="lg"
-                              disabled={!!user}
-                              className="w-full sm:w-auto"
-                            >
-                              {user ? "Connecté" : "Se connecter"}
-                            </Button>
-                          </SignInButton>
-                        </div>
-
-                        {/* Bloc droit : info user + déconnexion */}
-                        {user && (
-                          <div className="flex flex-col sm:flex-row items-center gap-2 text-sm text-muted-foreground">
-                            <div className="flex items-center gap-2">
-                              <UserButton />
-                              <span>
-                                Connecté en tant que{" "}
-                                <strong>{user.fullName}</strong>
-                              </span>
+                      {/* Actions d'authentification et envoi */}
+                      <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+                        {!user ? (
+                          <div className="flex flex-col items-center sm:items-start gap-3 w-full">
+                            <p className="text-xs text-slate-500 flex items-center gap-2">
+                              <Lock size={12} /> Une connexion est requise pour
+                              envoyer
+                            </p>
+                            <SignInButton mode="modal">
+                              <Button
+                                type="button"
+                                size="lg"
+                                className="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 rounded-xl px-8 font-bold"
+                              >
+                                <UserIcon className="mr-2 h-4 w-4" /> Se
+                                connecter
+                              </Button>
+                            </SignInButton>
+                          </div>
+                        ) : (
+                          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">
+                            <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-2 pr-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                              <UserButton afterSignOutUrl="/" />
+                              <div className="hidden sm:block">
+                                <p className="text-[10px] font-bold text-slate-400 uppercase leading-none">
+                                  Connecté
+                                </p>
+                                <p className="text-sm font-bold">
+                                  {user.firstName}
+                                </p>
+                              </div>
+                              <SignOutButton>
+                                <button
+                                  title="Déconnexion"
+                                  className="ml-2 p-1.5 text-slate-400 hover:text-red-500 transition-colors"
+                                >
+                                  <LogOut size={16} />
+                                </button>
+                              </SignOutButton>
                             </div>
-                            <SignOutButton>
-                              <button className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600">
-                                Déconnexion
-                              </button>
-                            </SignOutButton>
+
+                            <Button
+                              type="submit"
+                              disabled={isSending}
+                              size="lg"
+                              className="w-full sm:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 rounded-xl px-10 font-bold"
+                            >
+                              {isSending ? "Envoi..." : "Envoyer"}
+                              <Send className="ml-2 h-4 w-4" />
+                            </Button>
                           </div>
                         )}
                       </div>
@@ -338,7 +357,7 @@ const ContactSection = () => {
                   </Form>
                 </CardContent>
               </Card>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
