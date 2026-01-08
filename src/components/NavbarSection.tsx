@@ -12,12 +12,13 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { Menu, Code2, ArrowRight } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const NAV_LINKS = [
   { name: "Accueil", href: "/#hero" },
   { name: "À propos", href: "/#about" },
   { name: "Projets", href: "/#projects" },
+  { name: "Experiences", href: "/#experience" },
   { name: "Contact", href: "/#contact" },
 ];
 
