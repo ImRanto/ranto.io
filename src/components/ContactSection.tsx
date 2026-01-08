@@ -2,7 +2,7 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,6 +15,8 @@ import {
   Lock,
   LogOut,
   User as UserIcon,
+  CheckCircle2,
+  AlertCircle,
 } from "lucide-react";
 import {
   Form,
@@ -54,6 +56,21 @@ const ContactSection = () => {
   const [isSending, setIsSending] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [status, setStatus] = useState<{
+    type: "success" | "error" | "info" | null;
+    message: string | null;
+  }>({ type: null, message: null });
+
+  // Effet pour faire disparaître le message après 5 secondes
+  useEffect(() => {
+    if (status.message) {
+      const timer = setTimeout(
+        () => setStatus({ type: null, message: null }),
+        5000
+      );
+      return () => clearTimeout(timer);
+    }
+  }, [status]);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -64,7 +81,6 @@ const ContactSection = () => {
     },
   });
 
-  // Met à jour le formulaire quand l'utilisateur se connecte
   useEffect(() => {
     if (user) {
       form.setValue("name", user.fullName || "");
@@ -73,29 +89,37 @@ const ContactSection = () => {
   }, [user, form]);
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (!user) return; // Sécurité supplémentaire
+    if (!user) return;
 
     if (!recaptchaToken) {
-      alert("Veuillez valider le reCAPTCHA.");
+      setStatus({ type: "info", message: "Veuillez valider le reCAPTCHA." });
       return;
     }
 
     const now = Date.now();
     const DAY_MS = 24 * 60 * 60 * 1000;
-    let sentTimes: number[] = JSON.parse(
-      localStorage.getItem("emailSentTimes") || "[]"
-    );
-    sentTimes = sentTimes.filter((timestamp) => now - timestamp < DAY_MS);
 
-    if (sentTimes.length >= 1) {
-      alert("Limite d'envoi atteinte (1 message par 24h). À demain !");
+    const savedTimes =
+      typeof window !== "undefined"
+        ? localStorage.getItem("emailSentTimes")
+        : null;
+    let currentSentTimes: number[] = JSON.parse(savedTimes || "[]");
+
+    currentSentTimes = currentSentTimes.filter(
+      (timestamp) => now - timestamp < DAY_MS
+    );
+
+    if (currentSentTimes.length >= 2) {
+      setStatus({
+        type: "info",
+        message: "Limite atteinte (2 messages/24h). À demain ! 🚀",
+      });
       return;
     }
 
     setIsSending(true);
 
     try {
-      // Envoi vers votre boîte mail
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_USER!,
@@ -103,7 +127,6 @@ const ContactSection = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      // Envoi de la réponse automatique
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REPLY!,
@@ -111,14 +134,22 @@ const ContactSection = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
-      alert("Message envoyé avec succès !");
-      sentTimes.push(now);
-      localStorage.setItem("emailSentTimes", JSON.stringify(sentTimes));
-      form.reset({ ...values, message: "" }); // On garde le nom/email mais on vide le message
+      setStatus({
+        type: "success",
+        message: "Message envoyé avec succès ! ✨",
+      });
+
+      currentSentTimes.push(now);
+      localStorage.setItem("emailSentTimes", JSON.stringify(currentSentTimes));
+
+      form.reset({ ...values, message: "" });
       recaptchaRef.current?.reset();
       setRecaptchaToken(null);
     } catch (error) {
-      alert("Erreur lors de l'envoi.");
+      setStatus({
+        type: "error",
+        message: "Oups ! Erreur lors de l'envoi. Réessayez.",
+      });
       console.error(error);
     } finally {
       setIsSending(false);
@@ -146,21 +177,21 @@ const ContactSection = () => {
     },
   ];
 
-              <div className="space-y-4">
-                {[
-                  { icon: Mail, text: "hei.ranto.2@gmail.com" },
-                  { icon: Phone, text: "+261 38 13 277 37" },
-                  { icon: MapPin, text: "Antananarivo, Madagascar" },
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800"
-                  >
-                    <item.icon className="text-cyan-500" size={20} />
-                    <span className="text-sm font-medium">{item.text}</span>
-                  </div>
-                ))}
-              </div>;
+  <div className="space-y-4">
+    {[
+      { icon: Mail, text: "hei.ranto.2@gmail.com" },
+      { icon: Phone, text: "+261 38 13 277 37" },
+      { icon: MapPin, text: "Antananarivo, Madagascar" },
+    ].map((item, idx) => (
+      <div
+        key={idx}
+        className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800"
+      >
+        <item.icon className="text-cyan-500" size={20} />
+        <span className="text-sm font-medium">{item.text}</span>
+      </div>
+    ))}
+  </div>;
 
   return (
     <>
@@ -290,6 +321,52 @@ const ContactSection = () => {
                           </FormItem>
                         )}
                       />
+
+                      <AnimatePresence>
+                        {status.message && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.95 }}
+                            className={`p-4 rounded-2xl flex items-center gap-3 border ${
+                              status.type === "success"
+                                ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                                : status.type === "error"
+                                ? "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                                : "bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+                            }`}
+                          >
+                            <div
+                              className={`p-1.5 rounded-full ${
+                                status.type === "success"
+                                  ? "bg-emerald-500 text-white"
+                                  : status.type === "error"
+                                  ? "bg-red-500 text-white"
+                                  : "bg-cyan-500 text-white"
+                              }`}
+                            >
+                              {status.type === "success" ? (
+                                <CheckCircle2 size={16} />
+                              ) : (
+                                <AlertCircle size={16} />
+                              )}
+                            </div>
+                            <p className="text-sm font-bold tracking-tight">
+                              {status.message}
+                            </p>
+
+                            <button
+                              onClick={() =>
+                                setStatus({ type: null, message: null })
+                              }
+                              className="ml-auto opacity-50 hover:opacity-100 transition-opacity"
+                            >
+                              <LogOut size={14} className="rotate-45" />{" "}
+                              {/* Simple petite croix */}
+                            </button>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       <div className="flex justify-center py-2">
                         <ReCAPTCHA
