@@ -5,6 +5,7 @@ import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/FooterSection";
 import Navbar from "@/components/NavbarSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
+import ProfilePopup from "@/components/ProfilePopup";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <AboutSection />
+      <ProfilePopup />
       <ProjectsSection />
       <ExperienceSection />
       <ContactSection />
