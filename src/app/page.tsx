@@ -1,9 +1,9 @@
 import HeroSection from "../components/HeroSection";
-import AboutSection from "@/components/about-section";
-import ProjectsSection from "@/components/project-section";
-import ContactSection from "@/components/contact-section";
-import Footer from "@/components/footer";
-import Navbar from "@/components/Navbar";
+import AboutSection from "@/components/AboutSection";
+import ProjectsSection from "@/components/ProjectSection";
+import ContactSection from "@/components/ContactSection";
+import Footer from "@/components/FooterSection";
+import Navbar from "@/components/NavbarSection";
 import { ExperienceSection } from "@/components/ExperienceSection";
 
 export default function Home() {
