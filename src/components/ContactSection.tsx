@@ -258,7 +258,7 @@ const ContactSection = () => {
 
             {/* Colonne Formulaire */}
             <div className="lg:col-span-2">
-              <Card className="border-none shadow-xl rounded-[2rem] overflow-hidden bg-white dark:bg-slate-900">
+              <Card className="group relative border-none shadow-2xl rounded-[2rem] overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-all duration-500 hover:shadow-cyan-500/10">
                 <CardContent className="p-8">
                   <Form {...form}>
                     <form
