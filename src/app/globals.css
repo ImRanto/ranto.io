@@ -41,6 +41,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-quicksand), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
+  --color-cyan-500: #06b6d4;
 }
 
 :root {
@@ -110,6 +113,18 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+
+@media (pointer: fine) {
+
+  body,
+  a,
+  button,
+  input,
+  .cl-rootBox,
+  .cl-userButtonTrigger {
+    cursor: none !important;
+  }
 }
 
 @layer base {
