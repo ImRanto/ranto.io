@@ -71,13 +71,24 @@ const projects: Project[] = [
     description:
       "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision.",
     image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
-    tags: ["NextJs", "TypeScript", "Tailwind CSS"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
     liveUrl: "https://cycleflow-one.vercel.app/",
     githubUrl: "https://github.com/ImRanto/menstruel-cycle-tracker",
   },
   {
     id: 6,
+    title: "SkyLook - Pool Design Website",
+    description:
+      "Site web élégant dédié à la conception de piscines, réalisé en HTML5 et CSS3 pur.",
+    image: "https://i.postimg.cc/XvStMVTV/skylook.png",
+    tags: ["HTML", "CSS", "Responsive"],
+    category: "frontend",
+    liveUrl: "https://sky-look-alpha.vercel.app",
+    githubUrl: "https://github.com/ImRanto/SkyLook",
+  },
+  {
+    id: 7,
     title: "Suivi de vente E-Tsako",
     description:
       "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
@@ -92,14 +103,17 @@ const projects: Project[] = [
 const getTagStyle = (tag: string) => {
   const styles: Record<string, string> = {
     React: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
-    "Next.js": "bg-gray-500/10 text-gray-600 dark:text-gray-400",
     TypeScript: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+    "Next.js": "bg-slate-500/10 text-slate-600 dark:text-slate-400",
 
     "Spring Boot": "bg-red-500/10 text-red-600 dark:text-red-400",
     Java: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
     "Power BI": "bg-red-500/10 text-red-600 dark:text-red-400",
     Express: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
     PostgreSQL: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+    HTML: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+    CSS: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+    Responsive: "bg-green-500/10 text-green-600 dark:text-green-400",
 
     Python: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
     Airflow: "bg-green-500/10 text-green-600 dark:text-green-400",
@@ -137,7 +151,7 @@ const ProjectsSection = () => {
               <span>Portfolio</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
-              Projets{" "}
+              Projets Académiques et/ou Personnels{" "}
               <span className="text-slate-400 font-light">Sélectionnés</span>
             </h2>
           </div>
