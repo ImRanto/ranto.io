@@ -17,17 +17,17 @@ const ProfilePopup = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed right-0 top-1/2 -translate-y-1/2 z-50 flex items-center flex-row-reverse">
+    <div className="fixed -right-2 top-1/2 -translate-y-1/2 z-50 flex items-center flex-row-reverse">
       {!isOpen && (
         <motion.button
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           onClick={() => setIsOpen(true)}
-          className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 p-3 rounded-l-2xl shadow-2xl border border-r-0 border-slate-700 dark:border-slate-200 hover:pr-5 transition-all group"
+          className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 p-1 rounded-l-2xl shadow-2xl border border-r-0 border-slate-700 dark:border-slate-200 hover:pr-3 transition-all group"
         >
           <ChevronLeft
-            className="group-hover:scale-125 transition-transform"
-            size={24}
+            className="group-hover:scale-105 transition-transform"
+            size={25}
           />
         </motion.button>
       )}
