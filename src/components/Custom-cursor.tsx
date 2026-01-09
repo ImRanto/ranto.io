@@ -1,65 +1,75 @@
 "use client";
 import { useEffect, useState } from "react";
+import { motion, useSpring, useMotionValue } from "framer-motion";
 
 const CustomCursor = () => {
-  const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [clicked, setClicked] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [linkHovered, setLinkHovered] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+
+  const cursorX = useMotionValue(-100);
+  const cursorY = useMotionValue(-100);
+
+  const springConfig = { damping: 25, stiffness: 250 };
+  const smoothX = useSpring(cursorX, springConfig);
+  const smoothY = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    const handleMouseMove = (e: { clientX: any; clientY: any; }) => {
-      setPosition({ x: e.clientX, y: e.clientY });
+    const moveCursor = (e: MouseEvent) => {
+      cursorX.set(e.clientX);
+      cursorY.set(e.clientY);
     };
 
-    const handleMouseDown = () => setClicked(true);
-    const handleMouseUp = () => setClicked(false);
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
 
-    // Détection des éléments interactifs
-    const handleLinkHover = () => setLinkHovered(true);
-    const handleLinkLeave = () => setLinkHovered(false);
+    const handleMouseEnter = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, input, [role="button"], .group')) {
+        setIsHovered(true);
+      } else {
+        setIsHovered(false);
+      }
+    };
 
-    const interactiveElements = document.querySelectorAll(
-      'a, button, input, textarea, [role="button"]'
-    );
-    interactiveElements.forEach((el) => {
-      el.addEventListener("mouseenter", handleLinkHover);
-      el.addEventListener("mouseleave", handleLinkLeave);
-    });
-
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", moveCursor);
     window.addEventListener("mousedown", handleMouseDown);
     window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseover", handleMouseEnter);
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mousemove", moveCursor);
       window.removeEventListener("mousedown", handleMouseDown);
       window.removeEventListener("mouseup", handleMouseUp);
-      interactiveElements.forEach((el) => {
-        el.removeEventListener("mouseenter", handleLinkHover);
-        el.removeEventListener("mouseleave", handleLinkLeave);
-      });
+      window.removeEventListener("mouseover", handleMouseEnter);
     };
-  }, []);
-
-  const cursorClasses = [
-    "custom-cursor",
-    clicked ? "click-effect" : "",
-    hovered ? "hover-effect" : "",
-    linkHovered ? "link-hover" : "",
-  ]
-    .filter(Boolean)
-    .join(" ");
+  }, [cursorX, cursorY]);
 
   return (
-    <div
-      className={cursorClasses}
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        transform: `translate(-50%, -50%)${clicked ? " scale(0.7)" : ""}`,
-      }}
-    />
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-cyan-500 rounded-full pointer-events-none z-[999*9] mix-blend-difference"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          translateX: "-50%",
+          translateY: "-50%",
+        }}
+      />
+
+      <motion.div
+        className="fixed top-0 left-0 rounded-full pointer-events-none z-[99998] border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-[1px]"
+        style={{
+          x: smoothX,
+          y: smoothY,
+          translateX: "-50%",
+          translateY: "-50%",
+          width: isHovered ? 40 : 30,
+          height: isHovered ? 40 : 30,
+          opacity: isClicked ? 0.5 : 1,
+        }}
+        transition={{ type: "spring", damping: 20, stiffness: 150 }}
+      />
+    </>
   );
 };
 
