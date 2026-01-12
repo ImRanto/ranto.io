@@ -150,13 +150,20 @@ const HeroSection = () => {
               className="flex flex-wrap justify-center lg:justify-start gap-4"
             >
               <Link href="/#projects">
-                <button className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3.5 md:px-8 md:py-4 rounded-2xl font-bold transition-all hover:shadow-xl hover:-translate-y-1 active:scale-95 flex items-center gap-2">
-                  Voir mes projets <FiArrowRight />
+                <button className="group bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-6 py-3.5 md:px-8 md:py-4 rounded-2xl font-bold transition-all hover:shadow-xl hover:-translate-y-0.5 active:scale-95 flex items-center gap-2">
+                  Voir mes projets{" "}
+                  <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
                 </button>
               </Link>
               <Link href="/cv">
-                <button className="border-2 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white px-6 py-3.5 md:px-8 md:py-4 rounded-2xl font-bold transition-all hover:bg-slate-50 dark:hover:bg-slate-800/50 flex items-center gap-2">
-                  <FiDownload /> Mon CV
+                <button
+                  className="group border-2 border-slate-200 dark:border-slate-800 text-slate-900 dark:text-white 
+                     px-6 py-3.5 md:px-8 md:py-4 rounded-2xl font-bold transition-all 
+                     hover:bg-slate-50 dark:hover:bg-slate-800/50 hover:-translate-y-0.5 active:scale-95
+                     flex items-center gap-2"
+                >
+                  <FiDownload />
+                  Mon CV
                 </button>
               </Link>
             </motion.div>
