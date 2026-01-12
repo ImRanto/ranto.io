@@ -25,8 +25,12 @@ const HeroSection = () => {
 
       <div className="container mx-auto relative z-10">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-16">
-          {/* IMAGE : Ajustée pour ne pas être trop haute sur mobile */}
-          <div className="w-full lg:w-[45%] flex justify-center order-1 lg:order-2 mt-12 lg:mt-0">
+          <motion.div
+            className="w-full lg:w-[45%] flex justify-center order-1 lg:order-2 mt-12 lg:mt-0"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <div className="relative scale-90 md:scale-100">
               {/* Orbites */}
               <div className="absolute -inset-10 border border-slate-200/50 dark:border-slate-800/50 rounded-full scale-90 opacity-50" />
@@ -93,7 +97,7 @@ const HeroSection = () => {
                 </div>
               </motion.div>
             </div>
-          </div>
+          </motion.div>
 
           {/* TEXTE : Centré sur mobile, aligné gauche sur PC */}
           <motion.div
