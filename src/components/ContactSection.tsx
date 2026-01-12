@@ -61,6 +61,16 @@ const ContactSection = () => {
     message: string | null;
   }>({ type: null, message: null });
 
+    // SCROLL AUTO vers contact après connexion
+    useEffect(() => {
+      if (user) {
+        document.getElementById("contact")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }, [user]);
+
   // Effet pour faire disparaître le message après 5 secondes
   useEffect(() => {
     if (status.message) {
@@ -194,8 +204,6 @@ const ContactSection = () => {
   </div>;
 
   return (
-    <>
-      <AuthRedirectWatcher />
       <section
         id="contact"
         className="py-24 bg-slate-50/50 dark:bg-slate-900/20"
@@ -438,7 +446,6 @@ const ContactSection = () => {
           </div>
         </div>
       </section>
-    </>
   );
 };
 
