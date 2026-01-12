@@ -148,12 +148,12 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              <div className="flex flex-col">
+              {/* <div className="flex flex-col">
                 <span className="text-cyan-600 text-3xl font-bold">01+</span>
                 <span className="text-[10px] uppercase font-black tracking-widest opacity-50 dark:text-white">
                   Année d'exp.
                 </span>
-              </div>
+              </div> */}
               <div className="w-px h-10 bg-slate-200 dark:bg-slate-800" />
               <div className="flex flex-col">
                 <span className="text-cyan-600 text-3xl font-bold">8+</span>
