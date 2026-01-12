@@ -32,7 +32,7 @@ Le projet est bâti avec les dernières technologies du web pour garantir vitess
 
 ## 👨‍💻 À propos de moi
 
-Je suis **Handraina Ranto**, étudiant en Licence d'Informatique à **HEI**. Passionné par le développement Full-Stack, j'aime transformer des idées complexes en interfaces simples mais élégantes.
+Je suis *RAFALIMANANA Ranto Handraina**, étudiant en Licence d'Informatique à **HEI**. Passionné par le développement Full-Stack, j'aime transformer des idées complexes en interfaces simples mais élégantes.
 
 ---
 
