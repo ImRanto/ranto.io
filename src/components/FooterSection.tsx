@@ -12,7 +12,7 @@ const Footer = () => {
   const socialLinks = [
     {
       icon: <FaLinkedin size={18} />,
-      href: "https://www.linkedin.com/in/handraina-ranto-78a00b299",
+      href: "https://www.linkedin.com/in/ranto-rafalimanana-78a00b299",
       label: "LinkedIn",
     },
     {
