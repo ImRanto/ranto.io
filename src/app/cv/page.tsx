@@ -23,7 +23,7 @@ export default function CVPage() {
           </Link>
 
           <a
-            href="/cv.pdf"
+            href="/RAFALIMANANA Ranto Handraina - CV.pdf"
             download
             className="flex items-center gap-3 px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold text-sm shadow-xl hover:scale-105 transition-transform active:scale-95"
           >
