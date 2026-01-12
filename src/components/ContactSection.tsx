@@ -37,7 +37,6 @@ import {
   UserButton,
   SignOutButton,
 } from "@clerk/nextjs";
-import AuthRedirectWatcher from "./Auhredirection";
 
 const formSchema = z.object({
   name: z.string().min(2, {
