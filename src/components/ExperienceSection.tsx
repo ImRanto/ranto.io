@@ -18,7 +18,7 @@ const experiences = [
     type: "education",
     title: "Baccalauréat Scientifique",
     organization: "Lycée Ambohimanarina",
-    period: "2021",
+    period: "2021-2022",
     description:
       "Diplôme de fin d'études secondaires, série scientifique, axé sur les mathématiques et la logique.",
     highlights: ["Logique", "Mathématiques", "Physique"],
