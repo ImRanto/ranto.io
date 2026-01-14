@@ -47,7 +47,8 @@ const formSchema = z.object({
     .email({ message: "Veuillez entrer une adresse email valide." }),
   message: z
     .string()
-    .min(10, { message: "Le message doit contenir au moins 10 caractères." }),
+    .min(10, { message: "Le message doit contenir au moins 10 caractères." })
+    .max(600, { message: "Le message ne doit pas dépasser 600 caractères." }),
 });
 
 const ContactSection = () => {
@@ -321,6 +322,7 @@ const ContactSection = () => {
                               <Textarea
                                 placeholder="Décrivez-moi votre besoin..."
                                 className="min-h-[150px] rounded-xl"
+                                maxLength={600}
                                 {...field}
                               />
                             </FormControl>
