@@ -92,7 +92,7 @@ const HeroSection = () => {
                     Backend
                   </p>
                   <span className="text-[10px] text-slate-500">
-                    Java/Spring
+                    Java/Spring Boot
                   </span>
                 </div>
               </motion.div>
