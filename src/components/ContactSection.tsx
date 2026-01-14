@@ -183,7 +183,7 @@ const ContactSection = () => {
       icon: MapPin,
       title: "Localisation",
       value: "Antananarivo, Madagascar",
-      link: "#",
+      link: "https://www.google.com/maps/place/Madagascar,+Antananarivo",
     },
   ];
 
