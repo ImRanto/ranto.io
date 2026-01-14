@@ -119,10 +119,10 @@ const ContactSection = () => {
       (timestamp) => now - timestamp < DAY_MS
     );
 
-    if (currentSentTimes.length >= 2) {
+    if (currentSentTimes.length >= 1) {
       setStatus({
         type: "info",
-        message: "Limite atteinte (2 messages/24h). À demain ! 🚀",
+        message: "Limite atteinte (1 messages/24h). À demain ! 🚀",
       });
       return;
     }
@@ -204,249 +204,254 @@ const ContactSection = () => {
   </div>;
 
   return (
-      <section
-        id="contact"
-        className="py-24 bg-slate-50/50 dark:bg-slate-900/20"
-      >
-        <div className="container mx-auto px-6">
-          <motion.div
-            className="mb-16 text-center max-w-3xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl md:text-5xl font-bold mb-6">
-              Contactez <span className="text-cyan-500">Moi</span>
-            </h2>
-            <p className="text-slate-600 dark:text-slate-400">
-              Le formulaire est ouvert à tous. Connectez-vous simplement pour
-              valider l'envoi.
-            </p>
-          </motion.div>
+    <section id="contact" className="py-24 bg-slate-50/50 dark:bg-slate-900/20">
+      <div className="container mx-auto px-6">
+        <motion.div
+          className="mb-16 text-center max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <h2 className="text-3xl md:text-5xl font-bold mb-6">
+            Contactez <span className="text-cyan-500">Moi</span>
+          </h2>
+          <p className="text-slate-600 dark:text-slate-400">
+            Le formulaire est ouvert à tous. Connectez-vous simplement pour
+            valider l'envoi.
+          </p>
+        </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            {/* Colonne Infos */}
-            <div className="space-y-6">
-              {contactInfo.map((info, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Card className="group relative overflow-hidden border border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 rounded-[1.5rem]">
-                    {/* Petit éclat de lumière au survol */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Colonne Infos */}
+          <div className="space-y-6">
+            {contactInfo.map((info, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <Card className="group relative overflow-hidden border border-slate-100 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 backdrop-blur-sm transition-all duration-300 hover:border-cyan-500/50 hover:shadow-2xl hover:shadow-cyan-500/10 rounded-[1.5rem]">
+                  {/* Petit éclat de lumière au survol */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-cyan-500/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000" />
 
-                    <CardContent className="p-6 flex items-center gap-5 relative z-10">
-                      {/* Container de l'icône avec un cercle doux */}
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
-                        <div className="relative p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-inner">
-                          <info.icon size={22} strokeWidth={1.5} />
-                        </div>
+                  <CardContent className="p-6 flex items-center gap-5 relative z-10">
+                    {/* Container de l'icône avec un cercle doux */}
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <div className="relative p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-slate-600 dark:text-slate-400 group-hover:bg-cyan-500 group-hover:text-white transition-all duration-300 shadow-inner">
+                        <info.icon size={22} strokeWidth={1.5} />
                       </div>
+                    </div>
 
-                      <div className="flex flex-col">
-                        <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500 mb-1">
-                          {info.title}
-                        </span>
-                        <a
-                          href={info.link}
-                          className="text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300"
-                        >
-                          {info.value}
-                        </a>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
-            </div>
+                    <div className="flex flex-col">
+                      <span className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 dark:text-slate-500 mb-1">
+                        {info.title}
+                      </span>
+                      <a
+                        href={info.link}
+                        className="text-sm font-bold text-slate-700 dark:text-slate-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors duration-300"
+                      >
+                        {info.value}
+                      </a>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
+          </div>
 
-            {/* Colonne Formulaire */}
-            <div className="lg:col-span-2">
-              <Card className="group relative border-none shadow-2xl rounded-[2rem] overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-all duration-500 hover:shadow-cyan-500/10">
-                <CardContent className="p-8">
-                  <Form {...form}>
-                    <form
-                      onSubmit={form.handleSubmit(onSubmit)}
-                      className="space-y-6"
-                    >
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <FormField
-                          control={form.control}
-                          name="name"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Nom</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="Votre nom..."
-                                  {...field}
-                                  readOnly={!!user}
-                                  className="rounded-xl"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                        <FormField
-                          control={form.control}
-                          name="email"
-                          render={({ field }) => (
-                            <FormItem>
-                              <FormLabel>Adresse Email</FormLabel>
-                              <FormControl>
-                                <Input
-                                  placeholder="exemple@gmail.com"
-                                  {...field}
-                                  readOnly={!!user}
-                                  className="rounded-xl"
-                                />
-                              </FormControl>
-                              <FormMessage />
-                            </FormItem>
-                          )}
-                        />
-                      </div>
-
+          {/* Colonne Formulaire */}
+          <div className="lg:col-span-2">
+            <Card className="group relative border-none shadow-2xl rounded-[2rem] overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-md transition-all duration-500 hover:shadow-cyan-500/10">
+              <CardContent className="p-8">
+                <Form {...form}>
+                  <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="space-y-6"
+                  >
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <FormField
                         control={form.control}
-                        name="message"
+                        name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Votre Projet / Message</FormLabel>
+                            <FormLabel>Nom</FormLabel>
                             <FormControl>
-                              <Textarea
-                                placeholder="Décrivez-moi votre besoin..."
-                                className="min-h-[150px] rounded-xl"
-                                maxLength={600}
+                              <Input
+                                placeholder="Votre nom..."
                                 {...field}
+                                readOnly={!!user}
+                                className="rounded-xl"
                               />
                             </FormControl>
                             <FormMessage />
                           </FormItem>
                         )}
                       />
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Adresse Email</FormLabel>
+                            <FormControl>
+                              <Input
+                                placeholder="exemple@gmail.com"
+                                {...field}
+                                readOnly={!!user}
+                                className="rounded-xl"
+                              />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                    </div>
 
-                      <AnimatePresence>
-                        {status.message && (
-                          <motion.div
-                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
-                            animate={{ opacity: 1, y: 0, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.95 }}
-                            className={`p-4 rounded-2xl flex items-center gap-3 border ${
-                              status.type === "success"
-                                ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400"
-                                : status.type === "error"
-                                ? "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
-                                : "bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
-                            }`}
-                          >
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Votre Projet / Message</FormLabel>
+                          <FormControl>
+                            <Textarea
+                              placeholder="Décrivez-moi votre besoin..."
+                              className="min-h-[150px] rounded-xl"
+                              maxLength={600}
+                              {...field}
+                            />
+                          </FormControl>
                             <div
-                              className={`p-1.5 rounded-full ${
-                                status.type === "success"
-                                  ? "bg-emerald-500 text-white"
-                                  : status.type === "error"
-                                  ? "bg-red-500 text-white"
-                                  : "bg-cyan-500 text-white"
+                              className={`flex justify-end text-xs mt-1 ${
+                                (field.value?.length || 0) > 550
+                                  ? "text-red-500"
+                                  : "text-slate-500"
                               }`}
                             >
-                              {status.type === "success" ? (
-                                <CheckCircle2 size={16} />
-                              ) : (
-                                <AlertCircle size={16} />
-                              )}
+                              {field.value?.length || 0}/600
                             </div>
-                            <p className="text-sm font-bold tracking-tight">
-                              {status.message}
-                            </p>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
 
-                            <button
-                              onClick={() =>
-                                setStatus({ type: null, message: null })
-                              }
-                              className="ml-auto opacity-50 hover:opacity-100 transition-opacity"
-                            >
-                              <LogOut size={14} className="rotate-45" />{" "}
-                              {/* Simple petite croix */}
-                            </button>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
-
-                      <div className="flex justify-center py-2">
-                        <ReCAPTCHA
-                          ref={recaptchaRef}
-                          sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                          onChange={(t) => setRecaptchaToken(t)}
-                          theme="dark"
-                        />
-                      </div>
-
-                      {/* Actions d'authentification et envoi */}
-                      <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
-                        {!user ? (
-                          <div className="flex flex-col items-center sm:items-start gap-3 w-full">
-                            <p className="text-xs text-slate-500 flex items-center gap-2">
-                              <Lock size={12} /> Une connexion est requise pour
-                              envoyer
-                            </p>
-                            <SignInButton mode="modal">
-                              <Button
-                                type="button"
-                                size="lg"
-                                className="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 rounded-xl px-8 font-bold"
-                              >
-                                <UserIcon className="mr-2 h-4 w-4" /> Se
-                                connecter
-                              </Button>
-                            </SignInButton>
+                    <AnimatePresence>
+                      {status.message && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                          animate={{ opacity: 1, y: 0, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.95 }}
+                          className={`p-4 rounded-2xl flex items-center gap-3 border ${
+                            status.type === "success"
+                              ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-600 dark:text-emerald-400"
+                              : status.type === "error"
+                              ? "bg-red-500/10 border-red-500/20 text-red-600 dark:text-red-400"
+                              : "bg-cyan-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+                          }`}
+                        >
+                          <div
+                            className={`p-1.5 rounded-full ${
+                              status.type === "success"
+                                ? "bg-emerald-500 text-white"
+                                : status.type === "error"
+                                ? "bg-red-500 text-white"
+                                : "bg-cyan-500 text-white"
+                            }`}
+                          >
+                            {status.type === "success" ? (
+                              <CheckCircle2 size={16} />
+                            ) : (
+                              <AlertCircle size={16} />
+                            )}
                           </div>
-                        ) : (
-                          <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">
-                            <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-2 pr-4 rounded-2xl border border-slate-100 dark:border-slate-800">
-                              <UserButton afterSignOutUrl="/" />
-                              <div className="hidden sm:block">
-                                <p className="text-[10px] font-bold text-slate-400 uppercase leading-none">
-                                  Connecté
-                                </p>
-                                <p className="text-sm font-bold">
-                                  {user.firstName}
-                                </p>
-                              </div>
-                              <SignOutButton>
-                                <button
-                                  title="Déconnexion"
-                                  className="ml-2 p-1.5 text-slate-400 hover:text-red-500 transition-colors"
-                                >
-                                  <LogOut size={16} />
-                                </button>
-                              </SignOutButton>
-                            </div>
+                          <p className="text-sm font-bold tracking-tight">
+                            {status.message}
+                          </p>
 
+                          <button
+                            onClick={() =>
+                              setStatus({ type: null, message: null })
+                            }
+                            className="ml-auto opacity-50 hover:opacity-100 transition-opacity"
+                          >
+                            <LogOut size={14} className="rotate-45" />{" "}
+                            {/* Simple petite croix */}
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+
+                    <div className="flex justify-center py-2">
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                        onChange={(t) => setRecaptchaToken(t)}
+                        theme="dark"
+                      />
+                    </div>
+
+                    {/* Actions d'authentification et envoi */}
+                    <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+                      {!user ? (
+                        <div className="flex flex-col items-center sm:items-start gap-3 w-full">
+                          <p className="text-xs text-slate-500 flex items-center gap-2">
+                            <Lock size={12} /> Une connexion est requise pour
+                            envoyer
+                          </p>
+                          <SignInButton mode="modal">
                             <Button
-                              type="submit"
-                              disabled={isSending}
+                              type="button"
                               size="lg"
-                              className="w-full sm:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 rounded-xl px-10 font-bold"
+                              className="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 rounded-xl px-8 font-bold"
                             >
-                              {isSending ? "Envoi..." : "Envoyer"}
-                              <Send className="ml-2 h-4 w-4" />
+                              <UserIcon className="mr-2 h-4 w-4" /> Se connecter
                             </Button>
+                          </SignInButton>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col sm:flex-row items-center justify-between w-full gap-4">
+                          <div className="flex items-center gap-3 bg-slate-50 dark:bg-slate-800 p-2 pr-4 rounded-2xl border border-slate-100 dark:border-slate-800">
+                            <UserButton afterSignOutUrl="/" />
+                            <div className="hidden sm:block">
+                              <p className="text-[10px] font-bold text-slate-400 uppercase leading-none">
+                                Connecté
+                              </p>
+                              <p className="text-sm font-bold">
+                                {user.firstName}
+                              </p>
+                            </div>
+                            <SignOutButton>
+                              <button
+                                title="Déconnexion"
+                                className="ml-2 p-1.5 text-slate-400 hover:text-red-500 transition-colors"
+                              >
+                                <LogOut size={16} />
+                              </button>
+                            </SignOutButton>
                           </div>
-                        )}
-                      </div>
-                    </form>
-                  </Form>
-                </CardContent>
-              </Card>
-            </div>
+
+                          <Button
+                            type="submit"
+                            disabled={isSending}
+                            size="lg"
+                            className="w-full sm:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 rounded-xl px-10 font-bold"
+                          >
+                            {isSending ? "Envoi..." : "Envoyer"}
+                            <Send className="ml-2 h-4 w-4" />
+                          </Button>
+                        </div>
+                      )}
+                    </div>
+                  </form>
+                </Form>
+              </CardContent>
+            </Card>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
   );
 };
 
