@@ -9,7 +9,6 @@ import {
   Github,
   Linkedin,
   ChevronLeft,
-  Briefcase,
 } from "lucide-react";
 import { Button } from "./ui/button";
 
@@ -17,17 +16,19 @@ const ProfilePopup = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="fixed -right-1 top-1/2 -translate-y-1/2 z-50 flex items-center flex-row-reverse">
+    <div className="fixed -right-1 top-1/2 -translate-y-1/2 z-[100] flex items-center flex-row-reverse">
+      {/* Bouton d'ouverture optimisé */}
       {!isOpen && (
         <motion.button
           initial={{ x: 20, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
+          whileHover={{ x: -5 }}
           onClick={() => setIsOpen(true)}
-          className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 pt-1 pb-1 rounded-l-2xl shadow-2xl border border-r-0 border-slate-700 dark:border-slate-200 hover:pr-2 transition-all group"
+          className="bg-slate-900 dark:bg-white text-white dark:text-slate-900 py-4 px-1 rounded-l-2xl shadow-2xl border border-slate-700 dark:border-slate-200 transition-all group"
         >
           <ChevronLeft
-            className="group-hover:scale-110 transition-transform"
-            size={25}
+            className="group-hover:scale-125 transition-transform"
+            size={24}
           />
         </motion.button>
       )}
@@ -38,75 +39,82 @@ const ProfilePopup = () => {
             initial={{ x: 400, opacity: 0 }}
             animate={{ x: -20, opacity: 1 }}
             exit={{ x: 400, opacity: 0 }}
-            transition={{ type: "spring", damping: 20, stiffness: 100 }}
-            className="relative w-72 bg-white/90 dark:bg-slate-900/95 backdrop-blur-2xl p-6 rounded-2xl shadow-[-20px_20px_50px_rgba(0,0,0,0.2)] border border-slate-200 dark:border-slate-800"
+            transition={{ type: "spring", damping: 25, stiffness: 120 }}
+            className="relative w-80 bg-white/95 dark:bg-slate-900/98 backdrop-blur-2xl p-8 rounded-3xl shadow-[-20px_20px_60px_rgba(0,0,0,0.3)] border border-slate-200 dark:border-slate-800"
           >
             {/* Bouton Fermer */}
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-6 text-slate-400 hover:text-red-500 transition-colors"
+              className="absolute top-5 right-6 text-slate-400 hover:text-cyan-500 transition-colors p-1"
             >
-              <X size={18} />
+              <X size={20} />
             </button>
 
             <div className="flex flex-col items-center text-center">
-              {/* Photo */}
-              <div className="relative w-24 h-24 mb-4">
-                <div className="absolute inset-0 bg-cyan-500 blur-xl opacity-20" />
-                <div className="relative w-full h-full rounded-full border-2 border-cyan-500 p-1 bg-white dark:bg-slate-800">
+              {/* Photo avec effet de lueur */}
+              <div className="relative w-28 h-28 mb-6">
+                <div className="absolute inset-0 bg-cyan-500 blur-2xl opacity-30 animate-pulse" />
+                <div className="relative w-full h-full rounded-full border-2 border-cyan-500 p-1.5 bg-white dark:bg-slate-800">
                   <Image
                     src="/ranto.jpg"
                     alt="Ranto"
-                    width={96}
-                    height={96}
-                    className="rounded-full object-cover w-full h-full shadow-inner"
+                    width={110}
+                    height={110}
+                    className="rounded-full object-cover w-full h-full"
                   />
                 </div>
               </div>
+
               {/* Infos */}
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white leading-none mb-1">
-                Ranto <span className="text-cyan-500">H.</span>
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white leading-none mb-2">
+                Ranto <span className="text-cyan-500 font-black">H.</span>
               </h3>
-              <p className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 mb-4">
-                Développeur Web Fullstack
-              </p>
-              <p className="text-sm text-slate-600 dark:text-slate-400 mb-5 leading-relaxed">
-                Passionné par la création d'interfaces modernes et performantes.
-                Basé à Antananarivo.
-              </p>
+              
+              <div className="px-3 py-1 bg-cyan-500/10 rounded-full mb-4">
+                <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
+                  Développeur Fullstack
+                </p>
+              </div>
+
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-                À la recherche d'un{" "}
-                <span className="text-slate-900 dark:text-white font-semibold">
-                  stage passionnant
-                </span>{" "}
-                en Front-end, Back-end ou Fullstack.
+                Passionné par le développement d'applications <span className="text-slate-900 dark:text-white font-medium">web & mobile</span> performantes. Basé à Antananarivo.
               </p>
+
+              <div className="w-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700">
+                <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                  Actuellement disponible pour un <br />
+                  <span className="text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider text-[11px]">
+                    Stage de fin d'études
+                  </span>
+                </p>
+              </div>
+
               {/* Réseaux Sociaux */}
-              <div className="flex gap-3 mb-6">
+              <div className="flex gap-4 mb-8">
                 {[
-                  { icon: Mail, link: "mailto:hei.ranto.2@gmail.com" },
-                  { icon: Github, link: "https://github.com/ImRanto" },
-                  {
-                    icon: Linkedin,
-                    link: "https://linkedin.com/in/handraina-ranto-78a00b299",
-                  },
+                  { icon: Mail, link: "mailto:hei.ranto.2@gmail.com", label: "Email" },
+                  { icon: Github, link: "https://github.com/ImRanto", label: "Github" },
+                  { icon: Linkedin, link: "https://linkedin.com/in/handraina-ranto-78a00b299", label: "Linkedin" },
                 ].map((social, i) => (
                   <a
                     key={i}
                     href={social.link}
-                    className="p-2.5 bg-slate-100 dark:bg-slate-800 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-cyan-600 hover:text-white transition-all shadow-sm"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-3 bg-white dark:bg-slate-800 rounded-2xl text-slate-600 dark:text-slate-300 hover:text-cyan-500 hover:shadow-lg transition-all border border-slate-100 dark:border-slate-700"
+                    title={social.label}
                   >
-                    <social.icon size={18} />
+                    <social.icon size={20} />
                   </a>
                 ))}
               </div>
+
               <Button
-                className="w-full justify-center bg-cyan-600 hover:bg-cyan-700 text-white"
+                className="w-full py-6 rounded-2xl bg-slate-900 dark:bg-white text-white dark:text-slate-900 hover:bg-cyan-600 dark:hover:bg-cyan-500 dark:hover:text-white transition-all font-bold"
                 asChild
+                onClick={() => setIsOpen(false)}
               >
-                <a href="#contact">
-                  Contacter
-                </a>
+                <a href="#contact">Me Contacter</a>
               </Button>
             </div>
           </motion.div>
