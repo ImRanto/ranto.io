@@ -65,7 +65,7 @@ const AboutSection = () => {
       icon: Layout,
       title: "Frontend Development",
       description:
-        "Interfaces pixel-perfect avec React et Next.js. Focus sur la performance et l'accessibilité.",
+        "Interfaces pixel-perfect avec React et Next.js (Base HTML/CSS). Focus sur la performance et l'accessibilité.",
     },
     {
       icon: Server,
@@ -75,7 +75,7 @@ const AboutSection = () => {
     },
     {
       icon: Database,
-      title: "Database Design",
+      title: "Database",
       description:
         "Architecture de données optimisée avec PostgreSQL. Maîtrise de l'indexation.",
     },
@@ -83,7 +83,7 @@ const AboutSection = () => {
       icon: Code2,
       title: "Core Languages",
       description:
-        "Développement typé avec TypeScript, combiné à la puissance de Java et Python.",
+        "Développement typé avec TypeScript, combiné à la puissance de React et React Native.",
     },
     {
       icon: Brain,
