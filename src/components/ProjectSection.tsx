@@ -76,19 +76,19 @@ const projects: Project[] = [
     liveUrl: "https://cycleflow-one.vercel.app/",
     githubUrl: "https://github.com/ImRanto/menstruel-cycle-tracker",
   },
+  // {
+  //   id: 6,
+  //   title: "SkyLook - Pool Design Website",
+  //   description:
+  //     "Site web élégant dédié à la conception de piscines, réalisé en HTML5 et CSS3 pur.",
+  //   image: "https://i.postimg.cc/XvStMVTV/skylook.png",
+  //   tags: ["HTML", "CSS", "Responsive"],
+  //   category: "frontend",
+  //   liveUrl: "https://sky-look-alpha.vercel.app",
+  //   githubUrl: "https://github.com/ImRanto/SkyLook",
+  // },
   {
     id: 6,
-    title: "SkyLook - Pool Design Website",
-    description:
-      "Site web élégant dédié à la conception de piscines, réalisé en HTML5 et CSS3 pur.",
-    image: "https://i.postimg.cc/XvStMVTV/skylook.png",
-    tags: ["HTML", "CSS", "Responsive"],
-    category: "frontend",
-    liveUrl: "https://sky-look-alpha.vercel.app",
-    githubUrl: "https://github.com/ImRanto/SkyLook",
-  },
-  {
-    id: 7,
     title: "Suivi de vente E-Tsako",
     description:
       "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
@@ -152,7 +152,7 @@ const ProjectsSection = () => {
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
               Projets Académiques et/ou Personnels{" "}
-              <span className="text-slate-400 font-light">Sélectionnés</span>
+              <span className=" text-cyan-500 font-light">Sélectionnés</span>
             </h2>
           </div>
 
