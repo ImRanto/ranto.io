@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 export default function PhilosophySection() {
   return (
-    <section className="py-32 bg-white dark:bg-[#020617] relative overflow-hidden">
+    <section id="phylosophy" className="py-32 bg-white dark:bg-[#020617] relative overflow-hidden">
       {/* Halo de lumière subtil en arrière-plan */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-cyan-500/5 rounded-full blur-[120px] pointer-events-none" />
 
