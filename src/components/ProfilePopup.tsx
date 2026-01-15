@@ -94,7 +94,7 @@ const ProfilePopup = () => {
                 {[
                   { icon: Mail, link: "mailto:hei.ranto.2@gmail.com", label: "Email" },
                   { icon: Github, link: "https://github.com/ImRanto", label: "Github" },
-                  { icon: Linkedin, link: "https://linkedin.com/in/handraina-ranto-78a00b299", label: "Linkedin" },
+                  { icon: Linkedin, link: "https://www.linkedin.com/in/ranto-rafalimanana-78a00b299", label: "Linkedin" },
                 ].map((social, i) => (
                   <a
                     key={i}
