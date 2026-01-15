@@ -14,10 +14,10 @@ export default function Home() {
       <Navbar />
       <HeroSection />
       <AboutSection />
-      <PhilosophySection />
       <ProfilePopup />
       <ProjectsSection />
       <ExperienceSection />
+      <PhilosophySection />
       <ContactSection />
       <Footer />
     </div>
