@@ -48,7 +48,7 @@ const formSchema = z.object({
   message: z
     .string()
     .min(10, { message: "Le message doit contenir au moins 10 caractères." })
-    .max(600, { message: "Le message ne doit pas dépasser 600 caractères." }),
+    .max(1000, { message: "Le message ne doit pas dépasser 1000 caractères." }),
 });
 
 const ContactSection = () => {
@@ -61,15 +61,15 @@ const ContactSection = () => {
     message: string | null;
   }>({ type: null, message: null });
 
-    // SCROLL AUTO vers contact après connexion
-    useEffect(() => {
-      if (user) {
-        document.getElementById("contact")?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-    }, [user]);
+  // SCROLL AUTO vers contact après connexion
+  useEffect(() => {
+    if (user) {
+      document.getElementById("contact")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [user]);
 
   // Effet pour faire disparaître le message après 5 secondes
   useEffect(() => {
@@ -119,10 +119,10 @@ const ContactSection = () => {
       (timestamp) => now - timestamp < DAY_MS
     );
 
-    if (currentSentTimes.length >= 1) {
+    if (currentSentTimes.length >= 2) {
       setStatus({
         type: "info",
-        message: "Limite atteinte (1 messages/24h). À demain ! 🚀",
+        message: "Limite atteinte (2 messages/24h). À demain ! 🚀",
       });
       return;
     }
@@ -133,14 +133,22 @@ const ContactSection = () => {
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_USER!,
-        { ...values, "g-recaptcha-response": recaptchaToken },
+        {
+          from_name: values.name,
+          from_email: values.email,
+          message: values.message,
+          "g-recaptcha-response": recaptchaToken,
+        },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID_REPLY!,
-        { to_name: values.name, to_email: values.email },
+        {
+          to_name: values.name,
+          to_email: values.email,
+        },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       );
 
@@ -323,15 +331,15 @@ const ContactSection = () => {
                               {...field}
                             />
                           </FormControl>
-                            <div
-                              className={`flex justify-end text-xs mt-1 ${
-                                (field.value?.length || 0) > 550
-                                  ? "text-red-500"
-                                  : "text-slate-500"
-                              }`}
-                            >
-                              {field.value?.length || 0}/600
-                            </div>
+                          <div
+                            className={`flex justify-end text-xs mt-1 ${
+                              (field.value?.length || 0) > 900
+                                ? "text-red-500"
+                                : "text-slate-500"
+                            }`}
+                          >
+                            {field.value?.length || 0}/1000
+                          </div>
                           <FormMessage />
                         </FormItem>
                       )}
