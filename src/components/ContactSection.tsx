@@ -327,7 +327,7 @@ const ContactSection = () => {
                             <Textarea
                               placeholder="Décrivez-moi votre besoin..."
                               className="min-h-[150px] rounded-xl"
-                              maxLength={600}
+                              maxLength={1000}
                               {...field}
                             />
                           </FormControl>
