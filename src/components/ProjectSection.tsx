@@ -29,7 +29,7 @@ const projects: Project[] = [
     image: "https://iili.io/FmzUawb.png",
     tags: ["React", "Node.js", "Express", "Tailwind CSS"],
     category: "fullstack",
-    liveUrl: "https://patrimoine-economique-ui-rnt.onrender.com",
+    liveUrl: "#",
     githubUrl: "https://github.com/ImRanto/patrimoine-economique",
   },
   {
@@ -63,7 +63,7 @@ const projects: Project[] = [
     tags: ["Airflow", "Python", "Power BI"],
     category: "data",
     liveUrl: "#",
-    githubUrl: "https://github.com/ImRanto/meteo",
+    githubUrl: "https://github.com/ImRanto/meteo_project",
   },
   {
     id: 5,
@@ -74,7 +74,7 @@ const projects: Project[] = [
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
     liveUrl: "https://cycleflow-one.vercel.app/",
-    githubUrl: "https://github.com/ImRanto/menstruel-cycle-tracker",
+    githubUrl: "https://github.com/ImRanto/cycle-flow",
   },
   // {
   //   id: 6,
