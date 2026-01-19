@@ -52,7 +52,7 @@ const projects: Project[] = [
     tags: ["Next.js", "Spring Boot", "PostgreSQL"],
     category: "fullstack",
     liveUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/ImRanto/Event-Manager-App",
   },
   {
     id: 4,
