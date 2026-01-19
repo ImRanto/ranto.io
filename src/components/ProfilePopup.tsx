@@ -80,11 +80,12 @@ const ProfilePopup = () => {
                 Passionné par le développement d'applications <span className="text-slate-900 dark:text-white font-medium">web & mobile</span> performantes. Basé à Antananarivo.
               </p>
 
+              {/* SECTION DISPONIBILITÉ MODIFIÉE */}
               <div className="w-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700">
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Actuellement disponible pour un <br />
+                  Actuellement ouvert pour un <br />
                   <span className="text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider text-[11px]">
-                    Stage de fin d'études
+                    Contrat d'alternance <span className="text-slate-400 dark:text-slate-500 font-normal">ou</span> de nouvelles opportunités professionnelles
                   </span>
                 </p>
               </div>
@@ -114,7 +115,7 @@ const ProfilePopup = () => {
                 asChild
                 onClick={() => setIsOpen(false)}
               >
-                <a href="#contact">Me Contacter</a>
+                <a href="#contact">Recrutez-moi</a>
               </Button>
             </div>
           </motion.div>
