@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ExternalLink, Github, FolderCode, Layers } from "lucide-react";
@@ -24,8 +23,7 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Gestion de Patrimoine",
-    description:
-      "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel.",
+    description: "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel.",
     image: "https://iili.io/FmzUawb.png",
     tags: ["React", "Node.js", "Express", "Tailwind CSS"],
     category: "fullstack",
@@ -35,8 +33,7 @@ const projects: Project[] = [
   {
     id: 2,
     title: "Assistant IA (Hackathon HIU)",
-    description:
-      "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI.",
+    description: "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI.",
     image: "https://iili.io/Fmz4Ziv.png",
     tags: ["Next.js", "TypeScript", "OpenAI", "Python"],
     category: "frontend",
@@ -46,8 +43,7 @@ const projects: Project[] = [
   {
     id: 3,
     title: "Tapakila – Billetterie",
-    description:
-      "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot.",
+    description: "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot.",
     image: "https://iili.io/FmI9Kuf.png",
     tags: ["Next.js", "Spring Boot", "PostgreSQL"],
     category: "fullstack",
@@ -57,8 +53,7 @@ const projects: Project[] = [
   {
     id: 4,
     title: "Analyse Météo ETL",
-    description:
-      "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques.",
+    description: "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques.",
     image: "https://iili.io/FmxQjv2.png",
     tags: ["Airflow", "Python", "Power BI"],
     category: "data",
@@ -68,30 +63,17 @@ const projects: Project[] = [
   {
     id: 5,
     title: "CycleFlow – Analyse Cyclique",
-    description:
-      "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision.",
+    description: "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision.",
     image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
     liveUrl: "https://cycleflow-one.vercel.app/",
     githubUrl: "https://github.com/ImRanto/cycle-flow",
   },
-  // {
-  //   id: 6,
-  //   title: "SkyLook - Pool Design Website",
-  //   description:
-  //     "Site web élégant dédié à la conception de piscines, réalisé en HTML5 et CSS3 pur.",
-  //   image: "https://i.postimg.cc/XvStMVTV/skylook.png",
-  //   tags: ["HTML", "CSS", "Responsive"],
-  //   category: "frontend",
-  //   liveUrl: "https://sky-look-alpha.vercel.app",
-  //   githubUrl: "https://github.com/ImRanto/SkyLook",
-  // },
   {
     id: 6,
     title: "Suivi de vente E-Tsako",
-    description:
-      "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
+    description: "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
     image: "https://i.postimg.cc/BQBf4KCb/e-tsako.png",
     tags: ["Vite", "Tailwind CSS", "Java", "Spring Boot"],
     category: "fullstack",
@@ -105,29 +87,19 @@ const getTagStyle = (tag: string) => {
     React: "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400",
     TypeScript: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
     "Next.js": "bg-slate-500/10 text-slate-600 dark:text-slate-400",
-
-    "Spring Boot": "bg-red-500/10 text-red-600 dark:text-red-400",
-    Java: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
-    "Power BI": "bg-red-500/10 text-red-600 dark:text-red-400",
-    Express: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
-    PostgreSQL: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-    HTML: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
-    CSS: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
-    Responsive: "bg-green-500/10 text-green-600 dark:text-green-400",
-
-    Python: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
-    Airflow: "bg-green-500/10 text-green-600 dark:text-green-400",
-    "Node.js": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-    Vite: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
-
+    "Spring Boot": "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400",
+    Python: "bg-red-500/10 text-red-600 dark:text-red-400",
     "Tailwind CSS": "bg-violet-500/10 text-violet-600 dark:text-violet-400",
+    "Node.js": "bg-green-500/10 text-green-600 dark:text-green-400",
+    Express: "bg-white/10 text-slate-200",
+    PostgreSQL: "bg-blue-700/10 text-blue-800 dark:text-blue-400",
     OpenAI: "bg-pink-500/10 text-pink-600 dark:text-pink-400",
+    Airflow: "bg-orange-500/10 text-orange-600 dark:text-orange-400",
+    Vite: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
+    Java: "bg-red-500/10 text-red-600 dark:text-red-400",
+    "Power BI": "bg-yellow-700/10 text-yellow-800 dark:text-yellow-400"
   };
-
-  return (
-    styles[tag] ||
-    "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400"
-  );
+  return styles[tag] || "bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400";
 };
 
 const ProjectsSection = () => {
@@ -138,35 +110,28 @@ const ProjectsSection = () => {
   );
 
   return (
-    <section
-      id="projects"
-      className="py-32 bg-slate-50/50 dark:bg-[#020617]/50"
-    >
-      <div className="container mx-auto px-6">
-        {/* HEADER SECTION */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-          <div className="max-w-2xl">
-            <div className="flex items-center gap-2 text-cyan-600 dark:text-cyan-400 font-bold tracking-widest uppercase text-sm mb-3">
-              <FolderCode size={18} />
+    <section id="projects" className="py-24 bg-white dark:bg-[#020617] transition-colors duration-500">
+      <div className="container mx-auto px-4 md:px-6">
+        
+        {/* HEADER */}
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-12 gap-8">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-500 text-xs font-bold tracking-widest uppercase">
+              <FolderCode size={14} />
               <span>Portfolio</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 dark:text-white">
-              Projets Académiques et/ou Personnels{" "}
-              <span className=" text-cyan-500 font-light">Sélectionnés</span>
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+              Projets <span className="text-cyan-500">Réacteurs</span>
             </h2>
           </div>
 
-          <Tabs
-            value={activeTab}
-            onValueChange={setActiveTab}
-            className="w-auto"
-          >
-            <TabsList className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 p-1 h-12 rounded-xl shadow-sm">
+          <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full lg:w-auto">
+            <TabsList className="flex h-12 w-full items-center justify-start overflow-x-auto rounded-2xl bg-slate-100 p-1 dark:bg-slate-900 lg:w-auto">
               {["all", "frontend", "fullstack", "data"].map((tab) => (
                 <TabsTrigger
                   key={tab}
                   value={tab}
-                  className="rounded-lg px-6 capitalize data-[state=active]:bg-cyan-600 data-[state=active]:text-white transition-all"
+                  className="min-w-[100px] rounded-xl px-6 text-sm font-bold capitalize transition-all data-[state=active]:bg-white data-[state=active]:text-cyan-600 data-[state=active]:shadow-sm dark:data-[state=active]:bg-slate-800 dark:data-[state=active]:text-cyan-400"
                 >
                   {tab}
                 </TabsTrigger>
@@ -175,63 +140,67 @@ const ProjectsSection = () => {
           </Tabs>
         </div>
 
-        {/* GRID PROJETS */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* GRID */}
+        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project) => (
               <motion.div
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.4 }}
               >
-                <Card className="group relative h-full flex flex-col overflow-hidden bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200/50 dark:border-slate-800/50 hover:border-cyan-500/50 transition-all duration-500 rounded-[2rem]">
-                  {/* IMAGE AVEC OVERLAY */}
-                  <div className="absolute -inset-0.5 bg-gradient-to-r from-cyan-700 to-blue-600 rounded-[2rem] blur opacity-0 group-hover:opacity-20 transition duration-1000 group-hover:duration-200" />
-                  <div className="relative aspect-[16/10] overflow-hidden">
+                <Card className="group flex h-full flex-col overflow-hidden rounded-[2rem] border-none bg-slate-50 dark:bg-slate-900/50 shadow-none transition-all hover:bg-white dark:hover:bg-slate-900 hover:shadow-2xl hover:shadow-cyan-500/5">
+                  
+                  {/* MEDIA BOX */}
+                  <div className="relative aspect-[16/10] w-full overflow-hidden">
                     <Image
                       src={project.image}
                       alt={project.title}
                       fill
-                      className="object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-end p-6">
-                      <div className="flex gap-3 w-full">
-                        <Button
-                          size="sm"
-                          className="flex-1 bg-cyan-600 hover:bg-cyan-500 rounded-xl"
-                          asChild
-                        >
-                          <a href={project.liveUrl} target="_blank">
-                            <ExternalLink className="mr-2 h-4 w-4" /> Demo
-                          </a>
-                        </Button>
-                        <Button
-                          size="sm"
-                          variant="secondary"
-                          className="flex-1 rounded-xl"
-                          asChild
-                        >
-                          <a href={project.githubUrl} target="_blank">
-                            <Github className="mr-2 h-4 w-4" /> Code
-                          </a>
-                        </Button>
+                    
+                    {/* RESPONSIVE OVERLAY (Toujours visible sur mobile, hover sur desktop) */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent p-6 flex items-end 
+                                    opacity-100 lg:opacity-0 lg:group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="flex w-full gap-3 translate-y-0 lg:translate-y-4 lg:group-hover:translate-y-0 transition-transform duration-300">
+                        {project.liveUrl !== "#" && (
+                          <Button size="sm" className="flex-1 rounded-xl bg-cyan-500 font-bold text-white hover:bg-cyan-400" asChild>
+                            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="mr-2 h-4 w-4" /> Demo
+                            </a>
+                          </Button>
+                        )}
+                        {project.githubUrl !== "#" && (
+                          <Button size="sm" variant="outline" className="flex-1 rounded-xl border-white/20 bg-white/10 font-bold text-white backdrop-blur-md hover:bg-white/20" asChild>
+                            <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                              <Github className="mr-2 h-4 w-4" /> Code
+                            </a>
+                          </Button>
+                        )}
+                        {/* État si aucun lien n'est disponible */}
+                        {project.liveUrl === "#" && project.githubUrl === "#" && (
+                          <div className="w-full text-center text-[10px] font-black uppercase tracking-tighter text-white/60">
+                            Proprietary Project
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>
 
-                  {/* CONTENU TEXTE */}
-                  <CardContent className="p-6 flex flex-col flex-1">
-                    <div className="flex justify-between items-start mb-3">
-                      <h3 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-cyan-600 transition-colors">
+                  {/* CONTENT */}
+                  <CardContent className="flex flex-1 flex-col p-7">
+                    <div className="mb-3 flex items-start justify-between">
+                      <h3 className="text-xl font-bold text-slate-900 dark:text-white">
                         {project.title}
                       </h3>
                       <Layers size={16} className="text-slate-400" />
                     </div>
-
-                    <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 line-clamp-3">
+                    
+                    <p className="mb-6 text-sm leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-3">
                       {project.description}
                     </p>
 
@@ -239,9 +208,7 @@ const ProjectsSection = () => {
                       {project.tags.map((tag) => (
                         <span
                           key={tag}
-                          className={`text-[10px] font-bold px-2.5 py-1 rounded-lg uppercase tracking-wider transition-colors ${getTagStyle(
-                            tag
-                          )}`}
+                          className={`rounded-lg px-2.5 py-1 text-[10px] font-black uppercase tracking-wider ${getTagStyle(tag)}`}
                         >
                           {tag}
                         </span>
