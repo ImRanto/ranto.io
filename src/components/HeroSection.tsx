@@ -67,7 +67,7 @@ const HeroSection = () => {
                   <p className="text-xs font-bold dark:text-white leading-none">
                     Frontend
                   </p>
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-slate-300">
                     React/Next.js
                   </span>
                 </div>
@@ -91,7 +91,7 @@ const HeroSection = () => {
                   <p className="text-xs font-bold dark:text-white leading-none">
                     Backend
                   </p>
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-slate-300">
                     Java/Spring Boot
                   </span>
                 </div>
