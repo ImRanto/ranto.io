@@ -5,6 +5,8 @@ import { FaLinkedin, FaGithub, FaTwitter, FaHeart } from "react-icons/fa";
 import { SiNextdotjs, SiTailwindcss, SiFramer } from "react-icons/si";
 import { motion } from "framer-motion";
 import ScrollToTopButton from "./ScrollToTopButton";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -27,11 +29,14 @@ const Footer = () => {
     },
   ];
 
+  const { lang } = useLanguage();
+  const t = i18n[lang];
+
   const navLinks = [
-    { name: "Accueil", href: "/#hero" },
-    { name: "À propos", href: "/#about" },
-    { name: "Projets", href: "/#projects" },
-    { name: "Contact", href: "/#contact" },
+    { name: t.nav.home, href: "/#hero" },
+    { name: t.nav.about, href: "/#about" },
+    { name: t.nav.projects, href: "/#projects" },
+    { name: t.nav.contact, href: "/#contact" },
   ];
 
   return (
@@ -80,7 +85,7 @@ const Footer = () => {
           {/* Navigation Rapide */}
           <div className="md:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 mb-6">
-              Menu
+              {t.footer.menu}
             </h3>
             <ul className="space-y-4">
               {navLinks.map((item) => (
@@ -100,7 +105,7 @@ const Footer = () => {
           {/* Contact Direct */}
           <div className="md:col-span-4">
             <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 dark:text-slate-500 mb-6">
-              Contact direct
+              {t.footer.contactDirect}
             </h3>
             <div className="space-y-4">
               <a
@@ -108,7 +113,7 @@ const Footer = () => {
                 className="group flex flex-col p-4 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-100 dark:border-slate-800 hover:border-cyan-500/50 transition-all"
               >
                 <span className="text-[10px] font-bold text-cyan-600 uppercase mb-1">
-                  Envoyez-moi un mail
+                  {t.footer.sendMail}
                 </span>
                 <span className="text-sm font-semibold text-slate-900 dark:text-white truncate group-hover:text-cyan-500 transition-colors">
                   hei.ranto.2@gmail.com
@@ -116,7 +121,7 @@ const Footer = () => {
               </a>
               <p className="text-xs text-slate-500 flex items-center gap-2 px-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
-                Disponible pour de nouveaux projets
+                {t.footer.available}
               </p>
             </div>
           </div>
@@ -125,7 +130,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-xs text-slate-500 dark:text-slate-500">
-            © {currentYear} RAFALIMANANA Ranto Handraina . Conçu avec rigueur.
+            © {currentYear} RAFALIMANANA Ranto Handraina . {t.footer.copyright}
           </p>
 
           <div className="flex items-center gap-6 text-[10px] font-bold uppercase tracking-widest text-slate-400">
