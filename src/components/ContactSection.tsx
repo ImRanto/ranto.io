@@ -37,6 +37,8 @@ import {
   UserButton,
   SignOutButton,
 } from "@clerk/nextjs";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -53,6 +55,8 @@ const formSchema = z.object({
 
 const ContactSection = () => {
   const { user } = useUser();
+  const { lang } = useLanguage();
+  const t = i18n[lang].contact;
   const [isSending, setIsSending] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -102,7 +106,7 @@ const ContactSection = () => {
     if (!user) return;
 
     if (!recaptchaToken) {
-      setStatus({ type: "info", message: "Veuillez valider le reCAPTCHA." });
+      setStatus({ type: "info", message: t.recaptcha });
       return;
     }
 
@@ -122,7 +126,7 @@ const ContactSection = () => {
     if (currentSentTimes.length >= 2) {
       setStatus({
         type: "info",
-        message: "Limite atteinte (2 messages/24h). À demain ! 🚀",
+        message: t.limitReached,
       });
       return;
     }
@@ -154,7 +158,7 @@ const ContactSection = () => {
 
       setStatus({
         type: "success",
-        message: "Message envoyé avec succès !",
+        message: t.success,
       });
 
       currentSentTimes.push(now);
@@ -166,7 +170,7 @@ const ContactSection = () => {
     } catch (error) {
       setStatus({
         type: "error",
-        message: "Oups ! Erreur lors de l'envoi. Réessayez.",
+        message: t.error,
       });
       console.error(error);
     } finally {
@@ -177,19 +181,19 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
+      title: t.emailTitle,
       value: "hei.ranto.2@gmail.com",
       link: "mailto:hei.ranto.2@gmail.com",
     },
     {
       icon: Phone,
-      title: "Téléphone",
+      title: t.phoneTitle,
       value: "+261 38 13 277 37",
       link: "tel:+261381327737",
     },
     {
       icon: MapPin,
-      title: "Localisation",
+      title: t.locationTitle,
       value: "Antananarivo, Madagascar",
       link: "https://www.google.com/maps/place/Madagascar,+Antananarivo",
     },
@@ -214,19 +218,16 @@ const ContactSection = () => {
   return (
     <section id="contact" className="py-24 bg-slate-50/50 dark:bg-slate-900/20">
       <div className="container mx-auto px-6">
-        <motion.div
+          <motion.div
           className="mb-16 text-center max-w-3xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            Contactez <span className="text-cyan-500">Moi</span>
+            {t.title} <span className="text-cyan-500">{t.titleHighlight}</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400">
-            Le formulaire est ouvert à tous. Connectez-vous simplement pour
-            valider l'envoi.
-          </p>
+          <p className="text-slate-600 dark:text-slate-400">{t.intro}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -284,10 +285,10 @@ const ContactSection = () => {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Nom</FormLabel>
+                            <FormLabel>{t.labels.name}</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder="Votre nom..."
+                                placeholder={t.labels.namePlaceholder}
                                 {...field}
                                 readOnly={!!user}
                                 className="rounded-xl"
@@ -302,10 +303,10 @@ const ContactSection = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>Adresse Email</FormLabel>
+                            <FormLabel>{t.labels.email}</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder="exemple@gmail.com"
+                                placeholder={t.labels.emailPlaceholder}
                                 {...field}
                                 readOnly={!!user}
                                 className="rounded-xl"
@@ -322,10 +323,10 @@ const ContactSection = () => {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>Votre Projet / Message</FormLabel>
+                          <FormLabel>{t.labels.message}</FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder="Décrivez-moi votre besoin..."
+                              placeholder={t.labels.messagePlaceholder}
                               className="min-h-[150px] rounded-xl"
                               maxLength={1000}
                               {...field}
@@ -404,9 +405,8 @@ const ContactSection = () => {
                     <div className="pt-6 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
                       {!user ? (
                         <div className="flex flex-col items-center sm:items-start gap-3 w-full">
-                          <p className="text-xs text-slate-500 flex items-center gap-2">
-                            <Lock size={12} /> Une connexion est requise pour
-                            envoyer
+                            <p className="text-xs text-slate-500 flex items-center gap-2">
+                            <Lock size={12} /> {t.authRequired}
                           </p>
                           <SignInButton mode="modal">
                             <Button
@@ -414,7 +414,7 @@ const ContactSection = () => {
                               size="lg"
                               className="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 rounded-xl px-8 font-bold"
                             >
-                              <UserIcon className="mr-2 h-4 w-4" /> Se connecter
+                              <UserIcon className="mr-2 h-4 w-4" /> {t.signIn}
                             </Button>
                           </SignInButton>
                         </div>
@@ -424,7 +424,7 @@ const ContactSection = () => {
                             <UserButton afterSignOutUrl="/" />
                             <div className="hidden sm:block">
                               <p className="text-[10px] font-bold text-slate-400 uppercase leading-none">
-                                Connecté
+                                {t.connected}
                               </p>
                               <p className="text-sm font-bold">
                                 {user.firstName}
@@ -440,13 +440,13 @@ const ContactSection = () => {
                             </SignOutButton>
                           </div>
 
-                          <Button
+                            <Button
                             type="submit"
                             disabled={isSending}
                             size="lg"
                             className="w-full sm:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 rounded-xl px-10 font-bold"
                           >
-                            {isSending ? "Envoi..." : "Envoyer"}
+                            {isSending ? t.sending : t.send}
                             <Send className="ml-2 h-4 w-4" />
                           </Button>
                         </div>
