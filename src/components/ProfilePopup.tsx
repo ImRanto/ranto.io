@@ -11,9 +11,14 @@ import {
   ChevronLeft,
 } from "lucide-react";
 import { Button } from "./ui/button";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 
 const ProfilePopup = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { lang } = useLanguage();
+  const t = i18n[lang].profile;
 
   return (
     <div className="fixed -right-1 top-1/2 -translate-y-1/2 z-[100] flex items-center flex-row-reverse">
@@ -72,7 +77,7 @@ const ProfilePopup = () => {
               
               <div className="px-3 py-1 bg-cyan-500/10 rounded-full mb-4">
                 <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-cyan-600 dark:text-cyan-400">
-                  Développeur Fullstack
+                  {t.role}
                 </p>
               </div>
 
@@ -83,9 +88,9 @@ const ProfilePopup = () => {
               {/* SECTION DISPONIBILITÉ MODIFIÉE */}
               <div className="w-full p-4 bg-slate-50 dark:bg-slate-800/50 rounded-2xl mb-6 border border-slate-100 dark:border-slate-700">
                 <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-                  Actuellement ouvert pour un <br />
+                  {t.availabilityPrefix} <br />
                   <span className="text-cyan-600 dark:text-cyan-400 font-bold uppercase tracking-wider text-[11px]">
-                    Contrat d'alternance <span className="text-slate-400 dark:text-slate-500 font-normal">ou</span> de nouvelles opportunités professionnelles
+                    {t.availabilityHighlight}
                   </span>
                 </p>
               </div>
@@ -115,7 +120,7 @@ const ProfilePopup = () => {
                 asChild
                 onClick={() => setIsOpen(false)}
               >
-                <a href="#contact">Recrutez-moi</a>
+                <a href="#contact">{t.hireMe}</a>
               </Button>
             </div>
           </motion.div>
