@@ -1,0 +1,253 @@
+export const i18n = {
+  fr: {
+    navbar: {
+      navigation: "Navigation",
+      follow: "Suivez-moi",
+      changeTheme: "Changer le thème",
+    },
+    nav: {
+      home: "Accueil",
+      about: "À propos",
+      projects: "Projets",
+      experience: "Expériences",
+      contact: "Contact",
+    },
+    hero: {
+      roleBadge: "Développeur Full-Stack Web & Mobile",
+      frontendTitle: "Frontend",
+      frontendSubtitle: "React/Next.js",
+      backendTitle: "Backend",
+      backendSubtitle: "Java/Spring Boot",
+      greetingPrefix: "Bonjour, je suis",
+      subtitle:
+        "Je crée des produits web & mobile performants et élégants, du design à l’architecture backend.",
+      viewProjects: "Voir mes projets",
+      downloadCV: "Mon CV",
+    },
+    about: {
+      smallHeading: "Expertise",
+      titlePre: "Passionné par le",
+      titleHighlight: "Code",
+      titleSuffix: "& le Design.",
+      bio:
+        "Développeur Full-Stack, je transforme des problématiques complexes en interfaces intuitives. Mon but est de construire des produits exceptionnels.",
+      statsProjects: "Projets finis",
+      skills: [
+        {
+          title: "Frontend Development",
+          description:
+            "Interfaces pixel-perfect avec React et Next.js (Base HTML/CSS). Focus sur la performance et l'accessibilité.",
+        },
+        {
+          title: "Backend Systems",
+          description: "APIs robustes en Node.js et Java. Expertise en microservices et sécurité.",
+        },
+        {
+          title: "Database",
+          description: "Architecture de données optimisée avec PostgreSQL. Maîtrise de l'indexation.",
+        },
+        {
+          title: "Core Languages",
+          description: "Développement typé avec TypeScript, combiné à la puissance de React et React Native.",
+        },
+        {
+          title: "Software Architecture",
+          description: "Conception de systèmes scalables utilisant les meilleurs design patterns.",
+        },
+        {
+          title: "Creative Solutions",
+          description: "Résolution de problèmes complexes avec une approche centrée utilisateur.",
+        },
+      ],
+    },
+    contact: {
+      title: "Contactez",
+      titleHighlight: "Moi",
+      intro: "Le formulaire est ouvert à tous. Connectez-vous simplement pour valider l'envoi.",
+      emailTitle: "Email",
+      phoneTitle: "Téléphone",
+      locationTitle: "Localisation",
+      authRequired: "Une connexion est requise pour envoyer",
+      signIn: "Se connecter",
+      connected: "Connecté",
+      sending: "Envoi...",
+      send: "Envoyer",
+      recaptcha: "Veuillez valider le reCAPTCHA.",
+      limitReached: "Limite atteinte (2 messages/24h). À demain ! 🚀",
+      success: "Message envoyé avec succès !",
+      error: "Oups ! Erreur lors de l'envoi. Réessayez.",
+      labels: {
+        name: "Nom",
+        email: "Adresse Email",
+        message: "Votre Projet / Message",
+        namePlaceholder: "Votre nom...",
+        emailPlaceholder: "exemple@gmail.com",
+        messagePlaceholder: "Décrivez-moi votre besoin...",
+      },
+    },
+    projects: {
+      badge: "Portfolio",
+      title: "Projets",
+      tabs: { all: "Tous", frontend: "Frontend", fullstack: "Fullstack", data: "Data" },
+      demo: "Demo",
+      code: "Code",
+      proprietary: "Proprietary Project",
+    },
+    experience: {
+      small: "Mon Parcours",
+      title: "Expérience & Formation",
+      intro: "Un aperçu de mon évolution académique et des étapes clés qui forgent mon expertise technique aujourd'hui.",
+    },
+    profile: {
+      role: "Développeur Fullstack",
+      availabilityPrefix: "Actuellement ouvert pour un",
+      availabilityHighlight: "Contrat d'alternance ou de nouvelles opportunités professionnelles",
+      hireMe: "Recrutez-moi",
+    },
+    phylosophy: {
+      quote: "Le secret du changement, c'est de concentrer toute votre énergie non pas à lutter contre le passé, mais à construire le futur.",
+      author: "Socrate",
+      note: "Inspiration de mon architecture technique",
+    },
+    footer: {
+      menu: "Menu",
+      contactDirect: "Contact direct",
+      sendMail: "Envoyez-moi un mail",
+      available: "Disponible pour de nouveaux projets",
+      copyright: "Conçu avec rigueur.",
+    },
+    cv: {
+      back: "Retour",
+      download: "Télécharger le CV",
+      alt: "Curriculum Vitae",
+    },
+    loading: {
+      message: "Chargement de l’expérience",
+    },
+  },
+  en: {
+    navbar: {
+      navigation: "Navigation",
+      follow: "Follow me",
+      changeTheme: "Change theme",
+    },
+    nav: {
+      home: "Home",
+      about: "About",
+      projects: "Projects",
+      experience: "Experience",
+      contact: "Contact",
+    },
+    hero: {
+      roleBadge: "Full-Stack Web & Mobile Developer",
+      frontendTitle: "Frontend",
+      frontendSubtitle: "React/Next.js",
+      backendTitle: "Backend",
+      backendSubtitle: "Java/Spring Boot",
+      greetingPrefix: "Hello, I'm",
+      subtitle: "I build performant and elegant web & mobile products, from design to backend architecture.",
+      viewProjects: "View projects",
+      downloadCV: "My CV",
+    },
+    about: {
+      smallHeading: "Expertise",
+      titlePre: "Passionate about",
+      titleHighlight: "Code",
+      titleSuffix: "& Design.",
+      bio: "Full-Stack developer turning complex problems into intuitive interfaces. I aim to build exceptional products.",
+      statsProjects: "Completed projects",
+      skills: [
+        {
+          title: "Frontend Development",
+          description: "Pixel-perfect interfaces with React and Next.js (HTML/CSS base). Focus on performance and accessibility.",
+        },
+        {
+          title: "Backend Systems",
+          description: "Robust APIs in Node.js and Java. Expertise in microservices and security.",
+        },
+        {
+          title: "Database",
+          description: "Optimized data architecture with PostgreSQL. Mastery of indexing.",
+        },
+        {
+          title: "Core Languages",
+          description: "Typed development with TypeScript, combined with React and React Native.",
+        },
+        {
+          title: "Software Architecture",
+          description: "Designing scalable systems using proven design patterns.",
+        },
+        {
+          title: "Creative Solutions",
+          description: "Solving complex problems with a user-centered approach.",
+        },
+      ],
+    },
+    contact: {
+      title: "Contact",
+      titleHighlight: "Me",
+      intro: "The contact form is open to everyone. Please sign in to validate submission.",
+      emailTitle: "Email",
+      phoneTitle: "Phone",
+      locationTitle: "Location",
+      authRequired: "A sign-in is required to send",
+      signIn: "Sign in",
+      connected: "Signed in",
+      sending: "Sending...",
+      send: "Send",
+      recaptcha: "Please validate the reCAPTCHA.",
+      limitReached: "Limit reached (2 messages/24h). Try again tomorrow! 🚀",
+      success: "Message sent successfully!",
+      error: "Oops! Error while sending. Please try again.",
+      labels: {
+        name: "Name",
+        email: "Email address",
+        message: "Your Project / Message",
+        namePlaceholder: "Your name...",
+        emailPlaceholder: "example@gmail.com",
+        messagePlaceholder: "Describe your need...",
+      },
+    },
+    projects: {
+      badge: "Portfolio",
+      title: "Projects",
+      tabs: { all: "All", frontend: "Frontend", fullstack: "Fullstack", data: "Data" },
+      demo: "Demo",
+      code: "Code",
+      proprietary: "Proprietary Project",
+    },
+    experience: {
+      small: "My Background",
+      title: "Experience & Education",
+      intro: "An overview of my academic growth and key steps shaping my technical expertise today.",
+    },
+    profile: {
+      role: "Fullstack Developer",
+      availabilityPrefix: "Currently open for",
+      availabilityHighlight: "internships or new professional opportunities",
+      hireMe: "Hire me",
+    },
+    phylosophy: {
+      quote: "The secret of change is to focus all your energy not on fighting the old, but on building the new.",
+      author: "Socrates",
+      note: "Inspiration for my technical architecture",
+    },
+    footer: {
+      menu: "Menu",
+      contactDirect: "Direct contact",
+      sendMail: "Send me an email",
+      available: "Available for new projects",
+      copyright: "Built with rigor.",
+    },
+    cv: {
+      back: "Back",
+      download: "Download CV",
+      alt: "Curriculum Vitae",
+    },
+    loading: {
+      message: "Loading experience",
+    },
+  },
+};
+
+export type I18n = typeof i18n;
