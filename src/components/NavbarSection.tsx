@@ -5,6 +5,8 @@ import React, { useState, useEffect } from "react";
 import { FaLinkedin, FaGithub, FaTwitter } from "react-icons/fa";
 import { ModeToggle } from "@/components/ui/mode-toggle";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 import {
   Sheet,
   SheetContent,
@@ -14,13 +16,16 @@ import {
 import { Menu, Code2, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
-const NAV_LINKS = [
-  { name: "Accueil", href: "/#hero" },
-  { name: "À propos", href: "/#about" },
-  { name: "Projets", href: "/#projects" },
-  { name: "Experiences", href: "/#experience" },
-  { name: "Contact", href: "/#contact" },
-];
+function getNavLinks(lang: string) {
+  const t = i18n[lang] || i18n.fr;
+  return [
+    { name: t.nav.home, href: "/#hero" },
+    { name: t.nav.about, href: "/#about" },
+    { name: t.nav.projects, href: "/#projects" },
+    { name: t.nav.experience, href: "/#experience" },
+    { name: t.nav.contact, href: "/#contact" },
+  ];
+}
 
 const SOCIAL_LINKS = [
   {
@@ -42,6 +47,8 @@ const SOCIAL_LINKS = [
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { lang, setLang } = useLanguage();
+  const navLinks = getNavLinks(lang);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -89,7 +96,7 @@ const Navbar = () => {
         {/* DESKTOP NAV : Liens avec barre de progression */}
         <nav className="hidden md:flex items-center bg-slate-100/50 dark:bg-slate-800/40 px-6 py-2 rounded-full border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm">
           <ul className="flex items-center gap-8">
-            {NAV_LINKS.map((link) => (
+            {navLinks.map((link) => (
               <li key={link.name}>
                 <Link
                   href={link.href}
@@ -118,8 +125,33 @@ const Navbar = () => {
             ))}
           </div>
         </nav>
+        {/* Desktop language + theme actions */}
         {/* ACTIONS : Theme + Mobile */}
         <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 mr-2">
+            <button
+              onClick={() => setLang("fr")}
+              aria-label="FR"
+              className={`px-2 py-1 rounded-lg text-sm font-bold transition-all ${
+                lang === "fr"
+                  ? "bg-cyan-600 text-white"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+            >
+              FR
+            </button>
+            <button
+              onClick={() => setLang("en")}
+              aria-label="EN"
+              className={`px-2 py-1 rounded-lg text-sm font-bold transition-all ${
+                lang === "en"
+                  ? "bg-cyan-600 text-white"
+                  : "text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800"
+              }`}
+            >
+              EN
+            </button>
+          </div>
           <div className="hidden sm:block">
             <ModeToggle />
           </div>
@@ -139,12 +171,33 @@ const Navbar = () => {
               side="right"
               className="w-full sm:w-[350px] border-l border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 p-8"
             >
-              <SheetTitle className="text-left text-xs font-black uppercase tracking-[0.3em] text-slate-400 mb-12">
-                Navigation
+              <SheetTitle className="text-left text-xs font-black uppercase tracking-[0.3em] text-slate-400 mb-6">
+                {i18n[lang].navbar.navigation}
               </SheetTitle>
 
+              <div className="flex gap-2 mb-6">
+                <button
+                  onClick={() => setLang("fr")}
+                  aria-label="FR"
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                    lang === "fr" ? "bg-cyan-600 text-white" : "bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300"
+                  }`}
+                >
+                  FR
+                </button>
+                <button
+                  onClick={() => setLang("en")}
+                  aria-label="EN"
+                  className={`px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                    lang === "en" ? "bg-cyan-600 text-white" : "bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300"
+                  }`}
+                >
+                  EN
+                </button>
+              </div>
+
               <div className="flex flex-col gap-6">
-                {NAV_LINKS.map((link, i) => (
+                {navLinks.map((link, i) => (
                   <motion.div
                     key={link.name}
                     initial={{ opacity: 0, x: 20 }}
@@ -164,7 +217,7 @@ const Navbar = () => {
 
               <div className="mt-auto pt-12">
                 <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-6">
-                  Suivez-moi
+                  {i18n[lang].navbar.follow}
                 </p>
                 <div className="flex gap-4">
                   {SOCIAL_LINKS.map((social) => (
@@ -178,7 +231,7 @@ const Navbar = () => {
                   ))}
                 </div>
                 <div className="mt-8 flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-900 rounded-2xl border border-slate-100 dark:border-slate-800">
-                  <span className="text-sm font-medium">Changer le thème</span>
+                  <span className="text-sm font-medium">{i18n[lang].navbar.changeTheme}</span>
                   <ModeToggle />
                 </div>
               </div>
