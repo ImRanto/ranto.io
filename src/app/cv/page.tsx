@@ -5,8 +5,12 @@ import Image from "next/image";
 import ScrollToTopButton from "@/components/ScrollToTopButton";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 
 export default function CVPage() {
+  const { lang } = useLanguage();
+  const t = i18n[lang].cv;
   return (
     <section className="min-h-screen bg-white dark:bg-[#020617] py-12 px-6">
       <div className="max-w-4xl mx-auto">
@@ -18,7 +22,7 @@ export default function CVPage() {
           >
             <FaArrowLeft className="group-hover:-translate-x-1 transition-transform" />
             <span className="text-sm font-semibold uppercase tracking-widest">
-              Retour
+              {t.back}
             </span>
           </Link>
 
@@ -28,7 +32,7 @@ export default function CVPage() {
             className="flex items-center gap-3 px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold text-sm shadow-xl hover:scale-105 transition-transform active:scale-95"
           >
             <FaDownload size={14} />
-            Télécharger le CV
+            {t.download}
           </a>
         </div>
 
@@ -46,7 +50,7 @@ export default function CVPage() {
             <div className="rounded-xl overflow-hidden">
               <Image
                 src="/cv.png"
-                alt="Curriculum Vitae"
+                alt={t.alt}
                 width={1000}
                 height={1414}
                 priority

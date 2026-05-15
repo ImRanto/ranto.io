@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Quicksand, JetBrains_Mono } from "next/font/google"; // Import de Quicksand
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
+import { LanguageProvider } from "@/components/language-provider";
 import CustomCursor from "@/components/Custom-cursor";
 import { ClerkProvider } from "@clerk/nextjs";
 
@@ -37,15 +38,17 @@ export default function RootLayout({
         <body
           className={`${quicksand.variable} ${mono.variable} font-sans antialiased`}
         >
-          <ThemeProvider
+          <LanguageProvider>
+            <ThemeProvider
             attribute="class"
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange
           >
             <CustomCursor />
-            <main>{children}</main>
-          </ThemeProvider>
+              <main>{children}</main>
+            </ThemeProvider>
+          </LanguageProvider>
         </body>
       </html>
     </ClerkProvider>

@@ -2,6 +2,8 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 
 export default function Loading() {
   const [loading, setLoading] = useState(true);
@@ -41,7 +43,7 @@ export default function Loading() {
               transition={{ delay: 0.2 }}
               className="text-sm tracking-wide text-slate-400"
             >
-              Chargement de l’expérience
+              {i18n[useLanguage().lang].loading.message}
             </motion.p>
           </div>
         </motion.div>
