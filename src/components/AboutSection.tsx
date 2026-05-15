@@ -1,6 +1,8 @@
 "use client";
 
 import React from "react";
+import { useLanguage } from "@/components/language-provider";
+import { i18n } from "@/i18n/translations";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -60,44 +62,14 @@ const SkillCard = ({
 );
 
 const AboutSection = () => {
-  const skills = [
-    {
-      icon: Layout,
-      title: "Frontend Development",
-      description:
-        "Interfaces pixel-perfect avec React et Next.js (Base HTML/CSS). Focus sur la performance et l'accessibilité.",
-    },
-    {
-      icon: Server,
-      title: "Backend Systems",
-      description:
-        "APIs robustes en Node.js et Java. Expertise en microservices et sécurité.",
-    },
-    {
-      icon: Database,
-      title: "Database",
-      description:
-        "Architecture de données optimisée avec PostgreSQL. Maîtrise de l'indexation.",
-    },
-    {
-      icon: Code2,
-      title: "Core Languages",
-      description:
-        "Développement typé avec TypeScript, combiné à la puissance de React et React Native.",
-    },
-    {
-      icon: Brain,
-      title: "Software Architecture",
-      description:
-        "Conception de systèmes scalables utilisant les meilleurs design patterns.",
-    },
-    {
-      icon: Lightbulb,
-      title: "Creative Solutions",
-      description:
-        "Résolution de problèmes complexes avec une approche centrée utilisateur.",
-    },
-  ];
+  const { lang } = useLanguage();
+  const aboutT = i18n[lang].about;
+
+  const skills = aboutT.skills.map((s: any, idx: number) => ({
+    icon: [Layout, Server, Database, Code2, Brain, Lightbulb][idx],
+    title: s.title,
+    description: s.description,
+  }));
 
   return (
     <section
@@ -117,14 +89,14 @@ const AboutSection = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-xs font-black uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-500 mb-4">
-                Expertise
+                {aboutT.smallHeading}
               </h2>
               <h3 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white leading-[1.1]">
-                Passionné par le{" "}
+                {aboutT.titlePre} {" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-500">
-                  Code
+                  {aboutT.titleHighlight}
                 </span>{" "}
-                & le Design.
+                {aboutT.titleSuffix}
               </h3>
             </motion.div>
 
@@ -135,9 +107,7 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              Développeur Full-Stack, je transforme des problématiques complexes
-              en interfaces intuitives. Mon but est de construire des produits
-              exceptionnels.
+              {aboutT.bio}
             </motion.p>
 
             {/* Statistiques adaptatives */}
@@ -158,7 +128,7 @@ const AboutSection = () => {
               <div className="flex flex-col">
                 <span className="text-cyan-600 text-3xl font-bold">8+</span>
                 <span className="text-[10px] uppercase font-black tracking-widest opacity-50 dark:text-white">
-                  Projets finis
+                  {aboutT.statsProjects}
                 </span>
               </div>
             </motion.div>
