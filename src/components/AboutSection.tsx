@@ -65,8 +65,8 @@ const AboutSection = () => {
 
   const skillIcons = [Layout, Server, Database, Code2, Brain, Lightbulb];
 
-  const skillsRaw = t.raw("skills") as any[];
-  const skills = skillsRaw.map((skill: any, idx: number) => ({
+  const skillsRaw = t.raw("skills") as Array<{ title: string; description: string }>;
+  const skills = skillsRaw.map((skill, idx: number) => ({
     ...skill,
     icon: skillIcons[idx] || Lightbulb,
   }));

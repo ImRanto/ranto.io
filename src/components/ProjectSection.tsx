@@ -142,7 +142,7 @@ const getTagStyle = (tag: string) => {
 /* ─────────────────────────────────────────
    Mobile Project Card
 ───────────────────────────────────────── */
-const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
+const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) => string }) => {
   const [activeScreen, setActiveScreen] = useState(0);
   const screens = project.mobileScreenshots ?? [];
 
@@ -391,7 +391,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
 /* ─────────────────────────────────────────
    Standard Project Card
 ───────────────────────────────────────── */
-const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
+const RegularProjectCard = ({ project, t }: { project: Project; t: (key: string) => string }) => (
   <Card className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-100 dark:border-slate-800/60 bg-white dark:bg-slate-900/60 shadow-none transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/70 dark:hover:shadow-cyan-500/5 hover:-translate-y-1">
     {/* Image */}
     <div className="relative aspect-[16/10] w-full overflow-hidden">

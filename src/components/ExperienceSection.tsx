@@ -8,8 +8,15 @@ import { Briefcase, GraduationCap, Calendar, CheckCircle2 } from "lucide-react";
 export const ExperienceSection = () => {
   const t = useTranslations("experience");
 
-  const experiencesRaw = t.raw("items") as any[];
-  const experiences = experiencesRaw.map((item: any) => ({
+  const experiencesRaw = t.raw("items") as Array<{
+    title: string;
+    organization: string;
+    period: string;
+    description: string;
+    highlights: string[];
+    type?: string;
+  }>;
+  const experiences = experiencesRaw.map((item) => ({
     ...item,
     type: item.type || "education",
   }));

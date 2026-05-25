@@ -80,7 +80,7 @@ const ProfilePopup = () => {
               </div>
 
               <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 leading-relaxed">
-                Passionné par le développement d'applications <span className="text-slate-900 dark:text-white font-medium">web & mobile</span> performantes. Basé à Antananarivo.
+                {t("bio")}
               </p>
 
               {/* SECTION DISPONIBILITÉ MODIFIÉE */}

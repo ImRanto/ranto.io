@@ -83,7 +83,7 @@ const Navbar = () => {
                 {tNavbar("myVision")}
               </p>
               <p className="text-xs italic text-slate-600 dark:text-slate-400 leading-relaxed">
-                "{tPhylosophy("quote")}"
+                &quot;{tPhylosophy("quote")}&quot;
               </p>
               <div className="absolute -top-1 left-10 w-3 h-3 bg-white dark:bg-slate-900 border-l border-t border-slate-200 dark:border-slate-800 rotate-45" />
             </div>
