@@ -65,6 +65,13 @@ const HeroSection = () => {
                   {t("roleBadge")}
                 </span>
               </div>
+              {t("winnerBadge") && (
+                <div className="ml-3 inline-flex items-center gap-2 pl-1.5 pr-4 py-1.5 rounded-full bg-cyan-100 dark:bg-cyan-900/30 border border-cyan-200 dark:border-cyan-800/60 shadow-sm">
+                  <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-cyan-600 dark:text-cyan-400">
+                    🏆 {t("winnerBadge")}
+                  </span>
+                </div>
+              )}
             </motion.div>
 
             {/* Heading */}

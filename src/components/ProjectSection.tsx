@@ -23,8 +23,8 @@ import {
 
 type Project = {
   id: number;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   image: string;
   tags: string[];
   category: "frontend" | "backend" | "fullstack" | "data" | "mobile" | "all";
@@ -37,9 +37,8 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Gestion de Patrimoine",
-    description:
-      "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel.",
+    titleKey: "items.patrimoine.title",
+    descriptionKey: "items.patrimoine.description",
     image: "https://iili.io/FmzUawb.png",
     tags: ["React", "Node.js", "Express", "Tailwind CSS"],
     category: "fullstack",
@@ -48,9 +47,8 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Assistant IA (Hackathon HIU)",
-    description:
-      "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI.",
+    titleKey: "items.ia.title",
+    descriptionKey: "items.ia.description",
     image: "https://iili.io/Fmz4Ziv.png",
     tags: ["Next.js", "TypeScript", "OpenAI", "Python"],
     category: "frontend",
@@ -59,9 +57,8 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Tapakila – Billetterie",
-    description:
-      "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot.",
+    titleKey: "items.tapakila.title",
+    descriptionKey: "items.tapakila.description",
     image: "https://iili.io/FmI9Kuf.png",
     tags: ["Next.js", "Spring Boot", "PostgreSQL"],
     category: "fullstack",
@@ -70,9 +67,8 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Analyse Météo ETL",
-    description:
-      "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques.",
+    titleKey: "items.meteo.title",
+    descriptionKey: "items.meteo.description",
     image: "https://iili.io/FmxQjv2.png",
     tags: ["Airflow", "Python", "Power BI"],
     category: "data",
@@ -81,9 +77,8 @@ const projects: Project[] = [
   },
   {
     id: 5,
-    title: "CycleFlow – Analyse Cyclique",
-    description:
-      "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision.",
+    titleKey: "items.cycleflow.title",
+    descriptionKey: "items.cycleflow.description",
     image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
@@ -92,9 +87,8 @@ const projects: Project[] = [
   },
   {
     id: 6,
-    title: "Suivi de vente E-Tsako",
-    description:
-      "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
+    titleKey: "items.etsako.title",
+    descriptionKey: "items.etsako.description",
     image: "https://i.postimg.cc/BQBf4KCb/e-tsako.png",
     tags: ["Vite", "Tailwind CSS", "Java", "Spring Boot"],
     category: "fullstack",
@@ -103,9 +97,8 @@ const projects: Project[] = [
   },
   {
     id: 7,
-    title: "Fidio – Vote Électronique",
-    description:
-      "Application mobile Android sécurisée de vote électronique avec résultats en temps réel, authentification biométrique (empreinte & visage), gestion des scrutins et profil électeur vérifié.",
+    titleKey: "items.fidio.title",
+    descriptionKey: "items.fidio.description",
     image: "https://iili.io/BmmtSSI.jpg",
     tags: ["React Native", "Spring Boot", "WebSocket"],
     category: "mobile",
@@ -147,34 +140,6 @@ const getTagStyle = (tag: string) => {
 };
 
 /* ─────────────────────────────────────────
-   Feature list for Fidio
-───────────────────────────────────────── */
-const fidioFeatures = [
-  {
-    Icon: Fingerprint,
-    label: "Auth biométrique",
-    sub: "Empreinte digitale & reconnaissance faciale",
-  },
-  {
-    Icon: ShieldCheck,
-    label: "Vote sécurisé",
-    sub: "Chiffrement de bout en bout",
-  },
-  {
-    Icon: BarChart3,
-    label: "Résultats en direct",
-    sub: "Mise à jour temps réel via WebSocket",
-  },
-  {
-    Icon: BadgeCheck,
-    label: "Profil vérifié",
-    sub: "Vérification CIN & compte électeur",
-  },
-];
-
-const screenLabels = ["Connexion", "Scrutins", "Résultats", "Profil"];
-
-/* ─────────────────────────────────────────
    Mobile Project Card
 ───────────────────────────────────────── */
 const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
@@ -186,6 +151,36 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
   const next = () =>
     setActiveScreen((s) => (s + 1) % screens.length);
 
+  const fidioFeatures = [
+    {
+      Icon: Fingerprint,
+      label: t("items.fidio.features.auth.label"),
+      sub: t("items.fidio.features.auth.sub"),
+    },
+    {
+      Icon: ShieldCheck,
+      label: t("items.fidio.features.vote.label"),
+      sub: t("items.fidio.features.vote.sub"),
+    },
+    {
+      Icon: BarChart3,
+      label: t("items.fidio.features.results.label"),
+      sub: t("items.fidio.features.results.sub"),
+    },
+    {
+      Icon: BadgeCheck,
+      label: t("items.fidio.features.profile.label"),
+      sub: t("items.fidio.features.profile.sub"),
+    },
+  ];
+
+  const screenLabels = [
+      t("items.fidio.screens.connexion"),
+      t("items.fidio.screens.scrutins"),
+      t("items.fidio.screens.resultats"),
+      t("items.fidio.screens.profil"),
+  ];
+
   return (
     <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none">
 
@@ -195,7 +190,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-200 dark:border-red-900/60 bg-red-50 dark:bg-red-950/30 text-red-500 dark:text-red-400 text-[10px] font-bold tracking-widest uppercase mb-6">
             <Smartphone size={11} strokeWidth={2.5} />
-            <span>Application Mobile · Android</span>
+            <span>{t("mobileAppBadge")}</span>
           </div>
 
           {/* Title */}
@@ -203,11 +198,11 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
             Fidio
           </h3>
           <p className="text-sm font-semibold text-red-500 dark:text-red-400 mb-5 tracking-tight">
-            Plateforme de vote électronique sécurisé
+            {t("mobileAppSubtitle")}
           </p>
 
           <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400 mb-8 max-w-sm">
-            {project.description}
+            {t(project.descriptionKey)}
           </p>
 
           {/* Feature grid */}
@@ -402,7 +397,7 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
     <div className="relative aspect-[16/10] w-full overflow-hidden">
       <Image
         src={project.image}
-        alt={project.title}
+        alt={t(project.titleKey)}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       />
@@ -446,13 +441,13 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
     <CardContent className="flex flex-1 flex-col p-6">
       <div className="mb-2.5 flex items-start justify-between gap-2">
         <h3 className="text-base font-bold leading-snug text-slate-900 dark:text-white">
-          {project.title}
+          {t(project.titleKey)}
         </h3>
         <Layers size={14} className="mt-0.5 shrink-0 text-slate-300 dark:text-slate-600" />
       </div>
 
       <p className="mb-5 text-sm leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-2">
-        {project.description}
+        {t(project.descriptionKey)}
       </p>
 
       <div className="mt-auto flex flex-wrap gap-1.5">

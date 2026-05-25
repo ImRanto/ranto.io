@@ -5,29 +5,15 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Calendar, CheckCircle2 } from "lucide-react";
 
-const experiences = [
-  {
-    type: "education",
-    title: "Licence en Informatique",
-    organization: "HEI (Haute École d'Informatique)",
-    period: "2023 - 2026",
-    description:
-      "Formation approfondie en développement logiciel, algorithmes, bases de données et systèmes d'information.",
-    highlights: ["Algorithmique", "Réseaux", "Programmation", "Bases de données"],
-  },
-  {
-    type: "education",
-    title: "Baccalauréat Scientifique",
-    organization: "Lycée Ambohimanarina",
-    period: "2021-2022",
-    description:
-      "Diplôme de fin d'études secondaires, série scientifique, axé sur les mathématiques et la logique.",
-    highlights: ["Logique", "Mathématiques", "Physique"],
-  },
-];
-
 export const ExperienceSection = () => {
   const t = useTranslations("experience");
+
+  const experiencesRaw = t.raw("items") as any[];
+  const experiences = experiencesRaw.map((item: any) => ({
+    ...item,
+    type: item.type || "education",
+  }));
+
   return (
     <section
       id="experience"

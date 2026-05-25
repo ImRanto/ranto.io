@@ -14,6 +14,7 @@
   },
   "hero": {
     "roleBadge": "Full-Stack Web & Mobile Developer",
+    "winnerBadge": "HIU 2025 Winner",
     "frontendTitle": "Frontend",
     "frontendSubtitle": "React/Next.js",
     "backendTitle": "Backend",
@@ -94,18 +95,91 @@
     },
     "demo": "Demo",
     "code": "Code",
-    "proprietary": "Proprietary Project"
+    "proprietary": "Proprietary Project",
+    "mobileAppBadge": "Mobile Application · Android",
+    "mobileAppSubtitle": "Secure electronic voting platform",
+    "items": {
+      "patrimoine": {
+        "title": "Wealth Management",
+        "description": "Expert financial calculation system: asset management, amortization calculations, and real-time income projections."
+      },
+      "ia": {
+        "title": "AI Assistant (HIU Hackathon)",
+        "description": "HIU 2025 winner. Intelligent agent optimizing job search and task automation via OpenAI."
+      },
+      "tapakila": {
+        "title": "Tapakila – Ticketing",
+        "description": "Event platform with QR Code ticket management and secure Spring Boot payment gateway."
+      },
+      "meteo": {
+        "title": "ETL Weather Analysis",
+        "description": "Automated data pipeline with Airflow for processing and visualizing climate metrics."
+      },
+      "cycleflow": {
+        "title": "CycleFlow – Cyclic Analysis",
+        "description": "Modern and intuitive web application allowing users to track and predict their menstrual cycle with precision."
+      },
+      "etsako": {
+        "title": "E-Tsako Sales Tracking",
+        "description": "Web application for sales and stock management, with integrated analytical dashboard."
+      },
+      "fidio": {
+        "title": "Fidio – Electronic Voting",
+        "description": "Secure Android mobile electronic voting application with real-time results, biometric authentication (fingerprint & face), ballot management, and verified voter profiles.",
+        "features": {
+          "auth": {
+            "label": "Biometric Auth",
+            "sub": "Fingerprint & facial recognition"
+          },
+          "vote": {
+            "label": "Secure Voting",
+            "sub": "End-to-end encryption"
+          },
+          "results": {
+            "label": "Live Results",
+            "sub": "Real-time updates via WebSocket"
+          },
+          "profile": {
+            "label": "Verified Profile",
+            "sub": "ID verification & voter account"
+          }
+        },
+        "screens": {
+          "connexion": "Sign In",
+          "scrutins": "Polls",
+          "resultats": "Results",
+          "profil": "Profile"
+        }
+      }
+    }
   },
   "experience": {
     "small": "My Background",
     "title": "Experience & Education",
-    "intro": "An overview of my academic growth and key steps shaping my technical expertise today."
+    "intro": "An overview of my academic growth and key steps shaping my technical expertise today.",
+    "items": [
+      {
+        "title": "Bachelor's in Computer Science",
+        "organization": "HEI (Haute École d'Informatique)",
+        "period": "2023 - 2026",
+        "description": "In-depth training in software development, algorithms, databases, and information systems.",
+        "highlights": ["Algorithms", "Networking", "Programming", "Databases"]
+      },
+      {
+        "title": "Scientific Baccalaureate",
+        "organization": "Lycée Ambohimanarina",
+        "period": "2021-2022",
+        "description": "High school diploma, scientific stream, focused on mathematics and logic.",
+        "highlights": ["Logic", "Mathematics", "Physics"]
+      }
+    ]
   },
   "profile": {
     "role": "Fullstack Developer",
     "availabilityPrefix": "Currently open for",
     "availabilityHighlight": "internships or new professional opportunities",
-    "hireMe": "Hire me"
+    "hireMe": "Hire me",
+    "bio": "Passionate about building high-performance web & mobile applications. Based in Antananarivo."
   },
   "phylosophy": {
     "quote": "The secret of change is to focus all your energy not on fighting the old, but on building the new.",
@@ -113,6 +187,7 @@
     "note": "Inspiration for my technical architecture"
   },
   "footer": {
+    "bio": "Full-stack developer specialized in creating high-end interfaces and scalable architectures. Based in Madagascar, available everywhere.",
     "menu": "Menu",
     "contactDirect": "Direct contact",
     "sendMail": "Send me an email",

@@ -14,6 +14,7 @@
   },
   "hero": {
     "roleBadge": "Développeur Full-Stack Web & Mobile",
+    "winnerBadge": "Lauréat HIU 2025",
     "frontendTitle": "Frontend",
     "frontendSubtitle": "React/Next.js",
     "backendTitle": "Backend",
@@ -94,18 +95,91 @@
     },
     "demo": "Demo",
     "code": "Code",
-    "proprietary": "Proprietary Project"
+    "proprietary": "Projet Propriétaire",
+    "mobileAppBadge": "Application Mobile · Android",
+    "mobileAppSubtitle": "Plateforme de vote électronique sécurisé",
+    "items": {
+      "patrimoine": {
+        "title": "Gestion de Patrimoine",
+        "description": "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel."
+      },
+      "ia": {
+        "title": "Assistant IA (Hackathon HIU)",
+        "description": "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI."
+      },
+      "tapakila": {
+        "title": "Tapakila – Billetterie",
+        "description": "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot."
+      },
+      "meteo": {
+        "title": "Analyse Météo ETL",
+        "description": "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques."
+      },
+      "cycleflow": {
+        "title": "CycleFlow – Analyse Cyclique",
+        "description": "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision."
+      },
+      "etsako": {
+        "title": "Suivi de vente E-Tsako",
+        "description": "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré."
+      },
+      "fidio": {
+        "title": "Fidio – Vote Électronique",
+        "description": "Application mobile Android sécurisée de vote électronique avec résultats en temps réel, authentification biométrique (empreinte & visage), gestion des scrutins et profil électeur vérifié.",
+        "features": {
+          "auth": {
+            "label": "Auth biométrique",
+            "sub": "Empreinte digitale & reconnaissance faciale"
+          },
+          "vote": {
+            "label": "Vote sécurisé",
+            "sub": "Chiffrement de bout en bout"
+          },
+          "results": {
+            "label": "Résultats en direct",
+            "sub": "Mise à jour temps réel via WebSocket"
+          },
+          "profile": {
+            "label": "Profil vérifié",
+            "sub": "Vérification CIN & compte électeur"
+          }
+        },
+        "screens": {
+          "connexion": "Connexion",
+          "scrutins": "Scrutins",
+          "resultats": "Résultats",
+          "profil": "Profil"
+        }
+      }
+    }
   },
   "experience": {
     "small": "Mon Parcours",
     "title": "Expérience & Formation",
-    "intro": "Un aperçu de mon évolution académique et des étapes clés qui forgent mon expertise technique aujourd'hui."
+    "intro": "Un aperçu de mon évolution académique et des étapes clés qui forgent mon expertise technique aujourd'hui.",
+    "items": [
+      {
+        "title": "Licence en Informatique",
+        "organization": "HEI (Haute École d'Informatique)",
+        "period": "2023 - 2026",
+        "description": "Formation approfondie en développement logiciel, algorithmes, bases de données et systèmes d'information.",
+        "highlights": ["Algorithmique", "Réseaux", "Programmation", "Bases de données"]
+      },
+      {
+        "title": "Baccalauréat Scientifique",
+        "organization": "Lycée Ambohimanarina",
+        "period": "2021-2022",
+        "description": "Diplôme de fin d'études secondaires, série scientifique, axé sur les mathématiques et la logique.",
+        "highlights": ["Logique", "Mathématiques", "Physique"]
+      }
+    ]
   },
   "profile": {
     "role": "Développeur Fullstack",
     "availabilityPrefix": "Actuellement ouvert pour un",
     "availabilityHighlight": "Contrat d'alternance ou de nouvelles opportunités professionnelles",
-    "hireMe": "Recrutez-moi"
+    "hireMe": "Recrutez-moi",
+    "bio": "Passionné par le développement d'applications web & mobile performantes. Basé à Antananarivo."
   },
   "phylosophy": {
     "quote": "Le secret du changement, c'est de concentrer toute votre énergie non pas à lutter contre le passé, mais à construire le futur.",
@@ -113,6 +187,7 @@
     "note": "Inspiration de mon architecture technique"
   },
   "footer": {
+    "bio": "Développeur full-stack spécialisé dans la création d'interfaces haut de gamme et d'architectures scalables. Basé à Madagascar, disponible partout.",
     "menu": "Menu",
     "contactDirect": "Contact direct",
     "sendMail": "Envoyez-moi un mail",
