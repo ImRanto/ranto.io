@@ -28,7 +28,7 @@ export default function PhilosophySection() {
             transition={{ duration: 1 }}
             className="text-3xl md:text-5xl font-light italic tracking-tight leading-snug dark:text-slate-200"
           >
-            "{t("quote")}"
+            &quot;{t("quote")}&quot;
           </motion.h2>
 
           {/* L'auteur et la ligne de séparation */}

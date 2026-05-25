@@ -65,13 +65,10 @@ const AboutSection = () => {
 
   const skillIcons = [Layout, Server, Database, Code2, Brain, Lightbulb];
 
-  // Assuming skills is an array in JSON. next-intl can handle this if configured or we can iterate.
-  // In our JSON it is an array of objects.
-  const skillsCount = 6; // We know there are 6 skills from the JSON
-  const skills = Array.from({ length: skillsCount }).map((_, idx) => ({
-    icon: skillIcons[idx],
-    title: t(`skills.${idx}.title`),
-    description: t(`skills.${idx}.description`),
+  const skillsRaw = t.raw("skills") as Array<{ title: string; description: string }>;
+  const skills = skillsRaw.map((skill, idx: number) => ({
+    ...skill,
+    icon: skillIcons[idx] || Lightbulb,
   }));
 
   return (

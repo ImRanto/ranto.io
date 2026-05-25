@@ -58,9 +58,7 @@ const Footer = () => {
             </Link>
 
             <p className="text-slate-600 dark:text-slate-400 text-sm leading-relaxed max-w-sm">
-              Développeur full-stack spécialisé dans la création d'interfaces
-              haut de gamme et d'architectures scalables. Basé à Madagascar,
-              disponible partout.
+              {tFooter("bio")}
             </p>
 
             <div className="flex items-center gap-3">
