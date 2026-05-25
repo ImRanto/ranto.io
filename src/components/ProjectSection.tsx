@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -256,7 +255,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
               >
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-3.5 w-3.5" />
-                  {t.demo}
+                  {t("demo")}
                 </a>
               </Button>
             )}
@@ -264,13 +263,13 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
               <Button size="sm" variant="outline" className="rounded-xl font-bold" asChild>
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-3.5 w-3.5" />
-                  {t.code}
+                  {t("code")}
                 </a>
               </Button>
             )}
             {project.liveUrl === "#" && project.githubUrl === "#" && (
               <span className="self-center text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                {t.proprietary}
+                {t("proprietary")}
               </span>
             )}
           </div>
@@ -417,7 +416,7 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
             >
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
-                {t.demo}
+                {t("demo")}
               </a>
             </Button>
           )}
@@ -430,13 +429,13 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
             >
               <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="mr-1.5 h-3.5 w-3.5" />
-                {t.code}
+                {t("code")}
               </a>
             </Button>
           )}
           {project.liveUrl === "#" && project.githubUrl === "#" && (
             <p className="w-full text-center text-[10px] font-bold uppercase tracking-widest text-white/50">
-              {t.proprietary}
+              {t("proprietary")}
             </p>
           )}
         </div>
@@ -475,8 +474,7 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
 ───────────────────────────────────────── */
 const ProjectsSection = () => {
   const [activeTab, setActiveTab] = useState("all");
-  const { lang } = useLanguage();
-  const t = i18n[lang].projects;
+  const t = useTranslations("projects");
 
   const filteredProjects = projects.filter((p) =>
     activeTab === "all" ? true : p.category === activeTab
@@ -497,11 +495,11 @@ const ProjectsSection = () => {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-900/60 bg-cyan-50 dark:bg-cyan-950/30 text-cyan-600 dark:text-cyan-400 text-[10px] font-bold tracking-widest uppercase">
               <FolderCode size={12} strokeWidth={2.5} />
-              <span>{t.badge}</span>
+              <span>{t("badge")}</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-              {t.title}{" "}
-              <span className="text-cyan-500">Réacteurs</span>
+              {t("title")}{" "}
+              <span className="text-cyan-500">{t("subtitle")}</span>
             </h2>
           </div>
 
@@ -517,7 +515,7 @@ const ProjectsSection = () => {
                 >
                   {tab === "mobile"
                     ? "Mobile"
-                    : t.tabs[tab as keyof typeof t.tabs] || tab}
+                    : t(`tabs.${tab}`) || tab}
                 </TabsTrigger>
               ))}
             </TabsList>

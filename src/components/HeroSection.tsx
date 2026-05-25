@@ -4,9 +4,8 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ArrowRight, Download, Code2, Layers, Sparkles } from "lucide-react";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "../i18n/translations";
+import { ArrowRight, Download, Code2, Layers } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 /* ── Stagger variants ── */
 const container = {
@@ -15,7 +14,7 @@ const container = {
 };
 const item = {
   hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any } },
 };
 
 const techStack = [
@@ -29,8 +28,7 @@ const techStack = [
 ];
 
 const HeroSection = () => {
-  const { lang } = useLanguage();
-  const t = i18n[lang].hero;
+  const t = useTranslations("hero");
 
   return (
     <section
@@ -64,7 +62,7 @@ const HeroSection = () => {
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                 </span>
                 <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
-                  {t.roleBadge}
+                  {t("roleBadge")}
                 </span>
               </div>
             </motion.div>
@@ -72,7 +70,7 @@ const HeroSection = () => {
             {/* Heading */}
             <motion.div variants={item}>
               <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.05]">
-                {t.greetingPrefix}
+                {t("greetingPrefix")}
                 <br />
                 <span className="relative mt-1 inline-block">
                   {/* Gradient text */}
@@ -90,7 +88,7 @@ const HeroSection = () => {
               variants={item}
               className="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-lg leading-relaxed mx-auto lg:mx-0"
             >
-              {t.subtitle}
+              {t("subtitle")}
             </motion.p>
 
             {/* CTA buttons */}
@@ -102,7 +100,7 @@ const HeroSection = () => {
                 <button className="group relative inline-flex items-center gap-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-7 py-3.5 rounded-2xl font-bold text-sm tracking-tight transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/20 dark:hover:shadow-white/10 hover:-translate-y-0.5 active:scale-[0.98] overflow-hidden">
                   {/* Shimmer */}
                   <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
-                  {t.viewProjects}
+                  {t("viewProjects")}
                   <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
                 </button>
               </Link>
@@ -110,7 +108,7 @@ const HeroSection = () => {
               <Link href="/cv">
                 <button className="group inline-flex items-center gap-2.5 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800/40 px-7 py-3.5 rounded-2xl font-bold text-sm tracking-tight transition-all duration-300 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]">
                   <Download size={14} className="group-hover:-translate-y-0.5 transition-transform duration-200" />
-                  {t.downloadCV}
+                  {t("downloadCV")}
                 </button>
               </Link>
             </motion.div>
@@ -141,7 +139,7 @@ const HeroSection = () => {
             className="w-full lg:w-[46%] flex justify-center order-1 lg:order-2"
             initial={{ opacity: 0, scale: 0.92 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as any }}
           >
             <div className="relative">
 
@@ -202,10 +200,10 @@ const HeroSection = () => {
                   </div>
                   <div className="hidden sm:block">
                     <p className="text-[11px] font-black text-slate-900 dark:text-white leading-tight tracking-tight">
-                      {t.frontendTitle}
+                      {t("frontendTitle")}
                     </p>
                     <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
-                      {t.frontendSubtitle}
+                      {t("frontendSubtitle")}
                     </p>
                   </div>
                 </div>
@@ -223,10 +221,10 @@ const HeroSection = () => {
                   </div>
                   <div className="hidden sm:block">
                     <p className="text-[11px] font-black text-slate-900 dark:text-white leading-tight tracking-tight">
-                      {t.backendTitle}
+                      {t("backendTitle")}
                     </p>
                     <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
-                      {t.backendSubtitle}
+                      {t("backendSubtitle")}
                     </p>
                   </div>
                 </div>

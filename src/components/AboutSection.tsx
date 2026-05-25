@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import {
   Code2,
@@ -62,13 +61,17 @@ const SkillCard = ({
 );
 
 const AboutSection = () => {
-  const { lang } = useLanguage();
-  const aboutT = i18n[lang].about;
+  const t = useTranslations("about");
 
-  const skills = aboutT.skills.map((s: any, idx: number) => ({
-    icon: [Layout, Server, Database, Code2, Brain, Lightbulb][idx],
-    title: s.title,
-    description: s.description,
+  const skillIcons = [Layout, Server, Database, Code2, Brain, Lightbulb];
+
+  // Assuming skills is an array in JSON. next-intl can handle this if configured or we can iterate.
+  // In our JSON it is an array of objects.
+  const skillsCount = 6; // We know there are 6 skills from the JSON
+  const skills = Array.from({ length: skillsCount }).map((_, idx) => ({
+    icon: skillIcons[idx],
+    title: t(`skills.${idx}.title`),
+    description: t(`skills.${idx}.description`),
   }));
 
   return (
@@ -89,14 +92,14 @@ const AboutSection = () => {
               viewport={{ once: true }}
             >
               <h2 className="text-xs font-black uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-500 mb-4">
-                {aboutT.smallHeading}
+                {t("smallHeading")}
               </h2>
               <h3 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white leading-[1.1]">
-                {aboutT.titlePre} {" "}
+                {t("titlePre")} {" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-500">
-                  {aboutT.titleHighlight}
+                  {t("titleHighlight")}
                 </span>{" "}
-                {aboutT.titleSuffix}
+                {t("titleSuffix")}
               </h3>
             </motion.div>
 
@@ -107,7 +110,7 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
-              {aboutT.bio}
+              {t("bio")}
             </motion.p>
 
             {/* Statistiques adaptatives */}
@@ -118,17 +121,11 @@ const AboutSection = () => {
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
-              {/* <div className="flex flex-col">
-                <span className="text-cyan-600 text-3xl font-bold">01+</span>
-                <span className="text-[10px] uppercase font-black tracking-widest opacity-50 dark:text-white">
-                  Année d'exp.
-                </span>
-              </div> */}
               <div className="w-px h-10 bg-slate-200 dark:bg-slate-800" />
               <div className="flex flex-col">
                 <span className="text-cyan-600 text-3xl font-bold">8+</span>
                 <span className="text-[10px] uppercase font-black tracking-widest opacity-50 dark:text-white">
-                  {aboutT.statsProjects}
+                  {t("statsProjects")}
                 </span>
               </div>
             </motion.div>

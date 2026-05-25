@@ -1,11 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 
 export default function PhilosophySection() {
-  const { lang } = useLanguage();
-  const t = i18n[lang].phylosophy;
+  const t = useTranslations("phylosophy");
   return (
     <section id="phylosophy" className="py-32 bg-white dark:bg-[#020617] relative overflow-hidden">
       {/* Halo de lumière subtil en arrière-plan */}
@@ -30,7 +28,7 @@ export default function PhilosophySection() {
             transition={{ duration: 1 }}
             className="text-3xl md:text-5xl font-light italic tracking-tight leading-snug dark:text-slate-200"
           >
-            "{t.quote}"
+            "{t("quote")}"
           </motion.h2>
 
           {/* L'auteur et la ligne de séparation */}
@@ -47,11 +45,11 @@ export default function PhilosophySection() {
             transition={{ delay: 0.8 }}
             className="text-sm font-bold uppercase tracking-[0.4em] text-slate-500 dark:text-slate-400"
           >
-            {t.author}
+            {t("author")}
           </motion.p>
           
           <p className="mt-2 text-[10px] uppercase tracking-widest text-slate-400/60">
-          {t.note}
+          {t("note")}
           </p>
         </div>
       </div>
