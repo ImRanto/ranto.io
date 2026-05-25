@@ -37,8 +37,7 @@ import {
   UserButton,
   SignOutButton,
 } from "@clerk/nextjs";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -55,8 +54,7 @@ const formSchema = z.object({
 
 const ContactSection = () => {
   const { user } = useUser();
-  const { lang } = useLanguage();
-  const t = i18n[lang].contact;
+  const t = useTranslations("contact");
   const [isSending, setIsSending] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const recaptchaRef = useRef<ReCAPTCHA>(null);
@@ -106,7 +104,7 @@ const ContactSection = () => {
     if (!user) return;
 
     if (!recaptchaToken) {
-      setStatus({ type: "info", message: t.recaptcha });
+      setStatus({ type: "info", message: t("recaptcha") });
       return;
     }
 
@@ -126,7 +124,7 @@ const ContactSection = () => {
     if (currentSentTimes.length >= 2) {
       setStatus({
         type: "info",
-        message: t.limitReached,
+        message: t("limitReached"),
       });
       return;
     }
@@ -158,7 +156,7 @@ const ContactSection = () => {
 
       setStatus({
         type: "success",
-        message: t.success,
+        message: t("success"),
       });
 
       currentSentTimes.push(now);
@@ -170,7 +168,7 @@ const ContactSection = () => {
     } catch (error) {
       setStatus({
         type: "error",
-        message: t.error,
+        message: t("error"),
       });
       console.error(error);
     } finally {
@@ -181,39 +179,25 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: t.emailTitle,
+      title: t("emailTitle"),
       value: "hei.ranto.2@gmail.com",
       link: "mailto:hei.ranto.2@gmail.com",
     },
     {
       icon: Phone,
-      title: t.phoneTitle,
+      title: t("phoneTitle"),
       value: "+261 38 13 277 37",
       link: "tel:+261381327737",
     },
     {
       icon: MapPin,
-      title: t.locationTitle,
+      title: t("locationTitle"),
       value: "Antananarivo, Madagascar",
       link: "https://www.google.com/maps/place/Madagascar,+Antananarivo",
     },
   ];
 
-  <div className="space-y-4">
-    {[
-      { icon: Mail, text: "hei.ranto.2@gmail.com" },
-      { icon: Phone, text: "+261 38 13 277 37" },
-      { icon: MapPin, text: "Antananarivo, Madagascar" },
-    ].map((item, idx) => (
-      <div
-        key={idx}
-        className="flex items-center gap-4 p-4 rounded-2xl bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800"
-      >
-        <item.icon className="text-cyan-500" size={20} />
-        <span className="text-sm font-medium">{item.text}</span>
-      </div>
-    ))}
-  </div>;
+  const recaptchaKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
   return (
     <section id="contact" className="py-24 bg-slate-50/50 dark:bg-slate-900/20">
@@ -225,9 +209,9 @@ const ContactSection = () => {
           viewport={{ once: true }}
         >
           <h2 className="text-3xl md:text-5xl font-bold mb-6">
-            {t.title} <span className="text-cyan-500">{t.titleHighlight}</span>
+            {t("title")} <span className="text-cyan-500">{t("titleHighlight")}</span>
           </h2>
-          <p className="text-slate-600 dark:text-slate-400">{t.intro}</p>
+          <p className="text-slate-600 dark:text-slate-400">{t("intro")}</p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -285,10 +269,10 @@ const ContactSection = () => {
                         name="name"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t.labels.name}</FormLabel>
+                            <FormLabel>{t("labels.name")}</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder={t.labels.namePlaceholder}
+                                placeholder={t("labels.namePlaceholder")}
                                 {...field}
                                 readOnly={!!user}
                                 className="rounded-xl"
@@ -303,10 +287,10 @@ const ContactSection = () => {
                         name="email"
                         render={({ field }) => (
                           <FormItem>
-                            <FormLabel>{t.labels.email}</FormLabel>
+                            <FormLabel>{t("labels.email")}</FormLabel>
                             <FormControl>
                               <Input
-                                placeholder={t.labels.emailPlaceholder}
+                                placeholder={t("labels.emailPlaceholder")}
                                 {...field}
                                 readOnly={!!user}
                                 className="rounded-xl"
@@ -323,10 +307,10 @@ const ContactSection = () => {
                       name="message"
                       render={({ field }) => (
                         <FormItem>
-                          <FormLabel>{t.labels.message}</FormLabel>
+                          <FormLabel>{t("labels.message")}</FormLabel>
                           <FormControl>
                             <Textarea
-                              placeholder={t.labels.messagePlaceholder}
+                              placeholder={t("labels.messagePlaceholder")}
                               className="min-h-[150px] rounded-xl"
                               maxLength={1000}
                               {...field}
@@ -380,6 +364,7 @@ const ContactSection = () => {
                           </p>
 
                           <button
+                            type="button"
                             onClick={() =>
                               setStatus({ type: null, message: null })
                             }
@@ -393,12 +378,14 @@ const ContactSection = () => {
                     </AnimatePresence>
 
                     <div className="flex justify-center py-2">
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
-                        onChange={(t) => setRecaptchaToken(t)}
-                        theme="dark"
-                      />
+                      {recaptchaKey && (
+                        <ReCAPTCHA
+                          ref={recaptchaRef}
+                          sitekey={recaptchaKey}
+                          onChange={(t) => setRecaptchaToken(t)}
+                          theme="dark"
+                        />
+                      )}
                     </div>
 
                     {/* Actions d'authentification et envoi */}
@@ -406,7 +393,7 @@ const ContactSection = () => {
                       {!user ? (
                         <div className="flex flex-col items-center sm:items-start gap-3 w-full">
                             <p className="text-xs text-slate-500 flex items-center gap-2">
-                            <Lock size={12} /> {t.authRequired}
+                            <Lock size={12} /> {t("authRequired")}
                           </p>
                           <SignInButton mode="modal">
                             <Button
@@ -414,7 +401,7 @@ const ContactSection = () => {
                               size="lg"
                               className="w-full sm:w-auto bg-cyan-600 hover:bg-cyan-700 rounded-xl px-8 font-bold"
                             >
-                              <UserIcon className="mr-2 h-4 w-4" /> {t.signIn}
+                              <UserIcon className="mr-2 h-4 w-4" /> {t("signIn")}
                             </Button>
                           </SignInButton>
                         </div>
@@ -424,7 +411,7 @@ const ContactSection = () => {
                             <UserButton afterSignOutUrl="/" />
                             <div className="hidden sm:block">
                               <p className="text-[10px] font-bold text-slate-400 uppercase leading-none">
-                                {t.connected}
+                                {t("connected")}
                               </p>
                               <p className="text-sm font-bold">
                                 {user.firstName}
@@ -432,6 +419,7 @@ const ContactSection = () => {
                             </div>
                             <SignOutButton>
                               <button
+                                type="button"
                                 title="Déconnexion"
                                 className="ml-2 p-1.5 text-slate-400 hover:text-red-500 transition-colors"
                               >
@@ -446,7 +434,7 @@ const ContactSection = () => {
                             size="lg"
                             className="w-full sm:w-auto bg-slate-900 dark:bg-white dark:text-slate-900 rounded-xl px-10 font-bold"
                           >
-                            {isSending ? t.sending : t.send}
+                            {isSending ? t("sending") : t("send")}
                             <Send className="ml-2 h-4 w-4" />
                           </Button>
                         </div>

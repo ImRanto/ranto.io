@@ -1,8 +1,7 @@
 "use client";
 
 import React from "react";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Calendar, CheckCircle2 } from "lucide-react";
 
@@ -28,8 +27,7 @@ const experiences = [
 ];
 
 export const ExperienceSection = () => {
-  const { lang } = useLanguage();
-  const t = i18n[lang].experience;
+  const t = useTranslations("experience");
   return (
     <section
       id="experience"
@@ -50,7 +48,7 @@ export const ExperienceSection = () => {
             viewport={{ once: true }}
             className="inline-block text-cyan-600 dark:text-cyan-400 text-xs font-bold tracking-[0.2em] uppercase mb-4"
           >
-            {t.small}
+            {t("small")}
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -59,9 +57,9 @@ export const ExperienceSection = () => {
             transition={{ delay: 0.1 }}
             className="text-3xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white"
           >
-            {t.title.split(" & ")[0]} & <span className="text-cyan-600">{t.title.split(" & ")[1]}</span>
+            {t("title").split(" & ")[0]} & <span className="text-cyan-600">{t("title").split(" & ")[1]}</span>
           </motion.h2>
-          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{t.intro}</p>
+          <p className="text-slate-600 dark:text-slate-400 leading-relaxed">{t("intro")}</p>
         </div>
 
         {/* Timeline Container */}

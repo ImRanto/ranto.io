@@ -1,0 +1,135 @@
+{
+  "navbar": {
+    "navigation": "Navigation",
+    "follow": "Suivez-moi",
+    "changeTheme": "Changer le thème",
+    "myVision": "Ma Vision"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "experience": "Expériences",
+    "contact": "Contact"
+  },
+  "hero": {
+    "roleBadge": "Développeur Full-Stack Web & Mobile",
+    "frontendTitle": "Frontend",
+    "frontendSubtitle": "React/Next.js",
+    "backendTitle": "Backend",
+    "backendSubtitle": "Java/Spring Boot",
+    "greetingPrefix": "Bonjour, je suis",
+    "subtitle": "Je crée des produits web & mobile performants et élégants, du design à l’architecture backend.",
+    "viewProjects": "Voir mes projets",
+    "downloadCV": "Mon CV"
+  },
+  "about": {
+    "smallHeading": "Expertise",
+    "titlePre": "Passionné par le",
+    "titleHighlight": "Code",
+    "titleSuffix": "& le Design.",
+    "bio": "Développeur Full-Stack, je transforme des problématiques complexes en interfaces intuitives. Mon but est de construire des produits exceptionnels.",
+    "statsProjects": "Projets finis",
+    "skills": [
+      {
+        "title": "Frontend Development",
+        "description": "Interfaces pixel-perfect avec React et Next.js (Base HTML/CSS). Focus sur la performance et l'accessibilité."
+      },
+      {
+        "title": "Backend Systems",
+        "description": "APIs robustes en Node.js et Java. Expertise en microservices et sécurité."
+      },
+      {
+        "title": "Database",
+        "description": "Architecture de données optimisée avec PostgreSQL. Maîtrise de l'indexation."
+      },
+      {
+        "title": "Core Languages",
+        "description": "Développement typé avec TypeScript, combiné à la puissance de React et React Native."
+      },
+      {
+        "title": "Software Architecture",
+        "description": "Conception de systèmes scalables utilisant les meilleurs design patterns."
+      },
+      {
+        "title": "Creative Solutions",
+        "description": "Résolution de problèmes complexes avec une approche centrée utilisateur."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contactez",
+    "titleHighlight": "Moi",
+    "intro": "Le formulaire est ouvert à tous. Connectez-vous simplement pour valider l'envoi.",
+    "emailTitle": "Email",
+    "phoneTitle": "Téléphone",
+    "locationTitle": "Localisation",
+    "authRequired": "Une connexion est requise pour envoyer",
+    "signIn": "Se connecter",
+    "connected": "Connecté",
+    "sending": "Envoi...",
+    "send": "Envoyer",
+    "recaptcha": "Veuillez valider le reCAPTCHA.",
+    "limitReached": "Limite atteinte (2 messages/24h). À demain ! 🚀",
+    "success": "Message envoyé avec succès !",
+    "error": "Oups ! Erreur lors de l'envoi. Réessayez.",
+    "labels": {
+      "name": "Nom",
+      "email": "Adresse Email",
+      "message": "Votre Projet / Message",
+      "namePlaceholder": "Votre nom...",
+      "emailPlaceholder": "exemple@gmail.com",
+      "messagePlaceholder": "Décrivez-moi votre besoin..."
+    }
+  },
+  "projects": {
+    "badge": "Portfolio",
+    "title": "Projets",
+    "subtitle": "Réacteurs",
+    "tabs": {
+      "all": "Tous",
+      "frontend": "Frontend",
+      "fullstack": "Fullstack",
+      "data": "Data"
+    },
+    "demo": "Demo",
+    "code": "Code",
+    "proprietary": "Proprietary Project"
+  },
+  "experience": {
+    "small": "Mon Parcours",
+    "title": "Expérience & Formation",
+    "intro": "Un aperçu de mon évolution académique et des étapes clés qui forgent mon expertise technique aujourd'hui."
+  },
+  "profile": {
+    "role": "Développeur Fullstack",
+    "availabilityPrefix": "Actuellement ouvert pour un",
+    "availabilityHighlight": "Contrat d'alternance ou de nouvelles opportunités professionnelles",
+    "hireMe": "Recrutez-moi"
+  },
+  "phylosophy": {
+    "quote": "Le secret du changement, c'est de concentrer toute votre énergie non pas à lutter contre le passé, mais à construire le futur.",
+    "author": "Socrate",
+    "note": "Inspiration de mon architecture technique"
+  },
+  "footer": {
+    "menu": "Menu",
+    "contactDirect": "Contact direct",
+    "sendMail": "Envoyez-moi un mail",
+    "available": "Disponible pour de nouveaux projets",
+    "copyright": "Conçu avec rigueur."
+  },
+  "cv": {
+    "back": "Retour",
+    "download": "Télécharger le CV",
+    "alt": "Curriculum Vitae"
+  },
+  "loading": {
+    "message": "Chargement de l’expérience"
+  },
+  "notFound": {
+    "title": "404 - Non trouvé",
+    "description": "Oups! La page que vous recherchez n'existe pas.",
+    "backHome": "Retourner à l'accueil"
+  }
+}
