@@ -100,8 +100,8 @@ export const i18n = {
     },
     profile: {
       role: "Développeur Fullstack",
-      availabilityPrefix: "Actuellement ouvert pour un",
-      availabilityHighlight: "Contrat d'alternance ou de nouvelles opportunités professionnelles",
+      availabilityPrefix: "Actuellement ouvert pour",
+      availabilityHighlight: "de nouvelles opportunités professionnelles",
       hireMe: "Recrutez-moi",
     },
     phylosophy: {
@@ -224,7 +224,7 @@ export const i18n = {
     profile: {
       role: "Fullstack Developer",
       availabilityPrefix: "Currently open for",
-      availabilityHighlight: "internships or new professional opportunities",
+      availabilityHighlight: "new professional opportunities",
       hireMe: "Hire me",
     },
     phylosophy: {
