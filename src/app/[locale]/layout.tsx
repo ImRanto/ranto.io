@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Quicksand, JetBrains_Mono } from "next/font/google";
 import "../globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import CustomCursor from "@/components/Custom-cursor";
@@ -8,19 +7,6 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { routing } from "@/navigation";
 import { notFound } from "next/navigation";
-
-const quicksand = Quicksand({
-  subsets: ["latin"],
-  variable: "--font-quicksand",
-  display: "swap",
-  weight: ["300", "400", "500", "600", "700"],
-});
-
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
 
 export async function generateMetadata({
   params,
@@ -191,9 +177,7 @@ export default async function RootLayout({
             dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
           />
         </head>
-        <body
-          className={`${quicksand.variable} ${mono.variable} font-sans antialiased`}
-        >
+        <body className="font-sans antialiased">
           <NextIntlClientProvider messages={messages}>
             <ThemeProvider
               attribute="class"

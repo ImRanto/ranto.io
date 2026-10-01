@@ -102,6 +102,23 @@ const projects: Project[] = [
       "https://iili.io/BmpJWQt.jpg",
     ],
   },
+  {
+    id: 9,
+    titleKey: "items.netservice.title",
+    descriptionKey: "items.netservice.description",
+    image: "https://i.postimg.cc/Y0Ps9vjv/NS-(2).jpg",
+    tags: ["React Native", "Next.js", "Node.js", "Express", "PostgreSQL", "WebSocket"],
+    category: "mobile",
+    liveUrl: "https://netserviceapp.com",
+    githubUrl: "#",
+    isMobile: true,
+    mobileScreenshots: [
+      "https://i.postimg.cc/NFKdWQbh/Apercu-APK-1.jpg",
+      "https://i.postimg.cc/Bn9mV9KN/Apercu-APK-2.jpg",
+      "https://i.postimg.cc/GmFX07PG/Apercu-APK-3.jpg",
+      "https://i.postimg.cc/9MMb7c6q/Apercu-APK-4.jpg",
+    ],
+  },
 ];
 
 const getTagStyle = (tag: string) => {
@@ -135,41 +152,73 @@ const getTagStyle = (tag: string) => {
 const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) => string }) => {
   const [activeScreen, setActiveScreen] = useState(0);
   const screens = project.mobileScreenshots ?? [];
+  const projectRoot = project.titleKey.replace(".title", "");
 
   const prev = () =>
     setActiveScreen((s) => (s - 1 + screens.length) % screens.length);
   const next = () =>
     setActiveScreen((s) => (s + 1) % screens.length);
 
-  const fidioFeatures = [
-    {
-      Icon: Fingerprint,
-      label: t("items.fidio.features.auth.label"),
-      sub: t("items.fidio.features.auth.sub"),
-    },
-    {
-      Icon: ShieldCheck,
-      label: t("items.fidio.features.vote.label"),
-      sub: t("items.fidio.features.vote.sub"),
-    },
-    {
-      Icon: BarChart3,
-      label: t("items.fidio.features.results.label"),
-      sub: t("items.fidio.features.results.sub"),
-    },
-    {
-      Icon: BadgeCheck,
-      label: t("items.fidio.features.profile.label"),
-      sub: t("items.fidio.features.profile.sub"),
-    },
-  ];
+  const featureSet =
+    project.titleKey.includes("netservice")
+      ? [
+          {
+            Icon: Fingerprint,
+            label: t(`${projectRoot}.features.dashboard.label`),
+            sub: t(`${projectRoot}.features.dashboard.sub`),
+          },
+          {
+            Icon: ShieldCheck,
+            label: t(`${projectRoot}.features.services.label`),
+            sub: t(`${projectRoot}.features.services.sub`),
+          },
+          {
+            Icon: BarChart3,
+            label: t(`${projectRoot}.features.analytics.label`),
+            sub: t(`${projectRoot}.features.analytics.sub`),
+          },
+          {
+            Icon: BadgeCheck,
+            label: t(`${projectRoot}.features.followup.label`),
+            sub: t(`${projectRoot}.features.followup.sub`),
+          },
+        ]
+      : [
+          {
+            Icon: Fingerprint,
+            label: t(`${projectRoot}.features.auth.label`),
+            sub: t(`${projectRoot}.features.auth.sub`),
+          },
+          {
+            Icon: ShieldCheck,
+            label: t(`${projectRoot}.features.vote.label`),
+            sub: t(`${projectRoot}.features.vote.sub`),
+          },
+          {
+            Icon: BarChart3,
+            label: t(`${projectRoot}.features.results.label`),
+            sub: t(`${projectRoot}.features.results.sub`),
+          },
+          {
+            Icon: BadgeCheck,
+            label: t(`${projectRoot}.features.profile.label`),
+            sub: t(`${projectRoot}.features.profile.sub`),
+          },
+        ];
 
-  const screenLabels = [
-      t("items.fidio.screens.connexion"),
-      t("items.fidio.screens.scrutins"),
-      t("items.fidio.screens.resultats"),
-      t("items.fidio.screens.profil"),
-  ];
+  const screenLabels = project.titleKey.includes("netservice")
+    ? [
+        t(`${projectRoot}.screens.accueil`),
+        t(`${projectRoot}.screens.services`),
+        t(`${projectRoot}.screens.commandes`),
+        t(`${projectRoot}.screens.profil`),
+      ]
+    : [
+        t(`${projectRoot}.screens.connexion`),
+        t(`${projectRoot}.screens.scrutins`),
+        t(`${projectRoot}.screens.resultats`),
+        t(`${projectRoot}.screens.profil`),
+      ];
 
   return (
     <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none">
@@ -185,10 +234,10 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
 
           {/* Title */}
           <h3 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-1">
-            Fidio
+            {t(project.titleKey)}
           </h3>
           <p className="text-sm font-semibold text-red-500 dark:text-red-400 mb-5 tracking-tight">
-            {t("mobileAppSubtitle")}
+            {t(`${projectRoot}.subtitle`) || t("mobileAppSubtitle")}
           </p>
 
           <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400 mb-8 max-w-sm">
@@ -197,7 +246,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
 
           {/* Feature grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
-            {fidioFeatures.map(({ Icon, label, sub }) => (
+            {featureSet.map(({ Icon, label, sub }) => (
               <div
                 key={label}
                 className="flex items-start gap-3 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 px-4 py-3 transition-colors hover:border-red-200 dark:hover:border-red-900/60"
@@ -310,7 +359,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
                   {screens[activeScreen] ? (
                     <Image
                       src={screens[activeScreen]}
-                      alt={`Capture d'écran ${screenLabels[activeScreen]} - Application Mobile Fidio (RAFALIMANANA Ranto H.)`}
+                      alt={`Capture d'écran ${screenLabels[activeScreen]} - Application Mobile ${t(project.titleKey)} (RAFALIMANANA Ranto H.)`}
                       fill
                       className="object-cover object-top"
                     />

@@ -121,6 +121,7 @@
       "fidio": {
         "title": "Fidio – Vote Électronique",
         "description": "Application mobile Android sécurisée de vote électronique avec résultats en temps réel, authentification biométrique (empreinte & visage), gestion des scrutins et profil électeur vérifié.",
+        "subtitle": "Plateforme de vote électronique sécurisé",
         "features": {
           "auth": {
             "label": "Auth biométrique",
@@ -143,6 +144,35 @@
           "connexion": "Connexion",
           "scrutins": "Scrutins",
           "resultats": "Résultats",
+          "profil": "Profil"
+        }
+      },
+      "netservice": {
+        "title": "NET Service",
+        "description": "Plateforme mobile de gestion de services d’impression à Madagascar",
+        "subtitle": "Gestion des services d'impression",
+        "features": {
+          "dashboard": {
+            "label": "Dashboard central",
+            "sub": "Suivi de l'activité en temps réel"
+          },
+          "services": {
+            "label": "Services de gestion",
+            "sub": "Commandes, paiement et suivi"
+          },
+          "analytics": {
+            "label": "Suivi des commandes",
+            "sub": "Statut des impressions et clients"
+          },
+          "followup": {
+            "label": "Support client",
+            "sub": "Suivi rapide et gestion des demandes"
+          }
+        },
+        "screens": {
+          "accueil": "Accueil",
+          "services": "Services",
+          "commandes": "Commandes",
           "profil": "Profil"
         }
       }
