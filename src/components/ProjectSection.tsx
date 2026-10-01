@@ -79,7 +79,7 @@ const projects: Project[] = [
     id: 5,
     titleKey: "items.cycleflow.title",
     descriptionKey: "items.cycleflow.description",
-    image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
+    image: "https://i.postimg.cc/9fmLtd6G/cycle-nao.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
     liveUrl: "https://cycle-nao.vercel.app/",
