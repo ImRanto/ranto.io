@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,8 +23,8 @@ import {
 
 type Project = {
   id: number;
-  title: string;
-  description: string;
+  titleKey: string;
+  descriptionKey: string;
   image: string;
   tags: string[];
   category: "frontend" | "backend" | "fullstack" | "data" | "mobile" | "all";
@@ -38,9 +37,8 @@ type Project = {
 const projects: Project[] = [
   {
     id: 1,
-    title: "Gestion de Patrimoine",
-    description:
-      "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel.",
+    titleKey: "items.patrimoine.title",
+    descriptionKey: "items.patrimoine.description",
     image: "https://iili.io/FmzUawb.png",
     tags: ["React", "Node.js", "Express", "Tailwind CSS"],
     category: "fullstack",
@@ -49,9 +47,8 @@ const projects: Project[] = [
   },
   {
     id: 2,
-    title: "Assistant IA (Hackathon HIU)",
-    description:
-      "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI.",
+    titleKey: "items.ia.title",
+    descriptionKey: "items.ia.description",
     image: "https://iili.io/Fmz4Ziv.png",
     tags: ["Next.js", "TypeScript", "OpenAI", "Python"],
     category: "frontend",
@@ -60,9 +57,8 @@ const projects: Project[] = [
   },
   {
     id: 3,
-    title: "Tapakila – Billetterie",
-    description:
-      "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot.",
+    titleKey: "items.tapakila.title",
+    descriptionKey: "items.tapakila.description",
     image: "https://iili.io/FmI9Kuf.png",
     tags: ["Next.js", "Spring Boot", "PostgreSQL"],
     category: "fullstack",
@@ -71,9 +67,8 @@ const projects: Project[] = [
   },
   {
     id: 4,
-    title: "Analyse Météo ETL",
-    description:
-      "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques.",
+    titleKey: "items.meteo.title",
+    descriptionKey: "items.meteo.description",
     image: "https://iili.io/FmxQjv2.png",
     tags: ["Airflow", "Python", "Power BI"],
     category: "data",
@@ -82,9 +77,8 @@ const projects: Project[] = [
   },
   {
     id: 5,
-    title: "CycleFlow – Analyse Cyclique",
-    description:
-      "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision.",
+    titleKey: "items.cycleflow.title",
+    descriptionKey: "items.cycleflow.description",
     image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
@@ -93,9 +87,8 @@ const projects: Project[] = [
   },
   {
     id: 6,
-    title: "Suivi de vente E-Tsako",
-    description:
-      "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré.",
+    titleKey: "items.etsako.title",
+    descriptionKey: "items.etsako.description",
     image: "https://i.postimg.cc/BQBf4KCb/e-tsako.png",
     tags: ["Vite", "Tailwind CSS", "Java", "Spring Boot"],
     category: "fullstack",
@@ -104,9 +97,8 @@ const projects: Project[] = [
   },
   {
     id: 7,
-    title: "Fidio – Vote Électronique",
-    description:
-      "Application mobile Android sécurisée de vote électronique avec résultats en temps réel, authentification biométrique (empreinte & visage), gestion des scrutins et profil électeur vérifié.",
+    titleKey: "items.fidio.title",
+    descriptionKey: "items.fidio.description",
     image: "https://iili.io/BmmtSSI.jpg",
     tags: ["React Native", "Spring Boot", "WebSocket"],
     category: "mobile",
@@ -148,37 +140,9 @@ const getTagStyle = (tag: string) => {
 };
 
 /* ─────────────────────────────────────────
-   Feature list for Fidio
-───────────────────────────────────────── */
-const fidioFeatures = [
-  {
-    Icon: Fingerprint,
-    label: "Auth biométrique",
-    sub: "Empreinte digitale & reconnaissance faciale",
-  },
-  {
-    Icon: ShieldCheck,
-    label: "Vote sécurisé",
-    sub: "Chiffrement de bout en bout",
-  },
-  {
-    Icon: BarChart3,
-    label: "Résultats en direct",
-    sub: "Mise à jour temps réel via WebSocket",
-  },
-  {
-    Icon: BadgeCheck,
-    label: "Profil vérifié",
-    sub: "Vérification CIN & compte électeur",
-  },
-];
-
-const screenLabels = ["Connexion", "Scrutins", "Résultats", "Profil"];
-
-/* ─────────────────────────────────────────
    Mobile Project Card
 ───────────────────────────────────────── */
-const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
+const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) => string }) => {
   const [activeScreen, setActiveScreen] = useState(0);
   const screens = project.mobileScreenshots ?? [];
 
@@ -186,6 +150,36 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
     setActiveScreen((s) => (s - 1 + screens.length) % screens.length);
   const next = () =>
     setActiveScreen((s) => (s + 1) % screens.length);
+
+  const fidioFeatures = [
+    {
+      Icon: Fingerprint,
+      label: t("items.fidio.features.auth.label"),
+      sub: t("items.fidio.features.auth.sub"),
+    },
+    {
+      Icon: ShieldCheck,
+      label: t("items.fidio.features.vote.label"),
+      sub: t("items.fidio.features.vote.sub"),
+    },
+    {
+      Icon: BarChart3,
+      label: t("items.fidio.features.results.label"),
+      sub: t("items.fidio.features.results.sub"),
+    },
+    {
+      Icon: BadgeCheck,
+      label: t("items.fidio.features.profile.label"),
+      sub: t("items.fidio.features.profile.sub"),
+    },
+  ];
+
+  const screenLabels = [
+      t("items.fidio.screens.connexion"),
+      t("items.fidio.screens.scrutins"),
+      t("items.fidio.screens.resultats"),
+      t("items.fidio.screens.profil"),
+  ];
 
   return (
     <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none">
@@ -196,7 +190,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-200 dark:border-red-900/60 bg-red-50 dark:bg-red-950/30 text-red-500 dark:text-red-400 text-[10px] font-bold tracking-widest uppercase mb-6">
             <Smartphone size={11} strokeWidth={2.5} />
-            <span>Application Mobile · Android</span>
+            <span>{t("mobileAppBadge")}</span>
           </div>
 
           {/* Title */}
@@ -204,11 +198,11 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
             Fidio
           </h3>
           <p className="text-sm font-semibold text-red-500 dark:text-red-400 mb-5 tracking-tight">
-            Plateforme de vote électronique sécurisé
+            {t("mobileAppSubtitle")}
           </p>
 
           <p className="text-sm leading-relaxed text-slate-500 dark:text-slate-400 mb-8 max-w-sm">
-            {project.description}
+            {t(project.descriptionKey)}
           </p>
 
           {/* Feature grid */}
@@ -256,7 +250,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
               >
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-3.5 w-3.5" />
-                  {t.demo}
+                  {t("demo")}
                 </a>
               </Button>
             )}
@@ -264,13 +258,13 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
               <Button size="sm" variant="outline" className="rounded-xl font-bold" asChild>
                 <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-3.5 w-3.5" />
-                  {t.code}
+                  {t("code")}
                 </a>
               </Button>
             )}
             {project.liveUrl === "#" && project.githubUrl === "#" && (
               <span className="self-center text-[10px] font-bold uppercase tracking-widest text-slate-400">
-                {t.proprietary}
+                {t("proprietary")}
               </span>
             )}
           </div>
@@ -326,7 +320,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
                   {screens[activeScreen] ? (
                     <Image
                       src={screens[activeScreen]}
-                      alt={screenLabels[activeScreen]}
+                      alt={`Capture d'écran ${screenLabels[activeScreen]} - Application Mobile Fidio (RAFALIMANANA Ranto H.)`}
                       fill
                       className="object-cover object-top"
                     />
@@ -397,13 +391,13 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: any }) => {
 /* ─────────────────────────────────────────
    Standard Project Card
 ───────────────────────────────────────── */
-const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
+const RegularProjectCard = ({ project, t }: { project: Project; t: (key: string) => string }) => (
   <Card className="group flex h-full flex-col overflow-hidden rounded-[2rem] border border-slate-100 dark:border-slate-800/60 bg-white dark:bg-slate-900/60 shadow-none transition-all duration-300 hover:shadow-xl hover:shadow-slate-200/70 dark:hover:shadow-cyan-500/5 hover:-translate-y-1">
     {/* Image */}
     <div className="relative aspect-[16/10] w-full overflow-hidden">
       <Image
         src={project.image}
-        alt={project.title}
+        alt={`Projet ${t(project.titleKey)} - Développement par RAFALIMANANA Ranto Handraina`}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       />
@@ -417,7 +411,7 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
             >
               <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
-                {t.demo}
+                {t("demo")}
               </a>
             </Button>
           )}
@@ -430,13 +424,13 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
             >
               <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
                 <Github className="mr-1.5 h-3.5 w-3.5" />
-                {t.code}
+                {t("code")}
               </a>
             </Button>
           )}
           {project.liveUrl === "#" && project.githubUrl === "#" && (
             <p className="w-full text-center text-[10px] font-bold uppercase tracking-widest text-white/50">
-              {t.proprietary}
+              {t("proprietary")}
             </p>
           )}
         </div>
@@ -447,13 +441,13 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
     <CardContent className="flex flex-1 flex-col p-6">
       <div className="mb-2.5 flex items-start justify-between gap-2">
         <h3 className="text-base font-bold leading-snug text-slate-900 dark:text-white">
-          {project.title}
+          {t(project.titleKey)}
         </h3>
         <Layers size={14} className="mt-0.5 shrink-0 text-slate-300 dark:text-slate-600" />
       </div>
 
       <p className="mb-5 text-sm leading-relaxed text-slate-500 dark:text-slate-400 line-clamp-2">
-        {project.description}
+        {t(project.descriptionKey)}
       </p>
 
       <div className="mt-auto flex flex-wrap gap-1.5">
@@ -475,8 +469,7 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: any }) => (
 ───────────────────────────────────────── */
 const ProjectsSection = () => {
   const [activeTab, setActiveTab] = useState("all");
-  const { lang } = useLanguage();
-  const t = i18n[lang].projects;
+  const t = useTranslations("projects");
 
   const filteredProjects = projects.filter((p) =>
     activeTab === "all" ? true : p.category === activeTab
@@ -497,11 +490,11 @@ const ProjectsSection = () => {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-cyan-200 dark:border-cyan-900/60 bg-cyan-50 dark:bg-cyan-950/30 text-cyan-600 dark:text-cyan-400 text-[10px] font-bold tracking-widest uppercase">
               <FolderCode size={12} strokeWidth={2.5} />
-              <span>{t.badge}</span>
+              <span>{t("badge")}</span>
             </div>
             <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
-              {t.title}{" "}
-              <span className="text-cyan-500">Réacteurs</span>
+              {t("title")}{" "}
+              <span className="text-cyan-500">{t("subtitle")}</span>
             </h2>
           </div>
 
@@ -517,7 +510,7 @@ const ProjectsSection = () => {
                 >
                   {tab === "mobile"
                     ? "Mobile"
-                    : t.tabs[tab as keyof typeof t.tabs] || tab}
+                    : t(`tabs.${tab}`) || tab}
                 </TabsTrigger>
               ))}
             </TabsList>

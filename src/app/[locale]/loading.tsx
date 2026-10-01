@@ -2,11 +2,11 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useLanguage } from "@/components/language-provider";
-import { i18n } from "@/i18n/translations";
+import { useTranslations } from "next-intl";
 
 export default function Loading() {
   const [loading, setLoading] = useState(true);
+  const t = useTranslations("loading");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -43,7 +43,7 @@ export default function Loading() {
               transition={{ delay: 0.2 }}
               className="text-sm tracking-wide text-slate-400"
             >
-              {i18n[useLanguage().lang].loading.message}
+              {t("message")}
             </motion.p>
           </div>
         </motion.div>

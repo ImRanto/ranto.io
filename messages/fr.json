@@ -1,0 +1,209 @@
+{
+  "navbar": {
+    "navigation": "Navigation",
+    "follow": "Suivez-moi",
+    "changeTheme": "Changer le thème",
+    "myVision": "Ma Vision"
+  },
+  "nav": {
+    "home": "Accueil",
+    "about": "À propos",
+    "projects": "Projets",
+    "experience": "Expériences",
+    "contact": "Contact"
+  },
+  "hero": {
+    "roleBadge": "Développeur Full-Stack Web & Mobile",
+    "frontendTitle": "Frontend",
+    "frontendSubtitle": "React/Next.js",
+    "backendTitle": "Backend",
+    "backendSubtitle": "Java/Spring Boot",
+    "greetingPrefix": "Bonjour, je suis",
+    "subtitle": "Je crée des produits web & mobile performants et élégants, du design à l’architecture backend.",
+    "viewProjects": "Voir mes projets",
+    "downloadCV": "Mon CV"
+  },
+  "about": {
+    "smallHeading": "Expertise",
+    "titlePre": "Passionné par le",
+    "titleHighlight": "Code",
+    "titleSuffix": "& le Design.",
+    "bio": "Développeur Full-Stack, je transforme des problématiques complexes en interfaces intuitives. Mon but est de construire des produits exceptionnels.",
+    "statsProjects": "Projets finis",
+    "skills": [
+      {
+        "title": "Frontend Development",
+        "description": "Interfaces pixel-perfect avec React et Next.js (Base HTML/CSS). Focus sur la performance et l'accessibilité."
+      },
+      {
+        "title": "Backend Systems",
+        "description": "APIs robustes en Node.js et Java. Expertise en microservices et sécurité."
+      },
+      {
+        "title": "Database",
+        "description": "Architecture de données optimisée avec PostgreSQL. Maîtrise de l'indexation."
+      },
+      {
+        "title": "Core Languages",
+        "description": "Développement typé avec TypeScript, combiné à la puissance de React et React Native."
+      },
+      {
+        "title": "Software Architecture",
+        "description": "Conception de systèmes scalables utilisant les meilleurs design patterns."
+      },
+      {
+        "title": "Creative Solutions",
+        "description": "Résolution de problèmes complexes avec une approche centrée utilisateur."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contactez",
+    "titleHighlight": "Moi",
+    "intro": "Le formulaire est ouvert à tous. Connectez-vous simplement pour valider l'envoi.",
+    "emailTitle": "Email",
+    "phoneTitle": "Téléphone",
+    "locationTitle": "Localisation",
+    "authRequired": "Une connexion est requise pour envoyer",
+    "signIn": "Se connecter",
+    "connected": "Connecté",
+    "sending": "Envoi...",
+    "send": "Envoyer",
+    "recaptcha": "Veuillez valider le reCAPTCHA.",
+    "limitReached": "Limite atteinte (2 messages/24h). À demain ! 🚀",
+    "success": "Message envoyé avec succès !",
+    "error": "Oups ! Erreur lors de l'envoi. Réessayez.",
+    "labels": {
+      "name": "Nom",
+      "email": "Adresse Email",
+      "message": "Votre Projet / Message",
+      "namePlaceholder": "Votre nom...",
+      "emailPlaceholder": "exemple@gmail.com",
+      "messagePlaceholder": "Décrivez-moi votre besoin..."
+    }
+  },
+  "projects": {
+    "badge": "Portfolio",
+    "title": "Projets",
+    "subtitle": "Réacteurs",
+    "tabs": {
+      "all": "Tous",
+      "frontend": "Frontend",
+      "fullstack": "Fullstack",
+      "data": "Data"
+    },
+    "demo": "Demo",
+    "code": "Code",
+    "proprietary": "Projet Propriétaire",
+    "mobileAppBadge": "Application Mobile · Android",
+    "mobileAppSubtitle": "Plateforme de vote électronique sécurisé",
+    "items": {
+      "patrimoine": {
+        "title": "Gestion de Patrimoine",
+        "description": "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel."
+      },
+      "ia": {
+        "title": "Assistant IA (Hackathon HIU)",
+        "description": "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI."
+      },
+      "tapakila": {
+        "title": "Tapakila – Billetterie",
+        "description": "Plateforme événementielle avec gestion de tickets QR Code et passerelle de paiement sécurisée Spring Boot."
+      },
+      "meteo": {
+        "title": "Analyse Météo ETL",
+        "description": "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques."
+      },
+      "cycleflow": {
+        "title": "CycleFlow – Analyse Cyclique",
+        "description": "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision."
+      },
+      "etsako": {
+        "title": "Suivi de vente E-Tsako",
+        "description": "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré."
+      },
+      "fidio": {
+        "title": "Fidio – Vote Électronique",
+        "description": "Application mobile Android sécurisée de vote électronique avec résultats en temps réel, authentification biométrique (empreinte & visage), gestion des scrutins et profil électeur vérifié.",
+        "features": {
+          "auth": {
+            "label": "Auth biométrique",
+            "sub": "Empreinte digitale & reconnaissance faciale"
+          },
+          "vote": {
+            "label": "Vote sécurisé",
+            "sub": "Chiffrement de bout en bout"
+          },
+          "results": {
+            "label": "Résultats en direct",
+            "sub": "Mise à jour temps réel via WebSocket"
+          },
+          "profile": {
+            "label": "Profil vérifié",
+            "sub": "Vérification CIN & compte électeur"
+          }
+        },
+        "screens": {
+          "connexion": "Connexion",
+          "scrutins": "Scrutins",
+          "resultats": "Résultats",
+          "profil": "Profil"
+        }
+      }
+    }
+  },
+  "experience": {
+    "small": "Mon Parcours",
+    "title": "Expérience & Formation",
+    "intro": "Un aperçu de mon évolution académique et des étapes clés qui forgent mon expertise technique aujourd'hui.",
+    "items": [
+      {
+        "title": "Licence en Informatique",
+        "organization": "HEI (Haute École d'Informatique)",
+        "period": "2023 - 2026",
+        "description": "Formation approfondie en développement logiciel, algorithmes, bases de données et systèmes d'information.",
+        "highlights": ["Algorithmique", "Réseaux", "Programmation", "Bases de données"]
+      },
+      {
+        "title": "Baccalauréat Scientifique",
+        "organization": "Lycée Ambohimanarina",
+        "period": "2021-2022",
+        "description": "Diplôme de fin d'études secondaires, série scientifique, axé sur les mathématiques et la logique.",
+        "highlights": ["Logique", "Mathématiques", "Physique"]
+      }
+    ]
+  },
+  "profile": {
+    "role": "Développeur Fullstack",
+    "availabilityPrefix": "Actuellement ouvert pour un",
+    "availabilityHighlight": "Contrat d'alternance ou de nouvelles opportunités professionnelles",
+    "hireMe": "Recrutez-moi",
+    "bio": "Passionné par le développement d'applications web & mobile performantes. Basé à Antananarivo."
+  },
+  "phylosophy": {
+    "quote": "Le secret du changement, c'est de concentrer toute votre énergie non pas à lutter contre le passé, mais à construire le futur.",
+    "author": "Socrate",
+    "note": "Inspiration de mon architecture technique"
+  },
+  "footer": {
+    "bio": "Développeur full-stack spécialisé dans la création d'interfaces haut de gamme et d'architectures scalables. Basé à Madagascar, disponible partout.",
+    "menu": "Menu",
+    "contactDirect": "Contact direct",
+    "sendMail": "Envoyez-moi un mail",
+    "available": "Disponible pour de nouveaux projets",
+    "copyright": "Conçu avec rigueur."
+  },
+  "cv": {
+    "back": "Retour",
+    "download": "Télécharger le CV",
+    "alt": "Curriculum Vitae"
+  },
+  "loading": {
+    "message": "Chargement de l’expérience"
+  },
+  "notFound": {
+    "title": "404 - Non trouvé",
+    "description": "Oups! La page que vous recherchez n'existe pas.",
+    "backHome": "Retourner à l'accueil"
+  }
+}
