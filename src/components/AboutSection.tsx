@@ -88,16 +88,16 @@ const AboutSection = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-xs font-black uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-500 mb-4">
+              <span className="block text-xs font-black uppercase tracking-[0.3em] text-cyan-600 dark:text-cyan-500 mb-4">
                 {t("smallHeading")}
-              </h2>
-              <h3 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white leading-[1.1]">
+              </span>
+              <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white leading-[1.1]">
                 {t("titlePre")} {" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-500">
                   {t("titleHighlight")}
                 </span>{" "}
                 {t("titleSuffix")}
-              </h3>
+              </h2>
             </motion.div>
 
             <motion.p

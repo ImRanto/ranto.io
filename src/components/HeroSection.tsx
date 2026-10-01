@@ -178,7 +178,7 @@ const HeroSection = () => {
                     <Image
                       fill
                       src="/ranto.jpg"
-                      alt="Ranto Handraina"
+                      alt="RAFALIMANANA Ranto Handraina - Développeur Full-Stack Web & Mobile"
                       className="object-cover transition-transform duration-700 group-hover:scale-105"
                       priority
                     />
