@@ -243,7 +243,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
       ];
 
   return (
-    <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none">
+    <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none" style={{ fontFamily: '"Quicksand", "Segoe UI", sans-serif' }}>
 
       {/* LEFT – Info */}
       <div className="flex flex-col justify-between p-8 lg:p-12 lg:w-[52%]">
@@ -544,7 +544,7 @@ const ProjectsSection = () => {
       id="projects"
       className="py-24 bg-slate-50 dark:bg-[#020617] transition-colors duration-500"
     >
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6" style={{ fontFamily: '"Quicksand", "Segoe UI", sans-serif' }}>
 
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-14 gap-8">
@@ -553,7 +553,7 @@ const ProjectsSection = () => {
               <FolderCode size={12} strokeWidth={2.5} />
               <span>{t("badge")}</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white">
+            <h2 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white" style={{ fontFamily: '"Quicksand", "Segoe UI", sans-serif' }}>
               {t("title")}{" "}
               <span className="text-cyan-500">{t("subtitle")}</span>
             </h2>
