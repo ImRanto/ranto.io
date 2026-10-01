@@ -98,10 +98,6 @@
     "mobileAppBadge": "Mobile Application · Android",
     "mobileAppSubtitle": "Secure electronic voting platform",
     "items": {
-      "patrimoine": {
-        "title": "Wealth Management",
-        "description": "Expert financial calculation system: asset management, amortization calculations, and real-time income projections."
-      },
       "ia": {
         "title": "AI Assistant (HIU Hackathon)",
         "description": "HIU 2025 winner. Intelligent agent optimizing job search and task automation via OpenAI."

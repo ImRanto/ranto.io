@@ -36,16 +36,6 @@ type Project = {
 
 const projects: Project[] = [
   {
-    id: 1,
-    titleKey: "items.patrimoine.title",
-    descriptionKey: "items.patrimoine.description",
-    image: "https://iili.io/FmzUawb.png",
-    tags: ["React", "Node.js", "Express", "Tailwind CSS"],
-    category: "fullstack",
-    liveUrl: "#",
-    githubUrl: "https://github.com/ImRanto/patrimoine-economique",
-  },
-  {
     id: 2,
     titleKey: "items.ia.title",
     descriptionKey: "items.ia.description",

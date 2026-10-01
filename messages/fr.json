@@ -98,10 +98,6 @@
     "mobileAppBadge": "Application Mobile · Android",
     "mobileAppSubtitle": "Plateforme de vote électronique sécurisé",
     "items": {
-      "patrimoine": {
-        "title": "Gestion de Patrimoine",
-        "description": "Système expert de calcul financier : gestion d'actifs, calcul d'amortissements et projections de revenus en temps réel."
-      },
       "ia": {
         "title": "Assistant IA (Hackathon HIU)",
         "description": "Lauréat HIU 2025. Agent intelligent optimisant la recherche d'emploi et l'automatisation de tâches via OpenAI."
