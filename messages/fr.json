@@ -115,7 +115,7 @@
         "description": "Pipeline de données automatisé avec Airflow pour le traitement et la visualisation de métriques climatiques."
       },
       "cycleflow": {
-        "title": "CycleFlow – Analyse Cyclique",
+        "title": "Cycle-nao – Analyse Cyclique",
         "description": "Application web moderne et intuitive permettant de suivre et prédire leur cycle menstruel avec précision."
       },
       "etsako": {

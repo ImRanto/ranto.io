@@ -82,8 +82,8 @@ const projects: Project[] = [
     image: "https://i.postimg.cc/mgZCqLJJ/cycleflow.png",
     tags: ["Next.js", "TypeScript", "Tailwind CSS"],
     category: "frontend",
-    liveUrl: "https://cycleflow-one.vercel.app/",
-    githubUrl: "https://github.com/ImRanto/cycle-flow",
+    liveUrl: "https://cycle-nao.vercel.app/",
+    githubUrl: "https://github.com/ImRanto/cycle-nao",
   },
   {
     id: 6,
