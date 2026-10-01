@@ -153,6 +153,28 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
   const [activeScreen, setActiveScreen] = useState(0);
   const screens = project.mobileScreenshots ?? [];
   const projectRoot = project.titleKey.replace(".title", "");
+  const isNetService = project.titleKey.includes("netservice");
+  const accent = isNetService
+    ? {
+        badge: "border-[#0056b3]/20 dark:border-[#0056b3]/60 bg-[#0056b3]/5 dark:bg-[#0056b3]/20 text-[#0056b3] dark:text-[#5aa6ff]",
+        title: "text-[#0056b3] dark:text-[#5aa6ff]",
+        iconWrap: "bg-[#0056b3]/10",
+        icon: "text-[#0056b3]",
+        button: "bg-[#0056b3] hover:bg-[#004a9e] shadow-sm shadow-[#0056b3]/20 dark:shadow-none",
+        gradient: "from-[#0056b3] via-[#0056b3] to-[#00b894]",
+        selector: "bg-white text-[#0056b3] shadow-sm",
+        placeholderTop: "bg-gradient-to-br from-[#0056b3] to-[#00b894]",
+      }
+    : {
+        badge: "border-red-200 dark:border-red-900/60 bg-red-50 dark:bg-red-950/30 text-red-500 dark:text-red-400",
+        title: "text-red-500 dark:text-red-400",
+        iconWrap: "bg-red-500/10",
+        icon: "text-red-500",
+        button: "bg-red-500 hover:bg-red-600 shadow-sm shadow-red-200 dark:shadow-none",
+        gradient: "from-red-500 via-red-500 to-rose-600",
+        selector: "bg-white text-red-500 shadow-sm",
+        placeholderTop: "bg-red-500",
+      };
 
   const prev = () =>
     setActiveScreen((s) => (s - 1 + screens.length) % screens.length);
@@ -227,7 +249,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
       <div className="flex flex-col justify-between p-8 lg:p-12 lg:w-[52%]">
         <div>
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-red-200 dark:border-red-900/60 bg-red-50 dark:bg-red-950/30 text-red-500 dark:text-red-400 text-[10px] font-bold tracking-widest uppercase mb-6">
+          <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full border text-[10px] font-bold tracking-widest uppercase mb-6 ${accent.badge}`}>
             <Smartphone size={11} strokeWidth={2.5} />
             <span>{t("mobileAppBadge")}</span>
           </div>
@@ -236,7 +258,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
           <h3 className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mb-1">
             {t(project.titleKey)}
           </h3>
-          <p className="text-sm font-semibold text-red-500 dark:text-red-400 mb-5 tracking-tight">
+          <p className={`text-sm font-semibold mb-5 tracking-tight ${accent.title}`}>
             {t(`${projectRoot}.subtitle`) || t("mobileAppSubtitle")}
           </p>
 
@@ -251,8 +273,8 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
                 key={label}
                 className="flex items-start gap-3 rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/40 px-4 py-3 transition-colors hover:border-red-200 dark:hover:border-red-900/60"
               >
-                <div className="mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-red-500/10">
-                  <Icon size={14} className="text-red-500" strokeWidth={2} />
+                <div className={`mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-xl ${accent.iconWrap}`}>
+                  <Icon size={14} className={accent.icon} strokeWidth={2} />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-800 dark:text-slate-100 leading-tight">
@@ -284,7 +306,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
             {project.liveUrl !== "#" && (
               <Button
                 size="sm"
-                className="rounded-xl bg-red-500 font-bold text-white hover:bg-red-600 shadow-sm shadow-red-200 dark:shadow-none"
+                className={`rounded-xl font-bold text-white ${accent.button}`}
                 asChild
               >
                 <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
@@ -311,7 +333,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
       </div>
 
       {/* RIGHT – Phone showcase */}
-      <div className="relative flex items-center justify-center lg:w-[48%] min-h-[500px] overflow-hidden bg-gradient-to-br from-red-500 via-red-500 to-rose-600">
+      <div className={`relative flex items-center justify-center lg:w-[48%] min-h-[500px] overflow-hidden bg-gradient-to-br ${accent.gradient}`}>
 
         {/* Geometric rings */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.08]">
@@ -329,7 +351,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
               onClick={() => setActiveScreen(i)}
               className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wide transition-all duration-200 ${
                 activeScreen === i
-                  ? "bg-white text-red-500 shadow-sm"
+                  ? accent.selector
                   : "text-white/70 hover:text-white"
               }`}
             >
@@ -365,7 +387,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col">
-                      <div className="h-[38%] bg-red-500 flex flex-col justify-end px-4 pb-5">
+                      <div className={`h-[38%] ${accent.placeholderTop} flex flex-col justify-end px-4 pb-5`}>
                         <div className="w-14 h-1.5 bg-white/30 rounded-full mb-2" />
                         <div className="w-28 h-4 bg-white rounded-full mb-1.5" />
                         <div className="w-20 h-2 bg-white/50 rounded-full" />
