@@ -92,11 +92,21 @@ const projects: Project[] = [
     image: "https://i.postimg.cc/BQBf4KCb/e-tsako.png",
     tags: ["Vite", "Tailwind CSS", "Java", "Spring Boot"],
     category: "fullstack",
-    liveUrl: "https://i-tsaky.vercel.app",
+    liveUrl: "https://e-tsako.vercel.app",
     githubUrl: "https://github.com/ImRanto/e-tsako",
   },
-  {
+    {
     id: 7,
+    titleKey: "items.skanova.title",
+    descriptionKey: "items.skanova.description",
+    image: "https://i.postimg.cc/qqsK5Ynx/skanova.png",
+    tags: ["Kotlin", "Vite", "Tailwind CSS"],
+    category: "fullstack",
+    liveUrl: "https://skanova.vercel.app",
+    githubUrl: "https://github.com/ImRanto/Skanova-web",
+  },
+  {
+    id: 8,
     titleKey: "items.fidio.title",
     descriptionKey: "items.fidio.description",
     image: "https://iili.io/BmmtSSI.jpg",

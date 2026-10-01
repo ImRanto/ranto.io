@@ -122,6 +122,10 @@
         "title": "Suivi de vente E-Tsako",
         "description": "Application web pour la gestion des ventes et des stocks, avec dashboard analytique intégré."
       },
+      "skanova": {
+        "title": "Skanova - recharge par scan",
+        "description": "Scannez votre carte de recharge Yas, Orange ou Airtel et rechargez en un clic."
+      },
       "fidio": {
         "title": "Fidio – Vote Électronique",
         "description": "Application mobile Android sécurisée de vote électronique avec résultats en temps réel, authentification biométrique (empreinte & visage), gestion des scrutins et profil électeur vérifié.",
