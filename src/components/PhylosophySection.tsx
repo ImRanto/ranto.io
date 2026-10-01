@@ -22,14 +22,16 @@ export default function PhilosophySection() {
           </motion.div>
 
           {/* La Citation */}
-          <motion.h2 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="text-3xl md:text-5xl font-light italic tracking-tight leading-snug dark:text-slate-200"
-          >
-            &quot;{t("quote")}&quot;
-          </motion.h2>
+          <blockquote className="m-0 p-0 border-none">
+            <motion.h2
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+              className="text-3xl md:text-5xl font-light italic tracking-tight leading-snug dark:text-slate-200"
+            >
+              &quot;{t("quote")}&quot;
+            </motion.h2>
+          </blockquote>
 
           {/* L'auteur et la ligne de séparation */}
           <motion.div 

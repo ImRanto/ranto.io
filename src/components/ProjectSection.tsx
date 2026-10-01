@@ -320,7 +320,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
                   {screens[activeScreen] ? (
                     <Image
                       src={screens[activeScreen]}
-                      alt={screenLabels[activeScreen]}
+                      alt={`Capture d'écran ${screenLabels[activeScreen]} - Application Mobile Fidio (RAFALIMANANA Ranto H.)`}
                       fill
                       className="object-cover object-top"
                     />
@@ -397,7 +397,7 @@ const RegularProjectCard = ({ project, t }: { project: Project; t: (key: string)
     <div className="relative aspect-[16/10] w-full overflow-hidden">
       <Image
         src={project.image}
-        alt={t(project.titleKey)}
+        alt={`Projet ${t(project.titleKey)} - Développement par RAFALIMANANA Ranto Handraina`}
         fill
         className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
       />
