@@ -1,24 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { ArrowRight, Download, Code2, Layers } from "lucide-react";
+import { ArrowUpRight, Download, Terminal } from "lucide-react";
 import { useTranslations } from "next-intl";
 
-/* ── Stagger variants ── */
+/* ── Animation variants ── */
+const EASE = [0.22, 1, 0.36, 1] as any;
+
 const container = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.09, delayChildren: 0.1 } },
 };
 const item = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as any } },
+  hidden: { opacity: 0, y: 22, filter: "blur(6px)" },
+  show: {
+    opacity: 1,
+    y: 0,
+    filter: "blur(0px)",
+    transition: { duration: 0.7, ease: EASE },
+  },
 };
 
 const techStack = [
   "React Native",
+  "React.js",
   "Next.js",
   "Node.js",
   "Express.js",
@@ -29,56 +43,93 @@ const techStack = [
 
 const HeroSection = () => {
   const t = useTranslations("hero");
+  const reduceMotion = useReducedMotion();
+
+  /* ── 3D tilt on the photo card ── */
+  const mx = useMotionValue(0);
+  const my = useMotionValue(0);
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [7, -7]), {
+    stiffness: 140,
+    damping: 18,
+  });
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-9, 9]), {
+    stiffness: 140,
+    damping: 18,
+  });
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (reduceMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    mx.set((e.clientX - rect.left) / rect.width - 0.5);
+    my.set((e.clientY - rect.top) / rect.height - 0.5);
+  };
+  const handleMouseLeave = () => {
+    mx.set(0);
+    my.set(0);
+  };
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white dark:bg-[#020617] transition-colors duration-500 px-6 py-20 md:py-0"
+      className="relative isolate min-h-screen flex flex-col justify-center overflow-hidden bg-slate-50 dark:bg-[#05060a] text-slate-900 dark:text-white transition-colors duration-500"
     >
-      {/* ── Background texture ── */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808008_1px,transparent_1px),linear-gradient(to_bottom,#80808008_1px,transparent_1px)] bg-[size:48px_48px]" />
+      {/* ── Background: masked grid ── */}
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,rgba(100,116,139,0.10)_1px,transparent_1px),linear-gradient(to_bottom,rgba(100,116,139,0.10)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(ellipse_70%_60%_at_50%_40%,#000_30%,transparent_100%)]"
+      />
 
-      {/* ── Ambient glow blobs ── */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-cyan-400/5 dark:bg-cyan-500/8 rounded-full blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-indigo-500/5 dark:bg-indigo-600/8 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute top-1/3 right-0 w-[320px] h-[320px] bg-blue-500/5 dark:bg-blue-600/6 rounded-full blur-[100px] pointer-events-none" />
+      {/* ── Background: aurora ── */}
+      <motion.div
+        aria-hidden
+        className="absolute -top-40 left-[8%] -z-10 h-[520px] w-[520px] rounded-full bg-violet-500/20 dark:bg-violet-600/20 blur-[130px]"
+        animate={reduceMotion ? undefined : { x: [0, 60, 0], y: [0, 30, 0] }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        aria-hidden
+        className="absolute top-1/4 right-[2%] -z-10 h-[460px] w-[460px] rounded-full bg-cyan-400/20 dark:bg-cyan-500/15 blur-[130px]"
+        animate={reduceMotion ? undefined : { x: [0, -50, 0], y: [0, 40, 0] }}
+        transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <div
+        aria-hidden
+        className="absolute bottom-0 left-1/3 -z-10 h-[300px] w-[500px] rounded-full bg-emerald-400/10 dark:bg-emerald-500/8 blur-[120px]"
+      />
 
-      <div className="container mx-auto relative z-10 max-w-7xl">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-20">
-
-          {/* ══════════════════════════════════
-              LEFT – Text content
-          ══════════════════════════════════ */}
+      <div className="container mx-auto max-w-7xl px-6 pt-28 pb-10 md:pt-32">
+        <div className="grid items-center gap-14 lg:grid-cols-12 lg:gap-10">
+          {/* ═════════════ LEFT – Content ═════════════ */}
           <motion.div
-            className="w-full lg:w-[54%] space-y-7 text-center lg:text-left order-2 lg:order-1"
+            className="order-2 lg:order-1 lg:col-span-7 space-y-8 text-center lg:text-left"
             variants={container}
             initial="hidden"
             animate="show"
           >
-            {/* Status badge */}
+            {/* Availability / role badge */}
             <motion.div variants={item} className="flex justify-center lg:justify-start">
-              <div className="inline-flex items-center gap-2 pl-1.5 pr-4 py-1.5 rounded-full bg-slate-100 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700/60 shadow-sm">
-                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-emerald-500/15">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="inline-flex items-center gap-2.5 rounded-full border border-slate-200/80 dark:border-white/10 bg-white/70 dark:bg-white/[0.04] backdrop-blur-md px-4 py-2 shadow-sm">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-70" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-slate-600 dark:text-slate-300">
+                <span className="text-xs font-semibold tracking-wide text-slate-700 dark:text-slate-200">
                   {t("roleBadge")}
                 </span>
               </div>
             </motion.div>
 
             {/* Heading */}
-            <motion.div variants={item}>
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.05]">
+            <motion.div variants={item} className="space-y-2">
+              <p className="text-lg md:text-xl font-medium text-slate-500 dark:text-slate-400">
                 {t("greetingPrefix")}
-                <br />
-                <span className="relative mt-1 inline-block">
-                  {/* Gradient text */}
-                  <span className="bg-gradient-to-r from-cyan-500 via-blue-500 to-indigo-500 bg-clip-text text-transparent">
-                    Ranto Handraina
-                  </span>
-                  {/* Underline accent */}
-                  <span className="absolute -bottom-1 left-0 w-full h-[3px] rounded-full bg-gradient-to-r from-cyan-500/60 via-blue-500/60 to-indigo-500/60 blur-[1px]" />
+              </p>
+              <h1 className="text-5xl sm:text-6xl xl:text-7xl font-extrabold tracking-tight leading-[1.02]">
+                <span className="block text-slate-900 dark:text-white">
+                  RAFALIMANANA
+                </span>
+                <span className="block bg-gradient-to-r from-violet-500 via-blue-500 to-cyan-400 bg-clip-text text-transparent pb-1">
+                  Ranto Handraina
                 </span>
               </h1>
             </motion.div>
@@ -86,166 +137,118 @@ const HeroSection = () => {
             {/* Subtitle */}
             <motion.p
               variants={item}
-              className="text-slate-500 dark:text-slate-400 text-base md:text-lg max-w-lg leading-relaxed mx-auto lg:mx-0"
+              className="mx-auto lg:mx-0 max-w-xl text-base md:text-lg leading-relaxed text-slate-600 dark:text-slate-400"
             >
               {t("subtitle")}
             </motion.p>
 
-            {/* CTA buttons */}
+            {/* CTAs */}
             <motion.div
               variants={item}
-              className="flex flex-wrap justify-center lg:justify-start gap-3"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-3"
             >
-              <Link href="/#projects">
-                <button className="group relative inline-flex items-center gap-2.5 bg-slate-900 dark:bg-white text-white dark:text-slate-900 px-7 py-3.5 rounded-2xl font-bold text-sm tracking-tight transition-all duration-300 hover:shadow-2xl hover:shadow-slate-900/20 dark:hover:shadow-white/10 hover:-translate-y-0.5 active:scale-[0.98] overflow-hidden">
-                  {/* Shimmer */}
-                  <span className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12" />
-                  {t("viewProjects")}
-                  <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform duration-200" />
-                </button>
+              <Link
+                href="/#projects"
+                className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full bg-slate-900 dark:bg-white px-7 py-3.5 text-sm font-semibold text-white dark:text-slate-900 shadow-lg shadow-slate-900/10 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#05060a]"
+              >
+                <span className="absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/20 dark:via-slate-900/10 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="relative">{t("viewProjects")}</span>
+                <ArrowUpRight
+                  size={16}
+                  className="relative transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                />
               </Link>
 
-              <Link href="/cv">
-                <button className="group inline-flex items-center gap-2.5 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 bg-white dark:bg-slate-800/40 px-7 py-3.5 rounded-2xl font-bold text-sm tracking-tight transition-all duration-300 hover:border-slate-300 dark:hover:border-slate-600 hover:shadow-lg hover:-translate-y-0.5 active:scale-[0.98]">
-                  <Download size={14} className="group-hover:-translate-y-0.5 transition-transform duration-200" />
-                  {t("downloadCV")}
-                </button>
+              <Link
+                href="/cv"
+                className="group inline-flex items-center gap-2 rounded-full border border-slate-300/80 dark:border-white/15 bg-white/60 dark:bg-white/[0.04] backdrop-blur-md px-7 py-3.5 text-sm font-semibold text-slate-800 dark:text-slate-100 transition-all duration-300 hover:-translate-y-0.5 hover:border-slate-400 dark:hover:border-white/30 hover:bg-white dark:hover:bg-white/[0.08] active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-[#05060a]"
+              >
+                <Download
+                  size={15}
+                  className="transition-transform duration-200 group-hover:translate-y-0.5"
+                />
+                {t("downloadCV")}
               </Link>
-            </motion.div>
-
-            {/* Tech stack pills */}
-            <motion.div
-              variants={item}
-              className="flex flex-wrap justify-center lg:justify-start gap-2 pt-2"
-            >
-              {techStack.map((tech, i) => (
-                <motion.span
-                  key={tech}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.6 + i * 0.05, duration: 0.3 }}
-                  className="px-3 py-1.5 text-[11px] font-semibold bg-slate-50 dark:bg-slate-800/60 text-slate-500 dark:text-slate-400 rounded-xl border border-slate-200/80 dark:border-slate-700/60 hover:border-cyan-300 dark:hover:border-cyan-800 hover:text-cyan-600 dark:hover:text-cyan-400 transition-colors duration-200 cursor-default"
-                >
-                  {tech}
-                </motion.span>
-              ))}
             </motion.div>
           </motion.div>
 
-          {/* ══════════════════════════════════
-              RIGHT – Photo + floating badges
-          ══════════════════════════════════ */}
+          {/* ═════════════ RIGHT – Photo card ═════════════ */}
           <motion.div
-            className="w-full lg:w-[46%] flex justify-center order-1 lg:order-2"
-            initial={{ opacity: 0, scale: 0.92 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] as any }}
+            className="order-1 lg:order-2 lg:col-span-5 flex justify-center"
+            initial={{ opacity: 0, y: 30, scale: 0.96 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, ease: EASE, delay: 0.1 }}
           >
-            <div className="relative">
+            <div
+              className="relative w-full max-w-[340px] sm:max-w-[380px] [perspective:1000px]"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+            >
+              {/* Glow behind card */}
+              <div
+                aria-hidden
+                className="absolute -inset-6 -z-10 rounded-[3rem] bg-gradient-to-br from-violet-500/30 via-blue-500/20 to-cyan-400/30 blur-3xl"
+              />
 
-              {/* ── Outer decorative ring ── */}
-              <div className="absolute inset-0 rounded-full border border-dashed border-slate-200/70 dark:border-slate-700/50 scale-[1.18] animate-[spin_30s_linear_infinite]" />
-
-              {/* ── Spinning accent arc ── */}
-              <div className="absolute inset-0 scale-[1.18]">
-                <svg className="w-full h-full -rotate-90 animate-[spin_8s_linear_infinite]" viewBox="0 0 100 100">
-                  <circle
-                    cx="50" cy="50" r="49"
-                    fill="none"
-                    stroke="url(#arcGrad)"
-                    strokeWidth="1.5"
-                    strokeDasharray="30 320"
-                    strokeLinecap="round"
+              {/* Tilting card */}
+              <motion.div
+                style={reduceMotion ? undefined : { rotateX, rotateY }}
+                className="relative aspect-[4/5] rounded-[2rem] p-[1.5px] bg-gradient-to-br from-violet-400/70 via-blue-400/40 to-cyan-300/70 shadow-2xl shadow-blue-900/20 dark:shadow-black/60 [transform-style:preserve-3d]"
+              >
+                <div className="relative h-full w-full overflow-hidden rounded-[calc(2rem-1.5px)] bg-slate-200 dark:bg-slate-900">
+                  <Image
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 380px, 440px"
+                    src="/ranto.jpg"
+                    alt="RAFALIMANANA Ranto Handraina - Développeur Full-Stack Web & Mobile"
+                    className="object-cover"
                   />
-                  <defs>
-                    <linearGradient id="arcGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#06b6d4" stopOpacity="0" />
-                      <stop offset="50%" stopColor="#06b6d4" stopOpacity="1" />
-                      <stop offset="100%" stopColor="#6366f1" stopOpacity="0" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
+                  {/* Subtle bottom gradient for legibility */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/50 via-transparent to-transparent" />
 
-              {/* ── Photo frame ── */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80 lg:w-[380px] lg:h-[380px] rounded-full">
-                {/* Glow behind photo */}
-                <div className="absolute inset-4 rounded-full bg-gradient-to-br from-cyan-400/20 via-blue-500/15 to-indigo-500/20 blur-2xl" />
-
-                {/* Photo container */}
-                <div className="relative w-full h-full rounded-full p-[5px] bg-gradient-to-br from-cyan-400 via-blue-500 to-indigo-500 shadow-2xl shadow-blue-500/20">
-                  <div className="w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-slate-900 relative group">
-                    <Image
-                      fill
-                      src="/ranto.jpg"
-                      alt="RAFALIMANANA Ranto Handraina - Développeur Full-Stack Web & Mobile"
-                      className="object-cover transition-transform duration-700 group-hover:scale-105"
-                      priority
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-                </div>
-              </div>
-
-              {/* ── Floating badge – Frontend ── */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-3 -right-4 md:-right-8 lg:-right-10 z-20"
-              >
-                <div className="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/60 dark:shadow-black/40 px-4 py-3 rounded-2xl">
-                  <div className="w-9 h-9 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl flex items-center justify-center shadow-md shadow-blue-500/30 shrink-0">
-                    <Code2 size={16} className="text-white" strokeWidth={2.5} />
-                  </div>
-                  <div className="hidden sm:block">
-                    <p className="text-[11px] font-black text-slate-900 dark:text-white leading-tight tracking-tight">
-                      {t("frontendTitle")}
-                    </p>
-                    <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
-                      {t("frontendSubtitle")}
-                    </p>
+                  {/* Mini terminal strip */}
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center gap-2.5 rounded-xl border border-white/15 bg-slate-950/55 backdrop-blur-md px-3.5 py-2.5 font-mono text-[11px] text-slate-200">
+                    <Terminal size={13} className="text-emerald-400 shrink-0" />
+                    <span className="truncate">
+                      <span className="text-emerald-400">~</span>{" "}
+                      <span className="text-slate-400">$</span> npm run build
+                      <motion.span
+                        className="ml-0.5 inline-block h-3 w-[6px] translate-y-[2px] bg-slate-200"
+                        animate={{ opacity: [1, 0, 1] }}
+                        transition={{ duration: 1.1, repeat: Infinity }}
+                      />
+                    </span>
                   </div>
                 </div>
               </motion.div>
-
-              {/* ── Floating badge – Backend ── */}
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut", delay: 2.2 }}
-                className="absolute -bottom-3 -left-4 md:-left-8 lg:-left-10 z-20"
-              >
-                <div className="flex items-center gap-3 bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border border-white/50 dark:border-slate-700/50 shadow-xl shadow-slate-200/60 dark:shadow-black/40 px-4 py-3 rounded-2xl">
-                  <div className="w-9 h-9 bg-gradient-to-br from-emerald-500 to-teal-400 rounded-xl flex items-center justify-center shadow-md shadow-emerald-500/30 shrink-0">
-                    <Layers size={16} className="text-white" strokeWidth={2.5} />
-                  </div>
-                  <div className="hidden sm:block">
-                    <p className="text-[11px] font-black text-slate-900 dark:text-white leading-tight tracking-tight">
-                      {t("backendTitle")}
-                    </p>
-                    <p className="text-[10px] text-slate-400 dark:text-slate-500 mt-0.5">
-                      {t("backendSubtitle")}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-
 
             </div>
           </motion.div>
         </div>
 
-        {/* ── Bottom scroll hint ── */}
+        {/* ═════════════ Tech stack marquee ═════════════ */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2"
+          className="relative mt-16 md:mt-20 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_12%,#000_88%,transparent)]"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
+          transition={{ delay: 0.9, duration: 0.8 }}
         >
-          <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-slate-400 dark:text-slate-600">
-            Scroll
-          </span>
-          <div className="w-px h-10 bg-gradient-to-b from-slate-300 dark:from-slate-700 to-transparent animate-[pulse_2s_ease-in-out_infinite]" />
+          <motion.div
+            className="flex w-max gap-3"
+            animate={reduceMotion ? undefined : { x: ["0%", "-50%"] }}
+            transition={{ duration: 28, repeat: Infinity, ease: "linear" }}
+          >
+            {[...techStack, ...techStack].map((tech, i) => (
+              <span
+                key={`${tech}-${i}`}
+                className="inline-flex items-center gap-2 whitespace-nowrap rounded-full border border-slate-200/80 dark:border-white/10 bg-white/60 dark:bg-white/[0.03] px-4 py-2 text-xs font-semibold text-slate-600 dark:text-slate-300 backdrop-blur-sm"
+              >
+                <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-br from-violet-500 to-cyan-400" />
+                {tech}
+              </span>
+            ))}
+          </motion.div>
         </motion.div>
       </div>
     </section>
