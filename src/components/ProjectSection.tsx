@@ -85,16 +85,6 @@ const projects: Project[] = [
     liveUrl: "https://cycle-nao.vercel.app/",
     githubUrl: "https://github.com/ImRanto/cycle-nao",
   },
-  {
-    id: 6,
-    titleKey: "items.etsako.title",
-    descriptionKey: "items.etsako.description",
-    image: "https://i.postimg.cc/BQBf4KCb/e-tsako.png",
-    tags: ["Vite", "Tailwind CSS", "Java", "Spring Boot"],
-    category: "fullstack",
-    liveUrl: "https://e-tsako.vercel.app",
-    githubUrl: "https://github.com/ImRanto/e-tsako",
-  },
     {
     id: 7,
     titleKey: "items.skanova.title",
