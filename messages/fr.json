@@ -175,6 +175,10 @@
           "commandes": "Commandes",
           "profil": "Profil"
         }
+      },
+      "genereo": {
+        "title": "Genereo - Générateur de QR Codes",
+        "description": "Un générateur de QR codes moderne, personnalisable, rapide et 100% privé."
       }
     }
   },

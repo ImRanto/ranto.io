@@ -175,6 +175,10 @@
           "commandes": "Orders",
           "profil": "Profile"
         }
+      },
+      "genereo": {
+        "title": "Genereo",
+        "description": "A modern, customizable, fast, and 100% private QR code generator."
       }
     }
   },

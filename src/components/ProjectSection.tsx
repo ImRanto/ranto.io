@@ -119,6 +119,16 @@ const projects: Project[] = [
       "https://i.postimg.cc/9MMb7c6q/Apercu-APK-4.jpg",
     ],
   },
+  {
+    id: 10,
+    titleKey: "items.genereo.title",
+    descriptionKey: "items.genereo.description",
+    image: "https://i.postimg.cc/nLtDLgr3/genereo.png",
+    tags: ["React", "Vite", "Tailwind CSS"],
+    category: "fullstack",
+    liveUrl: "https://genereo.vercel.app",
+    githubUrl: "https://github.com/ImRanto/genereo",
+  }
 ];
 
 const getTagStyle = (tag: string) => {
