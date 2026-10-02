@@ -170,10 +170,10 @@
           }
         },
         "screens": {
-          "accueil": "Accueil",
-          "services": "Services",
-          "commandes": "Commandes",
-          "profil": "Profil"
+          "accueil": "Connexion",
+          "services": "Accueil",
+          "commandes": "Imports",
+          "profil": "Resultats"
         }
       },
       "genereo": {
