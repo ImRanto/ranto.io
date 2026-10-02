@@ -243,7 +243,7 @@ const MobileProjectCard = ({ project, t }: { project: Project; t: (key: string) 
       ];
 
   return (
-    <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none" style={{ fontFamily: '"Quicksand", "Segoe UI", sans-serif' }}>
+    <Card className="flex flex-col lg:flex-row overflow-hidden rounded-[2rem] border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-lg shadow-slate-100 dark:shadow-none">
 
       {/* LEFT – Info */}
       <div className="flex flex-col justify-between p-8 lg:p-12 lg:w-[52%]">
